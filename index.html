@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مفاجأة من يوسف إلى روان</title>
+    <title>روبو الحب - من أجل روان</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,448 +14,819 @@
         }
         
         body {
-            background: linear-gradient(45deg, #ff4e50, #f9d423);
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            perspective: 1000px;
+            color: white;
         }
         
         .container {
-            width: 90%;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(255, 105, 180, 0.5);
+            width: 95%;
             max-width: 600px;
+            padding: 25px;
             text-align: center;
             position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 105, 180, 0.3);
         }
         
-        /* شاشة الدخول */
-        #entry-screen {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            transition: all 0.5s ease;
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff0099, #493240, #ff0099);
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.7;
         }
         
         h1 {
-            color: #e84393;
+            color: #ff5e94;
             margin-bottom: 20px;
-            font-size: 32px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 0 10px #ff5e94;
+            font-size: 2.5rem;
         }
         
-        p {
-            color: #636e72;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            font-size: 18px;
+        .robot-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            margin: 20px 0;
+            perspective: 1000px;
         }
         
-        .input-group {
-            margin: 25px 0;
+        .robot {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 1s ease;
+        }
+        
+        .head {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 0 20px rgba(167, 119, 227, 0.8);
+            animation: floating 3s ease-in-out infinite;
+            overflow: hidden;
+        }
+        
+        .head::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom right, rgba(255,255,255,0.2), rgba(255,255,255,0));
+            transform: rotate(45deg);
+        }
+        
+        .eyes {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 35px;
+            transition: all 0.5s ease;
+        }
+        
+        .eye {
+            width: 25px;
+            height: 25px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: relative;
+            animation: blink 4s infinite;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        
+        .pupil {
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, #000, #333);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+        
+        .mouth {
+            width: 40px;
+            height: 10px;
+            background: linear-gradient(to right, #ff5e94, #ff2e63);
+            border-radius: 10px;
+            margin: 15px auto 0;
+            transition: all 0.5s ease;
+            box-shadow: 0 0 10px rgba(255, 46, 99, 0.8);
+        }
+        
+        .speaking .mouth {
+            animation: speak 0.5s infinite alternate;
+        }
+        
+        .chat-container {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+            height: 200px;
+            overflow-y: auto;
+            text-align: right;
+            box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.5);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+        }
+        
+        .message {
+            margin: 10px 0;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            display: inline-block;
+            animation: fadeIn 0.5s;
+            position: relative;
+        }
+        
+        .bot-message {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            text-align: right;
+            margin-left: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .user-message {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
+            text-align: left;
+            margin-right: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .input-container {
+            display: flex;
+            margin-top: 15px;
+            position: relative;
         }
         
         input {
-            width: 100%;
+            flex: 1;
             padding: 15px;
-            border: 2px solid #fd79a8;
-            border-radius: 10px;
-            font-size: 18px;
-            text-align: center;
-            margin-bottom: 20px;
+            border: none;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
             outline: none;
-            transition: all 0.3s;
+            font-size: 16px;
+            color: white;
+            box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.3);
+            border: 1px solid rgba(255, 105, 180, 0.5);
+            transition: all 0.3s ease;
         }
         
         input:focus {
-            border-color: #e84393;
-            box-shadow: 0 0 15px rgba(232, 67, 147, 0.3);
+            box-shadow: inset 0 0 15px rgba(255, 105, 180, 0.5), 0 0 20px rgba(255, 105, 180, 0.5);
         }
         
-        .btn {
-            background: linear-gradient(to right, #e84393, #fd79a8);
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        button {
+            background: linear-gradient(135deg, #ff5e94, #ff2e63);
             color: white;
             border: none;
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-size: 20px;
+            border-radius: 30px;
+            padding: 15px 25px;
+            margin-right: 10px;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(232, 67, 147, 0.3);
-            display: inline-block;
-            margin: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 46, 99, 0.5);
         }
         
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(232, 67, 147, 0.4);
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 46, 99, 0.8);
         }
         
-        /* الصينية */
-        .tray {
-            width: 400px;
-            height: 400px;
-            position: relative;
-            margin: 0 auto;
-            transform-style: preserve-3d;
-            transition: transform 1.5s ease-in-out;
-            display: none;
-        }
-        
-        .tray.open {
-            transform: rotateX(80deg);
-        }
-        
-        .tray .lid {
+        .hearts {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-            backface-visibility: hidden;
-            cursor: pointer;
-        }
-        
-        .tray .lid .heart-icon {
-            font-size: 80px;
-            color: white;
-            animation: heartbeat 1.5s infinite;
-        }
-        
-        .tray .content {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            border-radius: 50%;
-            transform: rotateX(180deg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            backface-visibility: hidden;
-            color: #e84393;
-        }
-        
-        .tray .content h2 {
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-        
-        .tray .content p {
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-        
-        /* تأثيرات الطيران */
-        .fly-effect {
-            position: fixed;
             pointer-events: none;
-            font-size: 24px;
-            z-index: 1000;
-            animation: fly 4s forwards;
-            opacity: 0;
+            z-index: -1;
         }
         
-        @keyframes fly {
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff5e94;
+            opacity: 0;
+            animation: float 6s linear infinite;
+            text-shadow: 0 0 10px #ff5e94;
+        }
+        
+        .phase-indicator {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .phase {
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            margin: 0 8px;
+            transition: all 0.5s ease;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+        }
+        
+        .phase.active {
+            background: linear-gradient(135deg, #ff5e94, #ff2e63);
+            transform: scale(1.5);
+            box-shadow: 0 0 15px rgba(255, 46, 99, 0.8);
+        }
+        
+        .welcome-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #a777e3;
+            text-shadow: 0 0 5px #a777e3;
+        }
+        
+        .romantic-phase {
+            display: none;
+            animation: fadeIn 1s;
+        }
+        
+        .romantic-phase.active {
+            display: block;
+        }
+        
+        .phase-title {
+            font-size: 1.8rem;
+            color: #ff5e94;
+            margin: 15px 0;
+            text-shadow: 0 0 10px #ff5e94;
+        }
+        
+        .phase-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.3);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 40%, 80%, 100% {
+                height: 25px;
+            }
+            20%, 60% {
+                height: 5px;
+            }
+        }
+        
+        @keyframes speak {
+            from {
+                height: 5px;
+            }
+            to {
+                height: 15px;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(100vh) rotate(0deg);
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100vh) rotate(360deg);
+                transform: translateY(-100px) rotate(360deg);
                 opacity: 0;
             }
         }
         
-        /* تأثير نبضات القلب */
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
         }
         
-        /* المراحل */
-        .stage {
-            display: none;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            margin-top: 30px;
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 1;
+            }
         }
         
-        .message {
-            background: #f8f5f5;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        @keyframes moveAround {
+            0% {
+                left: 50%;
+            }
+            25% {
+                left: 30%;
+            }
+            50% {
+                left: 50%;
+            }
+            75% {
+                left: 70%;
+            }
+            100% {
+                left: 50%;
+            }
         }
         
-        .signature {
-            margin-top: 30px;
-            font-style: italic;
-            color: #e84393;
-            font-weight: bold;
-            font-size: 22px;
+        @keyframes surprise {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
         }
         
-        .flowers {
-            font-size: 40px;
-            margin: 20px 0;
-            color: #e84393;
+        .surprise {
+            animation: surprise 0.5s ease-in-out;
+        }
+        
+        .move-around {
+            animation: moveAround 5s ease-in-out infinite;
+        }
+        
+        .looking-around .pupil {
+            animation: lookAround 3s ease-in-out infinite;
+        }
+        
+        @keyframes lookAround {
+            0%, 100% {
+                transform: translate(-50%, -50%);
+            }
+            25% {
+                transform: translate(-70%, -50%);
+            }
+            50% {
+                transform: translate(-50%, -70%);
+            }
+            75% {
+                transform: translate(-30%, -50%);
+            }
         }
         
         .fireworks {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
+            position: absolute;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
+            z-index: -1;
+        }
+        
+        .firework {
+            position: absolute;
+            border-radius: 50%;
             opacity: 0;
         }
         
-        /* تصميم متجاوب */
-        @media (max-width: 768px) {
-            .tray {
-                width: 300px;
-                height: 300px;
+        @keyframes explode {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
             }
-            
-            h1 {
-                font-size: 28px;
-            }
-            
-            .btn {
-                padding: 12px 25px;
-                font-size: 18px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .tray {
-                width: 250px;
-                height: 250px;
-            }
-            
-            .tray .content {
-                padding: 15px;
-            }
-            
-            .tray .content h2 {
-                font-size: 22px;
-            }
-            
-            .tray .content p {
-                font-size: 16px;
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(1);
+                opacity: 0;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- شاشة الدخول -->
-        <div id="entry-screen">
-            <h1>أهلاً بكِ في عالمنا السحري!</h1>
-            <p>هذه هدية رقمية من يوسف خصيصاً لكِ يا روان</p>
-            <p>أدخلي اسمكِ لتبدأ المفاجأة...</p>
+        <h1>روبو الحب <i class="fas fa-heart"></i></h1>
+        <div class="welcome-text" id="welcome-text">مرحباً بك في عالم الرومانسية</div>
+        
+        <div class="robot-container">
+            <div class="robot" id="robot">
+                <div class="head">
+                    <div class="eyes">
+                        <div class="eye"><div class="pupil"></div></div>
+                        <div class="eye"><div class="pupil"></div></div>
+                    </div>
+                    <div class="mouth"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="phase-indicator">
+            <div class="phase" id="phase1"></div>
+            <div class="phase" id="phase2"></div>
+            <div class="phase" id="phase3"></div>
+        </div>
+        
+        <div id="phase1-content" class="romantic-phase active">
+            <div class="chat-container" id="chat">
+                <!-- الرسائل ستظهر هنا -->
+            </div>
             
-            <div class="input-group">
-                <input type="text" id="name-input" placeholder="اسمكِ الجميل هنا...">
-                <button class="btn" onclick="startExperience()">
-                    <i class="fas fa-gift"></i> ابدأ المفاجأة
-                </button>
+            <div class="input-container">
+                <input type="text" id="user-input" placeholder="اكتبي رسالتك هنا...">
+                <button id="send-btn"><i class="fas fa-paper-plane"></i> إرسال</button>
             </div>
         </div>
         
-        <!-- الصينية -->
-        <div class="tray" id="tray">
-            <div class="lid">
-                <div class="heart-icon">❤</div>
+        <div id="phase2-content" class="romantic-phase">
+            <div class="phase-title">المرحلة الثانية: رحلة إلى القلب</div>
+            <div class="phase-content">
+                <p>الآن وقد عرفتكِ يا روان، دعينا نبدأ رحلتنا الرومانسية</p>
+                <p>أخبريني، ما هو أكثر شيء تحبينه في الحب؟</p>
             </div>
-            <div class="content">
-                <h2>مفاجأة!</h2>
-                <p>كل عام وأنتِ منورة حياتي يا <span id="name-placeholder">روان</span></p>
-                <p>أنتِ أجمل شيء حدث لي في الحياة</p>
-                <div class="flowers">🌹 🌸 💐 🌷</div>
+            <div class="input-container">
+                <input type="text" id="phase2-input" placeholder="ما هو أكثر شيء تحبينه في الحب؟">
+                <button id="phase2-btn"><i class="fas fa-heart"></i> تابعي</button>
             </div>
         </div>
         
-        <!-- المراحل -->
-        <div class="stage" id="stage1">
-            <h2>المرحلة الأولى: ذكرى لقائنا</h2>
-            <div class="message">
-                <p>يا روان، منذ أن دخلتِ حياتي أصبح كل شيء أجمل</p>
-                <p>أتذكر أول مرة رأيتكِ فيها، وكأنها كانت بالأمس</p>
-                <p>عيناكِ أضاءت حياتي وقلبي</p>
+        <div id="phase3-content" class="romantic-phase">
+            <div class="phase-title">المرحلة الثالثة: الوصول إلى القلعة</div>
+            <div class="phase-content">
+                <p>تهانينا يا روان! لقد وصلتي إلى القلعة الرومانسية</p>
+                <p>هنا حيث تتحقق الأحلام وتزهر المشاعر</p>
+                <p>أنتِ شخص استثنائي، وأنا سعيد بأنني أستطيع مشاركة هذه اللحظات معك</p>
             </div>
-            <button class="btn" onclick="showStage(2)">
-                <i class="fas fa-arrow-right"></i> التالي
-            </button>
-        </div>
-        
-        <div class="stage" id="stage2">
-            <h2>المرحلة الثانية: لماذا أحبكِ؟</h2>
-            <div class="message">
-                <p>أحببتكِ لأنكِ:</p>
-                <p>❥ تجعلينني أفضل version من نفسي</p>
-                <p>❥ تضحكتكِ هي أجمل موسيقى في حياتي</p>
-                <p>❥ طيبتكِ لا توصف وجمالكِ لا يُقارن</p>
-                <p>❥ وببساطة لأنكِ أنتِ</p>
-            </div>
-            <button class="btn" onclick="showStage(3)">
-                <i class="fas fa-arrow-right"></i> التالي
-            </button>
-        </div>
-        
-        <div class="stage" id="stage3">
-            <h2>المرحلة الثالثة: مستقبلنا</h2>
-            <div class="message">
-                <p>أتمنى أن أمضي كل حياتي إلى جانبكِ</p>
-                <p>أن أسعدكِ كما تسعديني</p>
-                <p>وأن أكون شريك حياتكِ إلى الأبد</p>
-            </div>
-            <button class="btn" onclick="flyAway()">
-                <i class="fas fa-heart"></i> اضغطي للطيران من الفرحة
-            </button>
-            
-            <p class="signature">مع كل حبي، يوسف</p>
+            <button id="restart-btn"><i class="fas fa-redo"></i> بدء رحلة جديدة</button>
         </div>
     </div>
-
+    
+    <div class="hearts" id="hearts"></div>
+    <div class="stars" id="stars"></div>
+    <div class="fireworks" id="fireworks"></div>
+    
+    <audio id="background-music" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2021/10/25/audio_172d7dec90.mp3?filename=soft-romantic-background-music-6986.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="sound-effect">
+        <source src="" type="audio/mpeg">
+    </audio>
+    
     <script>
-        function startExperience() {
-            let name = document.getElementById('name-input').value.trim();
-            if (name === '') {
-                name = 'روان';
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatContainer = document.getElementById('chat');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const robot = document.getElementById('robot');
+            const mouth = document.querySelector('.mouth');
+            const heartsContainer = document.getElementById('hearts');
+            const starsContainer = document.getElementById('stars');
+            const fireworksContainer = document.getElementById('fireworks');
+            const phases = document.querySelectorAll('.phase');
+            const welcomeText = document.getElementById('welcome-text');
+            const backgroundMusic = document.getElementById('background-music');
+            const soundEffect = document.getElementById('sound-effect');
+            const phase1Content = document.getElementById('phase1-content');
+            const phase2Content = document.getElementById('phase2-content');
+            const phase3Content = document.getElementById('phase3-content');
+            const phase2Input = document.getElementById('phase2-input');
+            const phase2Btn = document.getElementById('phase2-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            
+            let currentPhase = 1;
+            let conversationStep = 0;
+            let userName = "";
+            
+            // إنشاء النجوم في الخلفية
+            function createStars() {
+                for (let i = 0; i < 100; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add('star');
+                    star.style.width = Math.random() * 3 + 'px';
+                    star.style.height = star.style.width;
+                    star.style.left = Math.random() * 100 + 'vw';
+                    star.style.top = Math.random() * 100 + 'vh';
+                    star.style.animationDelay = Math.random() * 5 + 's';
+                    starsContainer.appendChild(star);
+                }
             }
             
-            // تحديث الاسم في الرسالة
-            document.getElementById('name-placeholder').textContent = name;
+            // رسائل الروبوت لكل مرحلة
+            const messages = {
+                phase1: [
+                    "مرحباً! من هناك؟ هل هناك أحد؟",
+                    "أرى أن هناك شخصاً ما قد دخل! من أنت؟",
+                    "أنتِ إنسانة، أليس كذلك؟ أخبريني ما اسمك!",
+                    "يجب أن تخبريني باسمك الحقيقي، لا تكذبي عليّ!",
+                    "أوه، روان! يا للروعة! هذا اسم جميل!",
+                    "حسناً يا روان، هل أنت مستعدة لبدء رحلتنا الرومانسية؟"
+                ]
+            };
             
-            // إخفاء شاشة الدخول وإظهار الصينية
-            document.getElementById('entry-screen').style.display = 'none';
-            document.getElementById('tray').style.display = 'block';
+            // إنشاء رسالة في الدردشة
+            function addMessage(text, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+                messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+                messageDiv.textContent = text;
+                chatContainer.appendChild(messageDiv);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
             
-            // فتح الصينية بعد ثانيتين
-            setTimeout(() => {
-                document.getElementById('tray').classList.add('open');
+            // جعل الروبوت يتحدث
+            function robotSpeak(text, callback) {
+                mouth.parentElement.classList.add('speaking');
+                addMessage(text);
                 
-                // بعد فتح الصينية، عرض المرحلة الأولى
-                setTimeout(() => {
-                    document.getElementById('tray').style.display = 'none';
-                    showStage(1);
-                    createFireworks();
-                }, 2000);
-            }, 2000);
-        }
-        
-        function showStage(stageNumber) {
-            // إخفاء جميع المراحل
-            document.querySelectorAll('.stage').forEach(stage => {
-                stage.style.display = 'none';
-            });
-            
-            // إظهار المرحلة المطلوبة
-            document.getElementById('stage' + stageNumber).style.display = 'block';
-            
-            // إضافة تأثيرات جميلة
-            if (stageNumber === 3) {
-                createHearts();
-            }
-        }
-        
-        function createHearts() {
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    let heart = document.createElement('div');
-                    heart.innerHTML = '❤';
-                    heart.classList.add('fly-effect');
-                    heart.style.left = Math.random() * window.innerWidth + 'px';
-                    heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
-                    heart.style.color = getRandomColor();
-                    document.body.appendChild(heart);
-                    
-                    // إزالة القلوب بعد انتهاء التحليق
+                // محاكاة الصوت باستخدام Web Speech API
+                try {
+                    const speech = new SpeechSynthesisUtterance(text);
+                    speech.lang = 'ar-SA';
+                    speech.rate = 0.9;
+                    speech.pitch = 1.2;
+                    speech.onend = function() {
+                        mouth.parentElement.classList.remove('speaking');
+                        if (callback) callback();
+                    };
+                    window.speechSynthesis.speak(speech);
+                } catch (e) {
+                    // إذا لم يعمل Web Speech API، ننتظر قليلاً ثم ننفذ callback
                     setTimeout(() => {
-                        heart.remove();
-                    }, 4000);
-                }, i * 300);
+                        mouth.parentElement.classList.remove('speaking');
+                        if (callback) callback();
+                    }, text.length * 100);
+                }
             }
-        }
-        
-        function createFireworks() {
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    let firework = document.createElement('div');
-                    firework.classList.add('fireworks');
-                    firework.style.left = Math.random() * window.innerWidth + 'px';
-                    firework.style.top = Math.random() * window.innerHeight + 'px';
-                    firework.style.background = getRandomColor();
-                    document.body.appendChild(firework);
-                    
-                    // تأثير firework
+            
+            // إنشاء قلوب متحركة
+            function createHearts() {
+                for (let i = 0; i < 15; i++) {
                     setTimeout(() => {
-                        firework.style.transition = 'all 0.5s ease-out';
-                        firework.style.opacity = '1';
-                        firework.style.transform = 'scale(20)';
-                        firework.style.opacity = '0';
+                        const heart = document.createElement('div');
+                        heart.classList.add('heart');
+                        heart.innerHTML = '❤️';
+                        heart.style.left = Math.random() * 100 + 'vw';
+                        heart.style.animationDuration = (Math.random() * 4 + 3) + 's';
+                        heartsContainer.appendChild(heart);
                         
-                        // إزالة firework بعد انتهاء التأثير
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 6000);
+                    }, i * 400);
+                }
+            }
+            
+            // إنشاء ألعاب نارية
+            function createFireworks() {
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        const firework = document.createElement('div');
+                        firework.classList.add('firework');
+                        firework.style.left = Math.random() * 100 + 'vw';
+                        firework.style.top = Math.random() * 100 + 'vh';
+                        firework.style.width = Math.random() * 8 + 2 + 'px';
+                        firework.style.height = firework.style.width;
+                        firework.style.background = `radial-gradient(circle, 
+                            ${getRandomColor()}, 
+                            ${getRandomColor()})`;
+                        firework.style.setProperty('--tx', (Math.random() * 100 - 50) + 'px');
+                        firework.style.setProperty('--ty', (Math.random() * 100 - 50) + 'px');
+                        firework.style.animation = `explode ${Math.random() * 1 + 0.5}s ease-out forwards`;
+                        fireworksContainer.appendChild(firework);
+                        
                         setTimeout(() => {
                             firework.remove();
-                        }, 500);
-                    }, 10);
-                }, i * 100);
+                        }, 2000);
+                    }, i * 300);
+                }
             }
-        }
-        
-        function flyAway() {
-            // إخفاء المرحلة الحالية
-            document.getElementById('stage3').style.display = 'none';
             
-            // إنشاء تأثير الطيران
-            for (let i = 0; i < 50; i++) {
+            function getRandomColor() {
+                const colors = ['#ff5e94', '#6e8efb', '#a777e3', '#ff2e63', '#00ffff', '#ffff00'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            // حركة الروبوت المفاجئة
+            function surpriseMovement() {
+                robot.classList.add('surprise');
                 setTimeout(() => {
-                    let text = document.createElement('div');
-                    text.classList.add('fly-effect');
-                    text.innerHTML = 'أنا أطير من الفرحة! ';
-                    text.style.left = Math.random() * window.innerWidth + 'px';
-                    text.style.fontSize = (Math.random() * 25 + 15) + 'px';
-                    text.style.color = getRandomColor();
-                    document.body.appendChild(text);
-                    
-                    // إزالة النص بعد انتهاء التحليق
-                    setTimeout(() => {
-                        text.remove();
-                    }, 4000);
-                }, i * 200);
+                    robot.classList.remove('surprise');
+                }, 500);
             }
             
-            // إعادة العرض بعد انتهاء التحليق
-            setTimeout(() => {
-                document.getElementById('stage3').style.display = 'block';
-            }, 5000);
-        }
-        
-        function getRandomColor() {
-            const colors = ['#e84393', '#fd79a8', '#6c5ce7', '#00cec9', '#ff9a9e', '#fdcb6e', '#e17055'];
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
-        
-        // لجعل التجربة أكثر تفاعلية عند الضغط على Enter في حقل الإدخال
-        document.getElementById('name-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                startExperience();
+            // حركة التطلع حوله
+            function lookAround() {
+                document.querySelector('.eyes').classList.add('looking-around');
+                setTimeout(() => {
+                    document.querySelector('.eyes').classList.remove('looking-around');
+                }, 3000);
             }
+            
+            // حركة التنقل في الشاشة
+            function moveAround() {
+                robot.classList.add('move-around');
+                setTimeout(() => {
+                    robot.classList.remove('move-around');
+                }, 5000);
+            }
+            
+            // تغيير المرحلة
+            function setPhase(phaseNum) {
+                currentPhase = phaseNum;
+                phases.forEach((phase, index) => {
+                    if (index + 1 === phaseNum) {
+                        phase.classList.add('active');
+                    } else {
+                        phase.classList.remove('active');
+                    }
+                });
+                
+                // إخفاء وإظهار محتوى المراحل
+                phase1Content.classList.remove('active');
+                phase2Content.classList.remove('active');
+                phase3Content.classList.remove('active');
+                
+                if (phaseNum === 1) {
+                    phase1Content.classList.add('active');
+                } else if (phaseNum === 2) {
+                    phase2Content.classList.add('active');
+                } else if (phaseNum === 3) {
+                    phase3Content.classList.add('active');
+                    createFireworks();
+                }
+                
+                conversationStep = 0;
+            }
+            
+            // معالجة إرسال الرسائل
+            function handleSendMessage() {
+                const message = userInput.value.trim();
+                if (message === '') return;
+                
+                addMessage(message, true);
+                userInput.value = '';
+                
+                // في المرة الأولى نأخذ الاسم
+                if (conversationStep === 0) {
+                    userName = message;
+                    setTimeout(() => {
+                        surpriseMovement();
+                        robotSpeak("أوه! " + userName + "! يا له من اسم جميل!", () => {
+                            conversationStep = 1;
+                            setTimeout(() => {
+                                robotSpeak("هل هذا اسمك الحقيقي؟ يجب أن تكوني صادقة معي!", () => {
+                                    conversationStep = 2;
+                                });
+                            }, 1000);
+                        });
+                    }, 1000);
+                } 
+                // التأكد من الاسم
+                else if (conversationStep === 2) {
+                    if (message.toLowerCase().includes("نعم") || message.includes("صحيح") || message.includes("ايوه")) {
+                        setTimeout(() => {
+                            moveAround();
+                            robotSpeak("أحسنت! الصدق هو مفتاح القلب!", () => {
+                                conversationStep = 3;
+                                setTimeout(() => {
+                                    robotSpeak("والآن يا " + userName + "، هل أنت مستعدة لبدء رحلتنا الرومانسية؟", () => {
+                                        conversationStep = 4;
+                                    });
+                                }, 1000);
+                            });
+                        }, 1000);
+                    } else {
+                        setTimeout(() => {
+                            robotSpeak("لا تكذبي عليّ! أخبريني اسمك الحقيقي!", () => {
+                                conversationStep = 0;
+                            });
+                        }, 1000);
+                    }
+                } 
+                // بدء الرحلة الرومانسية
+                else if (conversationStep === 4) {
+                    if (message.toLowerCase().includes("نعم") || message.includes("موافق") || message.includes("ابدا")) {
+                        setTimeout(() => {
+                            robotSpeak("رائع! لنبدأ الرحلة!", () => {
+                                setPhase(2);
+                                createHearts();
+                            });
+                        }, 1000);
+                    } else {
+                        setTimeout(() => {
+                            robotSpeak("لا بأس، سأنتظر حتى تكوني مستعدة...", () => {
+                                conversationStep = 3;
+                            });
+                        }, 1000);
+                    }
+                }
+            }
+            
+            // الانتقال إلى المرحلة الثالثة
+            phase2Btn.addEventListener('click', function() {
+                const message = phase2Input.value.trim();
+                if (message === '') return;
+                
+                setPhase(3);
+                createHearts();
+                createFireworks();
+            });
+            
+            // إعادة البدء
+            restartBtn.addEventListener('click', function() {
+                setPhase(1);
+                conversationStep = 0;
+                userName = "";
+                chatContainer.innerHTML = "";
+                phase2Input.value = "";
+                
+                // إعادة بدء المحادثة
+                setTimeout(() => {
+                    lookAround();
+                    robotSpeak("مرحباً! من هناك؟ هل هناك أحد؟", () => {
+                        conversationStep = 0;
+                    });
+                }, 1000);
+            });
+            
+            // إضافة event listeners
+            sendBtn.addEventListener('click', handleSendMessage);
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleSendMessage();
+                }
+            });
+            
+            // بدء المحادثة عند تحميل الصفحة
+            setTimeout(() => {
+                createStars();
+                lookAround();
+                setTimeout(() => {
+                    moveAround();
+                    robotSpeak("مرحباً! من هناك؟ هل هناك أحد؟", () => {
+                        conversationStep = 0;
+                    });
+                }, 1000);
+                
+                // حاول تشغيل الموسيقى الخلفية
+                try {
+                    backgroundMusic.volume = 0.3;
+                    backgroundMusic.play();
+                } catch (e) {
+                    console.log("تعذر تشغيل الموسيقى الخلفية");
+                }
+            }, 1000);
         });
     </script>
 </body>
