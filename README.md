@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>روبو الحب - من أجل روان</title>
+    <title>روبو الحب - من يوسف إلى روان</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -316,6 +316,38 @@
             animation: twinkle 5s infinite;
         }
         
+        .romantic-scene {
+            position: relative;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 15px 0;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+        }
+        
+        .scene-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .scene-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 20px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+        
         @keyframes blink {
             0%, 40%, 80%, 100% {
                 height: 25px;
@@ -452,6 +484,10 @@
                 opacity: 0;
             }
         }
+        
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -489,25 +525,48 @@
         </div>
         
         <div id="phase2-content" class="romantic-phase">
-            <div class="phase-title">المرحلة الثانية: رحلة إلى القلب</div>
+            <div class="phase-title">المرحلة الثانية: رحلة إلى قلعة الحب</div>
+            <div class="romantic-scene">
+                <div class="scene-overlay">
+                    مرحباً بك في قلعة الحب، حيث تبدأ رحلتنا الرومانسية
+                </div>
+            </div>
             <div class="phase-content">
-                <p>الآن وقد عرفتكِ يا روان، دعينا نبدأ رحلتنا الرومانسية</p>
-                <p>أخبريني، ما هو أكثر شيء تحبينه في الحب؟</p>
+                <p>أهلاً يا روان! لقد وصلنا إلى قلعة الحب الأسطورية</p>
+                <p>هنا حيث تبدأ رحلتنا الرومانسية التي أعدها يوسف خصيصاً لك</p>
+                <p>أخبريني، ما هو أكثر شيء تنتظرينه في هذه الرحلة؟</p>
             </div>
             <div class="input-container">
-                <input type="text" id="phase2-input" placeholder="ما هو أكثر شيء تحبينه في الحب؟">
+                <input type="text" id="phase2-input" placeholderما هو أكثر شيء تنتظرينه؟">
                 <button id="phase2-btn"><i class="fas fa-heart"></i> تابعي</button>
             </div>
         </div>
         
         <div id="phase3-content" class="romantic-phase">
-            <div class="phase-title">المرحلة الثالثة: الوصول إلى القلعة</div>
+            <div class="phase-title">المرحلة الثالثة: حديقة المشاعر</div>
+            <div class="romantic-scene">
+                <div class="scene-overlay">
+                    حديقة المشاعر، حيث تزهر أجمَل الأحاسيس
+                </div>
+            </div>
             <div class="phase-content">
-                <p>تهانينا يا روان! لقد وصلتي إلى القلعة الرومانسية</p>
-                <p>هنا حيث تتحقق الأحلام وتزهر المشاعر</p>
-                <p>أنتِ شخص استثنائي، وأنا سعيد بأنني أستطيع مشاركة هذه اللحظات معك</p>
+                <p>تهانينا يا روان! لقد وصلتي إلى حديقة المشاعر</p>
+                <p>هنا حيث تزهر أجمَل الأحاسيس وأعمق المشاعر</p>
+                <p>يوسف يريدك أن تعلمي أنكِ الشخص الأكثر تميزاً في حياته</p>
+                <p>وأن هذه الرحلة ما هي إلا بداية لقصة حب جميلة</p>
             </div>
             <button id="restart-btn"><i class="fas fa-redo"></i> بدء رحلة جديدة</button>
+        </div>
+        
+        <div id="final-message" class="hidden">
+            <div class="phase-title">رسالة خاصة من يوسف</div>
+            <div class="phase-content">
+                <p>عزيزتي روان،</p>
+                <p>هذه الرحلة ما هي إلا تعبير عن مشاعري التي لا أستطيع التعبير عنها</p>
+                <p>أتمنى أن تكوني قد استمتعتِ بهذه الرحلة الرومانسية البسيطة</p>
+                <p>وأن تعلمي أنكِ شخص مميز جداً في حياتي</p>
+                <p>مع كل الحب، يوسف</p>
+            </div>
         </div>
     </div>
     
@@ -543,6 +602,12 @@
             const phase2Input = document.getElementById('phase2-input');
             const phase2Btn = document.getElementById('phase2-btn');
             const restartBtn = document.getElementById('restart-btn');
+            const finalMessage = document.getElementById('final-message');
+            const romanticScenes = document.querySelectorAll('.romantic-scene');
+            
+            // تعيين خلفيات للمشاهد الرومانسية
+            romanticScenes[0].style.background = "linear-gradient(to bottom, #0f0c29, #302b63)";
+            romanticScenes[1].style.background = "linear-gradient(to bottom, #ff5e94, #a777e3)";
             
             let currentPhase = 1;
             let conversationStep = 0;
@@ -568,7 +633,7 @@
                     "مرحباً! من هناك؟ هل هناك أحد؟",
                     "أرى أن هناك شخصاً ما قد دخل! من أنت؟",
                     "أنتِ إنسانة، أليس كذلك؟ أخبريني ما اسمك!",
-                    "يجب أن تخبريني باسمك الحقيقي، لا تكذبي عليّ!",
+                    "يجب أن تخبريني باسمك الحقيقي، لا تكذبي عليّ! عشان الباشمهندس يوسف ممكن يقفلني في أي لحظة!",
                     "أوه، روان! يا للروعة! هذا اسم جميل!",
                     "حسناً يا روان، هل أنت مستعدة لبدء رحلتنا الرومانسية؟"
                 ]
@@ -696,6 +761,7 @@
                 phase1Content.classList.remove('active');
                 phase2Content.classList.remove('active');
                 phase3Content.classList.remove('active');
+                finalMessage.classList.add('hidden');
                 
                 if (phaseNum === 1) {
                     phase1Content.classList.add('active');
@@ -703,6 +769,9 @@
                     phase2Content.classList.add('active');
                 } else if (phaseNum === 3) {
                     phase3Content.classList.add('active');
+                    createFireworks();
+                } else if (phaseNum === 4) {
+                    finalMessage.classList.remove('hidden');
                     createFireworks();
                 }
                 
@@ -725,7 +794,7 @@
                         robotSpeak("أوه! " + userName + "! يا له من اسم جميل!", () => {
                             conversationStep = 1;
                             setTimeout(() => {
-                                robotSpeak("هل هذا اسمك الحقيقي؟ يجب أن تكوني صادقة معي!", () => {
+                                robotSpeak("هل هذا اسمك الحقيقي؟ يجب أن تكوني صادقة معي! عشان الباشمهندس يوسف ممكن يقفلني في أي لحظة!", () => {
                                     conversationStep = 2;
                                 });
                             }, 1000);
@@ -734,39 +803,18 @@
                 } 
                 // التأكد من الاسم
                 else if (conversationStep === 2) {
-                    if (message.toLowerCase().includes("نعم") || message.includes("صحيح") || message.includes("ايوه")) {
+                    if (message.toLowerCase().includes("نعم") || message.includes("صحيح") || message.includes("ايوه") || message.toLowerCase().includes("yes")) {
                         setTimeout(() => {
                             moveAround();
-                            robotSpeak("أحسنت! الصدق هو مفتاح القلب!", () => {
-                                conversationStep = 3;
-                                setTimeout(() => {
-                                    robotSpeak("والآن يا " + userName + "، هل أنت مستعدة لبدء رحلتنا الرومانسية؟", () => {
-                                        conversationStep = 4;
-                                    });
-                                }, 1000);
-                            });
-                        }, 1000);
-                    } else {
-                        setTimeout(() => {
-                            robotSpeak("لا تكذبي عليّ! أخبريني اسمك الحقيقي!", () => {
-                                conversationStep = 0;
-                            });
-                        }, 1000);
-                    }
-                } 
-                // بدء الرحلة الرومانسية
-                else if (conversationStep === 4) {
-                    if (message.toLowerCase().includes("نعم") || message.includes("موافق") || message.includes("ابدا")) {
-                        setTimeout(() => {
-                            robotSpeak("رائع! لنبدأ الرحلة!", () => {
+                            robotSpeak("أحسنت! الصدق هو مفتاح القلب! والآن لنبدأ رحلتنا الرومانسية!", () => {
                                 setPhase(2);
                                 createHearts();
                             });
                         }, 1000);
                     } else {
                         setTimeout(() => {
-                            robotSpeak("لا بأس، سأنتظر حتى تكوني مستعدة...", () => {
-                                conversationStep = 3;
+                            robotSpeak("لا تكذبي عليّ! أخبريني اسمك الحقيقي! عشان الباشمهندس يوسف ممكن يقفلني في أي لحظة!", () => {
+                                conversationStep = 0;
                             });
                         }, 1000);
                     }
@@ -781,6 +829,11 @@
                 setPhase(3);
                 createHearts();
                 createFireworks();
+                
+                // بعد فترة، عرض الرسالة النهائية
+                setTimeout(() => {
+                    setPhase(4);
+                }, 10000);
             });
             
             // إعادة البدء
