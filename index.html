@@ -1,346 +1,1105 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>عقد زواج يوسف &amp; روان — لحظة الأبد</title>
-  <style>
-    :root{--press-sec:15}
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family: 'Noto Kufi Arabic', 'Cairo', Tahoma, system-ui, -apple-system;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 10% 10%, #fff7f8, #ffdfe6 12%, #ffc1d3 40%, #ff8fb2 100%);color:#421b2a}
-
-    .stage{width:96%;max-width:1100px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));border-radius:22px;padding:28px;box-shadow:0 16px 50px rgba(0,0,0,0.18);text-align:center}
-    h1{margin:0 0 6px;font-size:30px;color:#fff;text-shadow:0 8px 30px rgba(0,0,0,0.18)}
-    p.lead{margin:4px 0 22px;color:rgba(255,255,255,0.95)}
-
-    .fingers{display:flex;gap:30px;justify-content:center;flex-wrap:wrap}
-    .finger-card{width:230px}
-    .finger{width:230px;height:230px;border-radius:50%;background:linear-gradient(180deg,#ffffff,#ffeef6);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 18px 40px rgba(0,0,0,0.18);cursor:pointer;user-select:none}
-    .finger svg{width:120px;height:120px;opacity:0.96;pointer-events:none}
-    .count{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(66,27,42,0.14);padding:6px 12px;border-radius:18px;color:#fff;font-weight:800}
-    .name{margin-top:12px;font-size:20px;color:#fff;font-weight:900;min-height:28px;text-shadow:0 4px 14px rgba(0,0,0,0.22)}
-    .status{margin-top:6px;color:rgba(255,255,255,0.95)}
-
-    .ring{transform:rotate(-90deg)}
-    .finger.pressing{transform:scale(0.985);box-shadow:inset 0 10px 30px rgba(0,0,0,0.08)}
-
-    /* Romance scene */
-    .scene{margin-top:28px;min-height:260px;position:relative;overflow:hidden;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.02));padding:18px}
-
-    .character{position:absolute;bottom:18px;width:220px;height:220px;display:flex;align-items:flex-end;justify-content:center;transition:transform 900ms cubic-bezier(.2,.9,.3,1);opacity:0}
-    .groom{left:-260px}
-    .bride{right:-260px}
-    .character.show{opacity:1}
-
-    /* simple SVG silhouettes centered inside */
-    .avatar{width:140px;height:160px}
-
-    .hands{position:absolute;bottom:56px;left:50%;transform:translateX(50%);opacity:0;transition:opacity 700ms 200ms ease}
-    .hands.show{opacity:1}
-
-    .banner{position:absolute;top:22px;left:50%;transform:translateX(-50%) scale(0.95);background:linear-gradient(90deg,#fff6fb,#ffeef6);padding:12px 22px;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,0.14);display:none}
-    .banner.show{display:flex;align-items:center;gap:12px}
-    .banner strong{color:#b42f58;font-size:20px}
-
-    .controls{margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-    button{padding:10px 16px;border-radius:10px;border:none;background:rgba(255,255,255,0.12);color:#fff;font-weight:800;cursor:pointer}
-    .primary{background:linear-gradient(90deg,#ff6b8a,#ff4471);box-shadow:0 8px 30px rgba(255,77,109,0.14)}
-
-    .hearts{position:absolute;left:0;right:0;top:0;pointer-events:none}
-    .heart{position:absolute;font-size:22px;opacity:0;animation:rise 2.6s linear forwards}
-    @keyframes rise{0%{transform:translateY(0) scale(0.6);opacity:1}100%{transform:translateY(-240px) translateX(var(--tx,0)) scale(1);opacity:0}}
-
-    .small{margin-top:10px;color:rgba(255,255,255,0.9)}
-
-    @media(max-width:720px){.finger{width:170px;height:170px}.finger-card{width:170px}.character{width:150px;height:150px}.avatar{width:110px;height:120px}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سعيد بتاع الغلابه - أفضل أسعار الموبايلات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #f39c12;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --gradient: linear-gradient(135deg, #2c3e50, #4a6491);
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* الشريط العلوي */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo-circle {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-circle::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .logo-circle span {
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            z-index: 1;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 24px;
+            margin: 0;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo-text p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 8px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-cart {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-box {
+            position: relative;
+            margin-left: 15px;
+        }
+        
+        .search-box input {
+            padding: 10px 15px;
+            border-radius: 30px;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            width: 200px;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.25);
+            width: 220px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            margin-left: 15px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background: var(--secondary-color);
+            color: white;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* الهيرو */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin: 0 auto 30px;
+            max-width: 600px;
+            animation: fadeInUp 1.2s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.5);
+        }
+        
+        .btn:hover::before {
+            opacity: 1;
+        }
+        
+        /* قسم الهواتف */
+        .phones-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            margin: 0 5px 10px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+        }
+        
+        .phones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .phone-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .phone-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .phone-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .phone-image {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .phone-image img {
+            max-height: 180px;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform 0.5s;
+        }
+        
+        .phone-card:hover .phone-image img {
+            transform: scale(1.1);
+        }
+        
+        .phone-details {
+            padding: 20px;
+        }
+        
+        .phone-details h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .phone-features {
+            list-style: none;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .phone-features li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .phone-features li i {
+            color: var(--accent-color);
+            margin-left: 5px;
+        }
+        
+        .phone-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        
+        .phone-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .phone-actions button {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .buy-btn {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            margin-left: 10px;
+        }
+        
+        .buy-btn:hover {
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+            transform: translateY(-2px);
+        }
+        
+        .details-btn {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background: white;
+        }
+        
+        .details-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* قسم العلامات التجارية */
+        .brands-section {
+            padding: 60px 0;
+            background: linear-gradient(to right, #f5f7fa, #e9ecef);
+        }
+        
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .brand-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            filter: grayscale(0.3);
+        }
+        
+        .brand-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            filter: grayscale(0);
+        }
+        
+        .brand-item img {
+            max-width: 100%;
+            max-height: 50px;
+            object-fit: contain;
+        }
+        
+        /* قسم المميزات */
+        .features-section {
+            padding: 80px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-item {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 28px;
+        }
+        
+        .feature-item h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .feature-item p {
+            color: #666;
+        }
+        
+        /* الفوتر */
+        footer {
+            background: var(--gradient);
+            color: white;
+            padding: 60px 0 20px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(0,0,0,0.05)"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+        
+        .footer-column p, .footer-column li {
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-column ul li i {
+            margin-left: 8px;
+            color: var(--accent-color);
+        }
+        
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent-color);
+            padding-right: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-left: 10px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            opacity: 0.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .header-actions {
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .search-box input {
+                width: 150px;
+            }
+            
+            .search-box input:focus {
+                width: 170px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 70px 0;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .search-box {
+                display: none;
+            }
+            
+            .phones-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
-  <main class="stage" role="main" aria-label="بصمات الحب">
-    <h1>💍 بصمات يوسف &amp; روان — لحظة الأبد</h1>
-    <p class="lead">اضغط مطوّلًا على بصمتك لـ <strong>15 ثانية</strong> كاملة بدون رفع — بعد ما تنتها الاتنين، هتشوف مراحل رومانسية كأنها فيلم صغير.</p>
-
-    <section class="fingers" aria-hidden="false">
-      <div class="finger-card">
-        <div class="finger" tabindex="0" role="button" aria-pressed="false" data-person="youssef" aria-label="بصمة يوسف">
-          <!-- fingerprint icon -->
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <g fill="none" stroke="#b32f52" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M50 20c0 0-8 0-12 8-5 11-6 22-6 30 0 14 6 28 20 28s20-14 20-28c0-8-1-19-6-30-4-8-12-8-12-8" />
-              <path d="M45 18c0 0-5 0-8 6-4 9-5 18-5 25 0 12 5 24 16 24s16-12 16-24c0-7-1-16-5-25-3-6-8-6-8-6" />
-              <path d="M40 33c0 0-2 2-2 7 0 10 4 18 10 18s10-8 10-18c0-5-2-7-2-7" />
-            </g>
-          </svg>
-
-          <div class="progress-ring" aria-hidden="true" style="position:absolute;inset:8px;pointer-events:none">
-            <svg width="214" height="214" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="44" stroke="rgba(255,255,255,0.16)" stroke-width="6" fill="none"></circle>
-              <circle class="ring" cx="50" cy="50" r="44" stroke="#fff" stroke-width="6" stroke-dasharray="276.46" stroke-dashoffset="276.46" fill="none"></circle>
-            </svg>
-          </div>
-
-          <div class="count">15s</div>
+    <!-- الشريط العلوي -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-circle">
+                    <span>س</span>
+                </div>
+                <div class="logo-text">
+                    <h1>سعيد بتاع الغلابه</h1>
+                    <p>أفضل أسعار الموبايلات في مصر</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">الموبايلات</a></li>
+                    <li><a href="#">العروض</a></li>
+                    <li><a href="#">الماركات</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="search-cart">
+                    <div class="search-box">
+                        <input type="text" placeholder="ابحث عن موبايل...">
+                    </div>
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="name" id="name-youssef">—</div>
-        <div class="status" id="status-youssef">يوسف — لم تضغط بعد</div>
-      </div>
+    </header>
 
-      <div class="finger-card">
-        <div class="finger" tabindex="0" role="button" aria-pressed="false" data-person="rawan" aria-label="بصمة روان">
-          <!-- fingerprint icon (different color) -->
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <g fill="none" stroke="#8c2c79" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M50 20c0 0-8 0-12 8-5 11-6 22-6 30 0 14 6 28 20 28s20-14 20-28c0-8-1-19-6-30-4-8-12-8-12-8" />
-              <path d="M45 18c0 0-5 0-8 6-4 9-5 18-5 25 0 12 5 24 16 24s16-12 16-24c0-7-1-16-5-25-3-6-8-6-8-6" />
-              <path d="M40 33c0 0-2 2-2 7 0 10 4 18 10 18s10-8 10-18c0-5-2-7-2-7" />
-            </g>
-          </svg>
-          <div class="progress-ring" aria-hidden="true" style="position:absolute;inset:8px;pointer-events:none">
-            <svg width="214" height="214" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="44" stroke="rgba(255,255,255,0.16)" stroke-width="6" fill="none"></circle>
-              <circle class="ring" cx="50" cy="50" r="44" stroke="#fff" stroke-width="6" stroke-dasharray="276.46" stroke-dashoffset="276.46" fill="none"></circle>
-            </svg>
-          </div>
-          <div class="count">15s</div>
+    <!-- الهيرو -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h2>أرخص أسعار الموبايلات في مصر</h2>
+            <p>أقوي العروض علي أحدث الموبايلات بأقل الأسعار مع ضمان الجودة والكفالة</p>
+            <a href="#" class="btn">استعرض العروض</a>
         </div>
-        <div class="name" id="name-rawan">—</div>
-        <div class="status" id="status-rawan">روان — لم تضغط بعد</div>
-      </div>
     </section>
 
-    <section class="scene" id="scene">
-      <!-- groom -->
-      <div class="character groom" id="groom">
-        <svg class="avatar" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- head -->
-          <circle cx="60" cy="30" r="18" fill="#fde7e9" stroke="#b33" stroke-width="1" />
-          <!-- suit -->
-          <path d="M35 60 L85 60 L75 140 L45 140 Z" fill="#2e2630" />
-          <!-- tie -->
-          <path d="M59 70 L63 95 L57 95 Z" fill="#b32f52" />
-        </svg>
-      </div>
+    <!-- قسم الهواتف -->
+    <section class="phones-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>أحدث الموبايلات</h2>
+                <p>اكتشف أحدث الموبايلات بأفضل الأسعار والمواصفات</p>
+            </div>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active">جميع الموبايلات</button>
+                <button class="filter-btn">أبل</button>
+                <button class="filter-btn">سامسونج</button>
+                <button class="filter-btn">شاومي</button>
+                <button class="filter-btn">oppo</button>
+                <button class="filter-btn">عروض خاصة</button>
+            </div>
+            
+            <div class="phones-grid">
+                <!-- موبايل 1 -->
+                <div class="phone-card">
+                    <span class="phone-badge">الأكثر مبيعاً</span>
+                    <div class="phone-image">
+                        <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="iPhone 13 Pro">
+                    </div>
+                    <div class="phone-details">
+                        <h3>iPhone 13 Pro</h3>
+                        <ul class="phone-features">
+                            <li><i class="fas fa-check"></i> شاشة 6.1 بوصة</li>
+                            <li><i class="fas fa-check"></i> كاميرا ثلاثية 12MP</li>
+                            <li><i class="fas fa-check"></i> ذاكرة 128GB</li>
+                        </ul>
+                        <div class="phone-price">
+                            <span class="original-price">28,999 ج.م</span>
+                            25,999 ج.م
+                        </div>
+                        <div class="phone-actions">
+                            <button class="details-btn"><i class="fas fa-info-circle"></i> التفاصيل</button>
+                            <button class="buy-btn"><i class="fas fa-shopping-cart"></i> شراء</button>
+                        </div>
+                    </div>
+                </div>
 
-      <!-- bride -->
-      <div class="character bride" id="bride">
-        <svg class="avatar" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- head -->
-          <circle cx="60" cy="30" r="18" fill="#fff4f6" stroke="#8c2c79" stroke-width="1" />
-          <!-- dress -->
-          <path d="M30 70 C55 110, 65 110, 90 70 L60 140 Z" fill="#fff" stroke="#ffdff0" stroke-width="1" />
-          <!-- veil -->
-          <path d="M42 18 C55 36, 66 36, 78 18" stroke="#fff" stroke-width="6" fill="none" opacity="0.9" />
-        </svg>
-      </div>
+                <!-- موبايل 2 -->
+                <div class="phone-card">
+                    <span class="phone-badge">جديد</span>
+                    <div class="phone-image">
+                        <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Samsung Galaxy S21">
+                    </div>
+                    <div class="phone-details">
+                        <h3>Samsung Galaxy S21</h3>
+                        <ul class="phone-features">
+                            <li><i class="fas fa-check"></i> شاشة 6.2 بوصة</li>
+                            <li><i class="fas fa-check"></i> كاميرا 64MP</li>
+                            <li><i class="fas fa-check"></i> ذاكرة 256GB</li>
+                        </ul>
+                        <div class="phone-price">18,499 ج.م</div>
+                        <div class="phone-actions">
+                            <button class="details-btn"><i class="fas fa-info-circle"></i> التفاصيل</button>
+                            <button class="buy-btn"><i class="fas fa-shopping-cart"></i> شراء</button>
+                        </div>
+                    </div>
+                </div>
 
-      <!-- hands connection -->
-      <div class="hands" id="hands" aria-hidden="true" style="left:50%;transform:translateX(-50%);">
-        <svg width="260" height="120" viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path id="handpath" d="M10 80 Q130 20 250 80" stroke="#f2c8d5" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.0" />
-        </svg>
-      </div>
+                <!-- موبايل 3 -->
+                <div class="phone-card">
+                    <div class="phone-image">
+                        <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Xiaomi Redmi Note 11">
+                    </div>
+                    <div class="phone-details">
+                        <h3>Xiaomi Redmi Note 11</h3>
+                        <ul class="phone-features">
+                            <li><i class="fas fa-check"></i> شاشة 6.43 بوصة</li>
+                            <li><i class="fas fa-check"></i> كاميرا 50MP</li>
+                            <li><i class="fas fa-check"></i> ذاكرة 128GB</li>
+                        </ul>
+                        <div class="phone-price">6,299 ج.م</div>
+                        <div class="phone-actions">
+                            <button class="details-btn"><i class="fas fa-info-circle"></i> التفاصيل</button>
+                            <button class="buy-btn"><i class="fas fa-shopping-cart"></i> شراء</button>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="banner" id="banner" role="status">
-        <div>✨</div>
-        <div><strong id="bannerText">يوسف ❤️ روان — تم الزواج الأبدي</strong></div>
-      </div>
-
-      <div class="hearts" id="hearts"></div>
-
+                <!-- موبايل 4 -->
+                <div class="phone-card">
+                    <span class="phone-badge">عرض خاص</span>
+                    <div class="phone-image">
+                        <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Oppo Reno 6">
+                    </div>
+                    <div class="phone-details">
+                        <h3>Oppo Reno 6</h3>
+                        <ul class="phone-features">
+                            <li><i class="fas fa-check"></i> شاشة 6.4 بوصة</li>
+                            <li><i class="fas fa-check"></i> كاميرا 64MP</li>
+                            <li><i class="fas fa-check"></i> ذاكرة 128GB</li>
+                        </ul>
+                        <div class="phone-price">
+                            <span class="original-price">9,999 ج.م</span>
+                            8,999 ج.م
+                        </div>
+                        <div class="phone-actions">
+                            <button class="details-btn"><i class="fas fa-info-circle"></i> التفاصيل</button>
+                            <button class="buy-btn"><i class="fas fa-shopping-cart"></i> شراء</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <div class="controls" id="controls">
-      <button class="primary" id="downloadBtn" style="display:none">حفظ لحظة (تحميل شهادة PNG)</button>
-      <button id="resetBtn" style="display:none">إعادة</button>
-    </div>
+    <!-- قسم الماركات -->
+    <section class="brands-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>أشهر الماركات</h2>
+                <p>جميع الماركات العالمية بأفضل الأسعار</p>
+            </div>
+            
+            <div class="brands-grid">
+                <div class="brand-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
+                </div>
+                <div class="brand-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Samsung">
+                </div>
+                <div class="brand-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Xiaomi_logo_%282021-%29.svg" alt="Xiaomi">
+                </div>
+                <div class="brand-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Oppo_logo.svg" alt="Oppo">
+                </div>
+                <div class="brand-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Huawei_Standard_logo.svg" alt="Huawei">
+                </div>
+                <div class="brand-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Realme_logo_%282021%29.svg" alt="Realme">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <p class="small">ملاحظة: لما تضغط وتكمل الـ15 ثانية، البصمة بتتسجل محليًا في المتصفح علشان تختار تبعت الملف بنفسك — مفيش حاجة بتتحمّل على الإنترنت.</p>
-  </main>
+    <!-- قسم المميزات -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>لماذا تختارنا؟</h2>
+                <p>نحن نقدم أفضل الخدمات لعملائنا الكرام</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>توصيل سريع</h3>
+                    <p>نقوم بالتوصيل خلال 24 ساعة في القاهرة و48 ساعة في المحافظات</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>ضمان لمدة عام</h3>
+                    <p>جميع أجهزتنا أصلية وبها ضمان لمدة عام من تاريخ الشراء</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>دعم فني 24/7</h3>
+                    <p>فريق الدعم الفني متاح على مدار الساعة لمساعدتك في أي استفسار</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>أسعار منافسة</h3>
+                    <p>نوفر لك أفضل الأسعار المنافسة في السوق المصري مع خيارات دفع متعددة</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    (function(){
-      const DURATION = (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--press-sec')) || 15) * 1000;
-      const fingers = document.querySelectorAll('.finger');
-      const state = { youssef:false, rawan:false };
-      const nameEls = { youssef:document.getElementById('name-youssef'), rawan:document.getElementById('name-rawan') };
-      const statusEls = { youssef:document.getElementById('status-youssef'), rawan:document.getElementById('status-rawan') };
-      const ringRadius = 44; const circumference = 2 * Math.PI * ringRadius;
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن سعيد بتاع الغلابه</h3>
+                    <p>متجرنا يقدم أفضل أسعار الموبايلات في مصر مع ضمان الجودة والكفالة. نحن نعمل منذ أكثر من 10 سنوات في سوق الموبايلات.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#">الموبايلات</a></li>
+                        <li><a href="#">العروض الخاصة</a></li>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>وسائل التواصل</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 شارع التحرير، القاهرة</li>
+                        <li><i class="fas fa-phone"></i> 0123456789</li>
+                        <li><i class="fas fa-envelope"></i> info@saeedmobile.com</li>
+                        <li><i class="fas fa-clock"></i> يومياً من 10 صباحاً إلى 10 مساءً</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2023 سعيد بتاع الغلابه</p>
+            </div>
+        </div>
+    </footer>
 
-      function setRing(circle,progress){
-        const offset = circumference * (1 - progress);
-        circle.style.strokeDashoffset = offset;
-      }
-
-      function createFloatHeart(x,y,size=22,delay=0){
-        const h = document.createElement('div');
-        h.className='heart'; h.style.left = x + 'px'; h.style.top = y + 'px'; h.style.fontSize = size + 'px'; h.style.setProperty('--tx',(Math.random()*200-100)+'px');
-        h.textContent = '💖';
-        document.getElementById('hearts').appendChild(h);
-        setTimeout(()=> h.remove(), 2600 + delay);
-      }
-
-      function burstHearts(centerX,centerY,count=22){
-        for(let i=0;i<count;i++){
-          setTimeout(()=> createFloatHeart(centerX + (Math.random()*120 - 60), centerY + (Math.random()*40 - 20), 12 + Math.random()*22), i*80);
-        }
-      }
-
-      fingers.forEach(fp=>{
-        const person = fp.dataset.person;
-        const ring = fp.querySelector('.ring');
-        const countdown = fp.querySelector('.count');
-        let start = 0; let raf=0; let pressing=false;
-
-        function update(){
-          const now = performance.now();
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / DURATION, 1);
-          const remaining = Math.ceil((DURATION - elapsed)/1000);
-          countdown.textContent = remaining > 0 ? remaining + 's' : '0s';
-          setRing(ring, progress);
-          if(progress >= 1){
-            cancelAnimationFrame(raf);
-            finish();
-            return;
-          }
-          raf = requestAnimationFrame(update);
-        }
-
-        function finish(){
-          pressing = false;
-          fp.classList.remove('pressing');
-          fp.setAttribute('aria-pressed','true');
-          nameEls[person].textContent = (person === 'youssef' ? 'يوسف' : 'روان');
-          statusEls[person].textContent = (person === 'youssef' ? 'يوسف — تم التوثيق' : 'روان — تم التوثيق');
-          state[person] = true;
-          fp.style.pointerEvents = 'none';
-          countdown.textContent = 'تم';
-          // small heart burst near fingerprint
-          const rect = fp.getBoundingClientRect();
-          burstHearts(rect.left + rect.width/2, rect.top + rect.height/2, 8);
-          if(state.youssef && state.rawan) startRomanceSequence();
-        }
-
-        function canceled(){
-          pressing=false; fp.classList.remove('pressing'); if(raf) cancelAnimationFrame(raf);
-          setRing(ring,0); countdown.textContent = (DURATION/1000) + 's';
-          statusEls[person].textContent = (person === 'youssef' ? 'يوسف — انقطع الضغط، حاول تاني' : 'روان — انقطع الضغط، حاول تاني');
-          fp.animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(0)'}],{duration:420,easing:'ease-out'});
-        }
-
-        function startPress(e){
-          if(fp.style.pointerEvents === 'none') return; if(pressing) return;
-          e.preventDefault(); pressing=true; fp.classList.add('pressing'); start = performance.now(); setRing(ring,0); countdown.textContent = (DURATION/1000)+'s'; raf = requestAnimationFrame(update);
-        }
-        function endPress(e){ if(!pressing) return; const now=performance.now(); const elapsed = now - start; if(elapsed >= DURATION){ /* already finished in update() */ } else { canceled(); } }
-
-        // mouse
-        fp.addEventListener('mousedown', startPress);
-        window.addEventListener('mouseup', endPress);
-        // touch
-        fp.addEventListener('touchstart', startPress, {passive:false});
-        window.addEventListener('touchend', endPress);
-        // keyboard
-        fp.addEventListener('keydown', function(evt){ if(evt.key === ' ' || evt.key === 'Enter'){ if(evt.repeat) return; startPress(evt); }});
-        fp.addEventListener('keyup', function(evt){ if(evt.key === ' ' || evt.key === 'Enter'){ endPress(evt); }});
-      });
-
-      // romance sequence
-      const groomEl = document.getElementById('groom');
-      const brideEl = document.getElementById('bride');
-      const handsEl = document.getElementById('hands');
-      const banner = document.getElementById('banner');
-      const downloadBtn = document.getElementById('downloadBtn');
-      const resetBtn = document.getElementById('resetBtn');
-
-      function startRomanceSequence(){
-        // step 1: characters enter
-        groomEl.style.transform = 'translateX(320px)'; groomEl.classList.add('show');
-        brideEl.style.transform = 'translateX(-320px)'; brideEl.classList.add('show');
-
-        setTimeout(()=>{
-          // step 2: hands appear and connect
-          handsEl.classList.add('show');
-          const path = document.getElementById('handpath');
-          path.style.opacity = '1';
-          path.style.stroke = '#ff9fb3';
-          path.style.transition = 'stroke-dashoffset 900ms ease, opacity 400ms ease';
-          // animate tiny wave by toggling stroke-dasharray
-          path.style.strokeDasharray = '400'; path.style.strokeDashoffset = '400';
-          setTimeout(()=>{ path.style.strokeDashoffset = '0'; },60);
-
-          // create a slow coupling of hands (visual)
-        }, 900);
-
-        setTimeout(()=>{
-          // hearts flutter
-          const rect = document.querySelector('.scene').getBoundingClientRect();
-          burstHearts(rect.width/2 - 80, rect.height/2 + 60, 30);
-        }, 1700);
-
-        setTimeout(()=>{
-          // show banner and controls
-          banner.classList.add('show'); banner.classList.add('appear');
-          downloadBtn.style.display = 'inline-block'; resetBtn.style.display = 'inline-block';
-        }, 2600);
-      }
-
-      // generate a PNG certificate
-      function downloadCertificate(){
-        const canvas = document.createElement('canvas');
-        const w = 1200, h = 700; canvas.width = w; canvas.height = h; const ctx = canvas.getContext('2d');
-        // background gradient
-        const g = ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#fff7f8'); g.addColorStop(0.5,'#ffdfe6'); g.addColorStop(1,'#ffb7d0'); ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
-        // title
-        ctx.fillStyle = '#5a2230'; ctx.font = 'bold 42px Arial'; ctx.textAlign = 'center'; ctx.fillText('شهادة زواج — يوسف & روان', w/2, 90);
-        // date
-        const date = new Date(); const dateStr = date.toLocaleDateString('ar-EG', {year:'numeric',month:'long',day:'numeric'});
-        ctx.font = '18px Arial'; ctx.fillStyle = '#6b3442'; ctx.fillText('بتاريخ: ' + dateStr, w/2, 130);
-
-        // draw simple groom
-        // groom head
-        ctx.fillStyle = '#fde7e9'; ctx.beginPath(); ctx.arc(w*0.3, 300, 48, 0, Math.PI*2); ctx.fill(); ctx.strokeStyle='#b33'; ctx.lineWidth=2; ctx.stroke();
-        // groom suit
-        ctx.fillStyle = '#2e2630'; ctx.beginPath(); ctx.moveTo(w*0.3-60,380); ctx.lineTo(w*0.3+60,380); ctx.lineTo(w*0.3+30,520); ctx.lineTo(w*0.3-30,520); ctx.closePath(); ctx.fill();
-
-        // bride
-        ctx.fillStyle = '#fff4f6'; ctx.beginPath(); ctx.arc(w*0.7,300,48,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#8c2c79'; ctx.lineWidth=2; ctx.stroke();
-        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.moveTo(w*0.7-60,380); ctx.bezierCurveTo(w*0.7-20,460,w*0.7+20,460,w*0.7+60,380); ctx.lineTo(w*0.7,520); ctx.closePath(); ctx.fill();
-
-        // hands joining (simple)
-        ctx.strokeStyle='#f2b6c4'; ctx.lineWidth=18; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(w*0.3+40,370); ctx.quadraticCurveTo(w/2,410,w*0.7-40,370); ctx.stroke();
-
-        // big text
-        ctx.fillStyle = '#b42f58'; ctx.font = 'bold 36px Arial'; ctx.fillText('✨ تم الزواج الأبدي ✨', w/2, 600);
-        ctx.fillStyle = '#3e2028'; ctx.font = '20px Arial'; ctx.fillText('يوسف ❤️ روان', w/2, 640);
-
-        // download
-        const data = canvas.toDataURL('image/png');
-        const a = document.createElement('a'); a.href = data; a.download = 'Shahadat_Zawag_Youssef_Rawan.png'; document.body.appendChild(a); a.click(); a.remove();
-      }
-
-      downloadBtn.addEventListener('click', downloadCertificate);
-
-      // reset
-      function resetAll(){
-        // reset state
-        state.youssef=false; state.rawan=false;
-        Object.keys(nameEls).forEach(k=> nameEls[k].textContent='—');
-        statusEls.youssef.textContent='يوسف — لم تضغط بعد'; statusEls.rawan.textContent='روان — لم تضغط بعد';
-        document.querySelectorAll('.finger').forEach(fp=>{ fp.style.pointerEvents=''; fp.setAttribute('aria-pressed','false'); const r = fp.querySelector('.ring'); r.style.strokeDashoffset = circumference; fp.querySelector('.count').textContent = (DURATION/1000) + 's'; });
-        // hide scene
-        groomEl.classList.remove('show'); brideEl.classList.remove('show'); groomEl.style.transform='translateX(0)'; brideEl.style.transform='translateX(0)'; handsEl.classList.remove('show'); document.getElementById('banner').classList.remove('show'); document.getElementById('hearts').innerHTML='';
-        downloadBtn.style.display='none'; resetBtn.style.display='none';
-      }
-      resetBtn.addEventListener('click', resetAll);
-
-      // init rings
-      document.querySelectorAll('.ring').forEach(r=>{ r.style.strokeDasharray = circumference; r.style.strokeDashoffset = circumference; });
-
-      // helpful: if one pressed already, the other can still press
-
-    })();
-  </script>
+    <script>
+        // كود جافاسكريبت للتفاعلية
+        document.addEventListener('DOMContentLoaded', function() {
+            // تأثير التمرير السلس للروابط
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // تغيير لون الشريط العلوي عند التمرير
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
+                    header.style.background = 'linear-gradient(135deg, #2c3e50, #34495e)';
+                } else {
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+                    header.style.background = 'linear-gradient(135deg, #2c3e50, #4a6491)';
+                }
+            });
+            
+            // فلترة المنتجات
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    // هنا يمكن إضافة كود الفلترة الفعلي
+                });
+            });
+            
+            // تأثيرات للبطاقات عند التمرير
+            const phoneCards = document.querySelectorAll('.phone-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            phoneCards.forEach(card => {
+                card.style.opacity = '0';
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
 </html>
