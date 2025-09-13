@@ -1,55 +1,59 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سعيد بتاع الغلابه - أفضل أسعار الموبايلات</title>
+    <title>أكاديمية البشمهندس يوسف - تعليم الأمن السيبراني</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #2bd576;
+            --primary-dark: #20a85d;
+            --secondary: #6c63ff;
+            --dark: #0f172a;
+            --darker: #0a0e1a;
+            --light: #f1f5f9;
+            --gray: #94a3b8;
+            --accent: #ff4d4d;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
-        
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #e74c3c;
-            --accent-color: #f39c12;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --gradient: linear-gradient(135deg, #2c3e50, #4a6491);
+            font-family: 'Tajawal', sans-serif;
         }
         
         body {
-            background-color: #f5f7fa;
-            color: #333;
+            background-color: var(--darker);
+            color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
         }
         
         .container {
-            width: 100%;
+            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }
         
-        /* الشريط العلوي */
+        /* شريط التنقل */
         header {
-            background: var(--gradient);
-            color: white;
-            padding: 15px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            position: sticky;
+            background-color: rgba(15, 23, 42, 0.9);
+            padding: 20px 0;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
             backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .header-content {
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -58,43 +62,20 @@
         .logo {
             display: flex;
             align-items: center;
-            position: relative;
+            gap: 15px;
         }
         
-        .logo-circle {
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-            border-radius: 50%;
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin-left: 10px;
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .logo-circle::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: translateX(-100%);
-            animation: shine 3s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        .logo-circle span {
-            color: white;
+            justify-content: center;
             font-weight: bold;
-            font-size: 24px;
-            z-index: 1;
+            font-size: 1.5rem;
+            color: white;
         }
         
         .logo-text {
@@ -103,124 +84,93 @@
         }
         
         .logo-text h1 {
-            font-size: 24px;
-            margin: 0;
-            line-height: 1.2;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            font-size: 1.6rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
         
-        .logo-text p {
-            font-size: 12px;
-            opacity: 0.9;
+        .logo-text span {
+            font-size: 0.9rem;
+            color: var(--gray);
         }
         
         nav ul {
             display: flex;
             list-style: none;
+            gap: 30px;
         }
         
-        nav ul li {
-            margin: 0 8px;
-            position: relative;
-        }
-        
-        nav ul li a {
-            color: white;
+        nav a {
+            color: var(--light);
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 15px;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+            font-weight: 500;
         }
         
-        nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
+        nav a:hover {
+            color: var(--primary);
         }
         
-        nav ul li a::after {
+        nav a::after {
             content: '';
             position: absolute;
             bottom: 0;
             right: 0;
             width: 0;
             height: 2px;
-            background: var(--accent-color);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             transition: width 0.3s;
         }
         
-        nav ul li a:hover::after {
+        nav a:hover::after {
             width: 100%;
         }
         
-        .header-actions {
+        .nav-buttons {
             display: flex;
-            align-items: center;
+            gap: 15px;
         }
         
-        .search-cart {
-            display: flex;
-            align-items: center;
-        }
-        
-        .search-box {
-            position: relative;
-            margin-left: 15px;
-        }
-        
-        .search-box input {
-            padding: 10px 15px;
+        .btn {
+            padding: 10px 20px;
             border-radius: 30px;
-            border: none;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            width: 200px;
+            text-decoration: none;
+            font-weight: 500;
             transition: all 0.3s;
-            backdrop-filter: blur(5px);
-        }
-        
-        .search-box input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .search-box input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.25);
-            width: 220px;
-        }
-        
-        .cart-icon {
-            position: relative;
-            margin-left: 15px;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            left: -8px;
-            background: var(--secondary-color);
-            color: white;
-            font-size: 12px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
+            display: inline-flex;
             align-items: center;
+            gap: 8px;
         }
         
-        /* الهيرو */
-        .hero {
-            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
             color: white;
-            padding: 100px 0;
-            text-align: center;
+            box-shadow: 0 4px 15px rgba(43, 213, 118, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(43, 213, 118, 0.4);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(43, 213, 118, 0.1);
+        }
+        
+        /* قسم الهيرو */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(to bottom, var(--darker), var(--dark));
             position: relative;
             overflow: hidden;
         }
@@ -228,876 +178,889 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
+            top: -50%;
+            right: -50%;
             width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-            background-size: 100% 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(107, 99, 255, 0.1) 0%, transparent 70%);
         }
         
         .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
             position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
         }
         
-        .hero h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 1s ease;
+        .hero-text {
+            flex: 1;
         }
         
-        .hero p {
-            font-size: 1.3rem;
-            margin: 0 auto 30px;
-            max-width: 600px;
-            animation: fadeInUp 1.2s ease;
-        }
-        
-        .btn {
+        .hero-badge {
             display: inline-block;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-            color: white;
-            padding: 14px 35px;
+            background: rgba(43, 213, 118, 0.15);
+            color: var(--primary);
+            padding: 8px 15px;
             border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
-            cursor: pointer;
-            border: none;
-            font-size: 16px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .hero-title {
+            font-size: 3.2rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--gray));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-title span {
+            color: var(--primary);
+            -webkit-text-fill-color: var(--primary);
+        }
+        
+        .hero-desc {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
             position: relative;
-            overflow: hidden;
         }
         
-        .btn::before {
-            content: '';
+        .floating-card {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: absolute;
-            top: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-card:nth-child(1) {
+            top: -30px;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: -1;
+            animation-delay: 0s;
         }
         
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.5);
+        .floating-card:nth-child(2) {
+            top: 150px;
+            right: 0;
+            animation-delay: 2s;
         }
         
-        .btn:hover::before {
-            opacity: 1;
+        .floating-card:nth-child(3) {
+            bottom: -30px;
+            left: 100px;
+            animation-delay: 4s;
         }
         
-        /* قسم الهواتف */
-        .phones-section {
-            padding: 80px 0;
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        /* قسم المميزات */
+        .features {
+            padding: 100px 0;
+            background-color: var(--dark);
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
-            color: var(--dark-color);
-            position: relative;
+            margin-bottom: 60px;
         }
         
         .section-title h2 {
             font-size: 2.5rem;
             margin-bottom: 15px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .section-title p {
-            color: #666;
+            color: var(--gray);
             max-width: 600px;
             margin: 0 auto;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--secondary-color);
-            margin: 15px auto;
-            border-radius: 2px;
-        }
-        
-        .filter-buttons {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            background: white;
-            border: 1px solid #ddd;
-            padding: 10px 20px;
-            margin: 0 5px 10px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--secondary-color);
-            color: white;
-            border-color: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
-        }
-        
-        .phones-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .phone-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-            position: relative;
-        }
-        
-        .phone-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .phone-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--secondary-color);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 2;
-        }
-        
-        .phone-image {
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .phone-image img {
-            max-height: 180px;
-            max-width: 100%;
-            object-fit: contain;
-            transition: transform 0.5s;
-        }
-        
-        .phone-card:hover .phone-image img {
-            transform: scale(1.1);
-        }
-        
-        .phone-details {
-            padding: 20px;
-        }
-        
-        .phone-details h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: var(--dark-color);
-        }
-        
-        .phone-features {
-            list-style: none;
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .phone-features li {
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .phone-features li i {
-            color: var(--accent-color);
-            margin-left: 5px;
-        }
-        
-        .phone-price {
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .original-price {
-            text-decoration: line-through;
-            color: #999;
-            font-size: 16px;
-            margin-right: 10px;
-        }
-        
-        .phone-actions {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .phone-actions button {
-            flex: 1;
-            text-align: center;
-            padding: 10px 0;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: none;
-            font-size: 14px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .buy-btn {
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-            color: white;
-            margin-left: 10px;
-        }
-        
-        .buy-btn:hover {
-            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
-            transform: translateY(-2px);
-        }
-        
-        .details-btn {
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-            background: white;
-        }
-        
-        .details-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        /* قسم العلامات التجارية */
-        .brands-section {
-            padding: 60px 0;
-            background: linear-gradient(to right, #f5f7fa, #e9ecef);
-        }
-        
-        .brands-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            align-items: center;
-        }
-        
-        .brand-item {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-            filter: grayscale(0.3);
-        }
-        
-        .brand-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            filter: grayscale(0);
-        }
-        
-        .brand-item img {
-            max-width: 100%;
-            max-height: 50px;
-            object-fit: contain;
-        }
-        
-        /* قسم المميزات */
-        .features-section {
-            padding: 80px 0;
+            font-size: 1.1rem;
         }
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
         
-        .feature-item {
-            background: white;
-            padding: 30px;
+        .feature-card {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            text-align: center;
-            transition: all 0.3s;
-        }
-        
-        .feature-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 20px;
-            color: white;
-            font-size: 28px;
-        }
-        
-        .feature-item h3 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: var(--dark-color);
-        }
-        
-        .feature-item p {
-            color: #666;
-        }
-        
-        /* الفوتر */
-        footer {
-            background: var(--gradient);
-            color: white;
-            padding: 60px 0 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
+            overflow: hidden;
         }
         
-        footer::before {
+        .feature-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 5px;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(0,0,0,0.05)"/></svg>');
-            background-size: 100% 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
         }
         
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
         
-        .footer-column h3 {
-            font-size: 20px;
+        .feature-icon {
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
+            color: var(--primary);
         }
         
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--accent-color);
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
         }
         
-        .footer-column p, .footer-column li {
-            margin-bottom: 12px;
-            opacity: 0.9;
+        .feature-card p {
+            color: var(--gray);
         }
         
-        .footer-column ul {
-            list-style: none;
+        /* قسم المسارات */
+        .courses {
+            padding: 100px 0;
+            background-color: var(--darker);
         }
         
-        .footer-column ul li {
-            margin-bottom: 10px;
+        .courses-tabs {
             display: flex;
-            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
         }
         
-        .footer-column ul li i {
-            margin-left: 8px;
-            color: var(--accent-color);
-        }
-        
-        .footer-column ul li a {
-            color: white;
-            text-decoration: none;
+        .tab-btn {
+            padding: 12px 25px;
+            background: transparent;
+            color: var(--gray);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
             transition: all 0.3s;
         }
         
-        .footer-column ul li a:hover {
-            color: var(--accent-color);
-            padding-right: 5px;
+        .tab-btn.active {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(43, 213, 118, 0.3);
         }
         
-        .social-icons {
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .course-header {
+            padding: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .course-level {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(43, 213, 118, 0.15);
+            color: var(--primary);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .course-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .course-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .course-features {
+            padding: 25px;
+        }
+        
+        .course-features ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .course-features li {
+            margin-bottom: 12px;
             display: flex;
-            margin-top: 15px;
+            align-items: center;
+            gap: 10px;
         }
         
-        .social-icons a {
+        .course-features li i {
+            color: var(--primary);
+        }
+        
+        .course-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* قسم الأسئلة */
+        .faq {
+            padding: 100px 0;
+            background-color: var(--dark);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .faq-question {
+            padding: 25px;
+            background: rgba(15, 23, 42, 0.5);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 25px;
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: var(--darker);
+            padding: 80px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-col p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            margin-left: 10px;
-            color: white;
+            color: var(--light);
             text-decoration: none;
             transition: all 0.3s;
         }
         
-        .social-icons a:hover {
-            background: var(--secondary-color);
+        .social-links a:hover {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             transform: translateY(-3px);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-col ul a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-col form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .footer-col input {
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--light);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 14px;
-            opacity: 0.7;
-            position: relative;
-            z-index: 1;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--gray);
+            font-size: 0.9rem;
         }
         
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Responsive design */
+        /* responsiveness */
         @media (max-width: 992px) {
-            .header-content {
+            .hero-content {
                 flex-direction: column;
                 text-align: center;
             }
             
-            .logo {
-                margin-bottom: 15px;
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .hero-desc {
+                margin: 0 auto 40px;
             }
             
             nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                margin-bottom: 15px;
-            }
-            
-            nav ul li {
-                margin: 5px;
-            }
-            
-            .header-actions {
-                justify-content: center;
-            }
-            
-            .hero h2 {
-                font-size: 2.2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
+                display: none;
             }
         }
         
         @media (max-width: 768px) {
-            .search-box input {
-                width: 150px;
+            .hero-title {
+                font-size: 2.5rem;
             }
             
-            .search-box input:focus {
-                width: 170px;
+            .floating-card {
+                position: relative;
+                margin: 20px auto;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .hero-image {
+                flex-direction: column;
             }
             
             .section-title h2 {
                 font-size: 2rem;
             }
-            
-            .hero {
-                padding: 70px 0;
-            }
-            
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
         }
         
         @media (max-width: 576px) {
-            .search-box {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .nav-buttons {
                 display: none;
             }
             
-            .phones-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .brands-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .feature-card, .course-card {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- الشريط العلوي -->
+    <!-- شريط التنقل -->
     <header>
-        <div class="container header-content">
+        <div class="container nav-container">
             <div class="logo">
-                <div class="logo-circle">
-                    <span>س</span>
+                <div class="logo-icon">
+                    <i class="fas fa-shield-alt"></i>
                 </div>
                 <div class="logo-text">
-                    <h1>سعيد بتاع الغلابه</h1>
-                    <p>أفضل أسعار الموبايلات في مصر</p>
+                    <h1>أكاديمية البشمهندس يوسف</h1>
+                    <span>تعليم الأمن السيبراني الأخلاقي</span>
                 </div>
             </div>
+            
             <nav>
                 <ul>
-                    <li><a href="#">الرئيسية</a></li>
-                    <li><a href="#">الموبايلات</a></li>
-                    <li><a href="#">العروض</a></li>
-                    <li><a href="#">الماركات</a></li>
-                    <li><a href="#">اتصل بنا</a></li>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#features">المميزات</a></li>
+                    <li><a href="#courses">المسارات</a></li>
+                    <li><a href="#faq">الأسئلة</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
                 </ul>
             </nav>
-            <div class="header-actions">
-                <div class="search-cart">
-                    <div class="search-box">
-                        <input type="text" placeholder="ابحث عن موبايل...">
-                    </div>
-                    <div class="cart-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">3</span>
-                    </div>
-                </div>
+            
+            <div class="nav-buttons">
+                <a href="#" class="btn btn-outline"><i class="fas fa-user"></i> تسجيل الدخول</a>
+                <a href="#" class="btn btn-primary"><i class="fas fa-book"></i> ابدأ التعلم</a>
             </div>
         </div>
     </header>
 
-    <!-- الهيرو -->
-    <section class="hero">
+    <!-- قسم الهيرو -->
+    <section class="hero" id="home">
         <div class="container hero-content">
-            <h2>أرخص أسعار الموبايلات في مصر</h2>
-            <p>أقوي العروض علي أحدث الموبايلات بأقل الأسعار مع ضمان الجودة والكفالة</p>
-            <a href="#" class="btn">استعرض العروض</a>
-        </div>
-    </section>
-
-    <!-- قسم الهواتف -->
-    <section class="phones-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>أحدث الموبايلات</h2>
-                <p>اكتشف أحدث الموبايلات بأفضل الأسعار والمواصفات</p>
+            <div class="hero-text">
+                <span class="hero-badge">
+                    <i class="fas fa-rocket"></i> منصة تعليمية متطورة
+                </span>
+                <h1 class="hero-title">تعلم القرصنة <span>الأخلاقية</span> من الصفر إلى الاحتراف</h1>
+                <p class="hero-desc">انضم إلى أكاديمية البشمهندس يوسف لاكتساب المهارات الأمنية اللازمة لحماية الأنظمة والشبكات في العصر الرقمي، بطريقة قانونية وأخلاقية تمامًا.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary"><i class="fas fa-book"></i> ابدأ التعلم المجاني</a>
+                    <a href="#" class="btn btn-outline"><i class="fas fa-video"></i> شاهد الدروس</a>
+                </div>
             </div>
             
-            <div class="filter-buttons">
-                <button class="filter-btn active">جميع الموبايلات</button>
-                <button class="filter-btn">أبل</button>
-                <button class="filter-btn">سامسونج</button>
-                <button class="filter-btn">شاومي</button>
-                <button class="filter-btn">oppo</button>
-                <button class="filter-btn">عروض خاصة</button>
-            </div>
-            
-            <div class="phones-grid">
-                <!-- موبايل 1 -->
-                <div class="phone-card">
-                    <span class="phone-badge">الأكثر مبيعاً</span>
-                    <div class="phone-image">
-                        <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="iPhone 13 Pro">
+            <div class="hero-image">
+                <div class="floating-card">
+                    <div class="card-icon">
+                        <i class="fas fa-lock"></i>
                     </div>
-                    <div class="phone-details">
-                        <h3>iPhone 13 Pro</h3>
-                        <ul class="phone-features">
-                            <li><i class="fas fa-check"></i> شاشة 6.1 بوصة</li>
-                            <li><i class="fas fa-check"></i> كاميرا ثلاثية 12MP</li>
-                            <li><i class="fas fa-check"></i> ذاكرة 128GB</li>
-                        </ul>
-                        <div class="phone-price">
-                            <span class="original-price">28,999 ج.م</span>
-                            25,999 ج.م
-                        </div>
-                        <div class="phone-actions">
-                            <button class="details-btn"><i class="fas fa-info-circle"></i> التفاصيل</button>
-                            <button class="buy-btn"><i class="fas fa-shopping-cart"></i> شراء</button>
-                        </div>
+                    <h3>أمن المعلومات</h3>
+                    <p>تعلم كيفية حماية البيانات والأنظمة من الهجمات الإلكترونية</p>
+                </div>
+                
+                <div class="floating-card">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
                     </div>
+                    <h3>اختبار الاختراق</h3>
+                    <p>اكتشف الثغرات الأمنية وأصلحها بطريقة أخلاقية</p>
                 </div>
-
-                <!-- موبايل 2 -->
-                <div class="phone-card">
-                    <span class="phone-badge">جديد</span>
-                    <div class="phone-image">
-                        <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Samsung Galaxy S21">
+                
+                <div class="floating-card">
+                    <div class="card-icon">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                    <div class="phone-details">
-                        <h3>Samsung Galaxy S21</h3>
-                        <ul class="phone-features">
-                            <li><i class="fas fa-check"></i> شاشة 6.2 بوصة</li>
-                            <li><i class="fas fa-check"></i> كاميرا 64MP</li>
-                            <li><i class="fas fa-check"></i> ذاكرة 256GB</li>
-                        </ul>
-                        <div class="phone-price">18,499 ج.م</div>
-                        <div class="phone-actions">
-                            <button class="details-btn"><i class="fas fa-info-circle"></i> التفاصيل</button>
-                            <button class="buy-btn"><i class="fas fa-shopping-cart"></i> شراء</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- موبايل 3 -->
-                <div class="phone-card">
-                    <div class="phone-image">
-                        <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Xiaomi Redmi Note 11">
-                    </div>
-                    <div class="phone-details">
-                        <h3>Xiaomi Redmi Note 11</h3>
-                        <ul class="phone-features">
-                            <li><i class="fas fa-check"></i> شاشة 6.43 بوصة</li>
-                            <li><i class="fas fa-check"></i> كاميرا 50MP</li>
-                            <li><i class="fas fa-check"></i> ذاكرة 128GB</li>
-                        </ul>
-                        <div class="phone-price">6,299 ج.م</div>
-                        <div class="phone-actions">
-                            <button class="details-btn"><i class="fas fa-info-circle"></i> التفاصيل</button>
-                            <button class="buy-btn"><i class="fas fa-shopping-cart"></i> شراء</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- موبايل 4 -->
-                <div class="phone-card">
-                    <span class="phone-badge">عرض خاص</span>
-                    <div class="phone-image">
-                        <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Oppo Reno 6">
-                    </div>
-                    <div class="phone-details">
-                        <h3>Oppo Reno 6</h3>
-                        <ul class="phone-features">
-                            <li><i class="fas fa-check"></i> شاشة 6.4 بوصة</li>
-                            <li><i class="fas fa-check"></i> كاميرا 64MP</li>
-                            <li><i class="fas fa-check"></i> ذاكرة 128GB</li>
-                        </ul>
-                        <div class="phone-price">
-                            <span class="original-price">9,999 ج.م</span>
-                            8,999 ج.م
-                        </div>
-                        <div class="phone-actions">
-                            <button class="details-btn"><i class="fas fa-info-circle"></i> التفاصيل</button>
-                            <button class="buy-btn"><i class="fas fa-shopping-cart"></i> شراء</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم الماركات -->
-    <section class="brands-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>أشهر الماركات</h2>
-                <p>جميع الماركات العالمية بأفضل الأسعار</p>
-            </div>
-            
-            <div class="brands-grid">
-                <div class="brand-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
-                </div>
-                <div class="brand-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Samsung">
-                </div>
-                <div class="brand-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Xiaomi_logo_%282021-%29.svg" alt="Xiaomi">
-                </div>
-                <div class="brand-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Oppo_logo.svg" alt="Oppo">
-                </div>
-                <div class="brand-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Huawei_Standard_logo.svg" alt="Huawei">
-                </div>
-                <div class="brand-item">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Realme_logo_%282021%29.svg" alt="Realme">
+                    <h3>الدفاع السيبراني</h3>
+                    <p>طور استراتيجيات دفاعية ضد الهجمات الإلكترونية</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- قسم المميزات -->
-    <section class="features-section">
+    <section class="features" id="features">
         <div class="container">
             <div class="section-title">
-                <h2>لماذا تختارنا؟</h2>
-                <p>نحن نقدم أفضل الخدمات لعملائنا الكرام</p>
+                <h2>لماذا تتعلم معنا؟</h2>
+                <p>نقدم تجربة تعليمية فريدة تجمع بين النظرية والتطبيق في مجال الأمن السيبراني</p>
             </div>
             
             <div class="features-grid">
-                <div class="feature-item">
+                <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-truck"></i>
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h3>توصيل سريع</h3>
-                    <p>نقوم بالتوصيل خلال 24 ساعة في القاهرة و48 ساعة في المحافظات</p>
+                    <h3>منهج متكامل</h3>
+                    <p>منهجية تعليمية شاملة تبدأ من الأساسيات وصولاً إلى المستويات المتقدمة في الأمن السيبراني</p>
                 </div>
                 
-                <div class="feature-item">
+                <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
+                        <i class="fas fa-laptop-code"></i>
                     </div>
-                    <h3>ضمان لمدة عام</h3>
-                    <p>جميع أجهزتنا أصلية وبها ضمان لمدة عام من تاريخ الشراء</p>
+                    <h3>بيئة عملية</h3>
+                    <p>مختبرات افتراضية متطورة لتطبيق المهارات في بيئة آمنة ومرخصة</p>
                 </div>
                 
-                <div class="feature-item">
+                <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-headset"></i>
+                        <i class="fas fa-certificate"></i>
                     </div>
-                    <h3>دعم فني 24/7</h3>
-                    <p>فريق الدعم الفني متاح على مدار الساعة لمساعدتك في أي استفسار</p>
+                    <h3>شهادات معتمدة</h3>
+                    <p>احصل على شهادات معترف بها في سوق العمل بعد إتمامك للمسارات التعليمية</p>
                 </div>
                 
-                <div class="feature-item">
+                <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-hand-holding-usd"></i>
+                        <i class="fas fa-users"></i>
                     </div>
-                    <h3>أسعار منافسة</h3>
-                    <p>نوفر لك أفضل الأسعار المنافسة في السوق المصري مع خيارات دفع متعددة</p>
+                    <h3>مجتمع نشط</h3>
+                    <p>انضم إلى مجتمع من المتعلمين والخبراء لتبادل المعرفة والخبرات</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>فرص عمل</h3>
+                    <p>فرص للتواصل مع شركات التوظيف في مجال الأمن السيبراني بعد التخرج</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>محتوى محدث</h3>
+                    <p>تحديث مستمر للمحتوى لمواكبة أحدث التطورات في مجال الأمن السيبراني</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المسارات -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <div class="section-title">
+                <h2>مساراتنا التعليمية</h2>
+                <p>اختر المسار الذي يناسبك وابدأ رحلتك في تعلم الأمن السيبراني الأخلاقي</p>
+            </div>
+            
+            <div class="courses-tabs">
+                <button class="tab-btn active">جميع المسارات</button>
+                <button class="tab-btn">المبتدئين</button>
+                <button class="tab-btn">المتوسطين</button>
+                <button class="tab-btn">المتقدمين</button>
+            </div>
+            
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-header">
+                        <span class="course-level">مبتدئ</span>
+                        <h3>أساسيات الأمن السيبراني</h3>
+                        <p>ابدأ رحلتك في مجال الأمن السيبراني بهذه الدورة الشاملة للمبتدئين</p>
+                    </div>
+                    
+                    <div class="course-features">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> مفاهيم الأمن السيبراني الأساسية</li>
+                            <li><i class="fas fa-check-circle"></i> أساسيات أنظمة التشغيل والشبكات</li>
+                            <li><i class="fas fa-check-circle"></i> مبادئ حماية البيانات والمعلومات</li>
+                            <li><i class="fas fa-check-circle"></i> التهديدات الإلكترونية الشائعة</li>
+                            <li><i class="fas fa-check-circle"></i> أساسيات الأمن السحابي</li>
+                        </ul>
+                        
+                        <div class="course-price">
+                            <div class="price">مجاني</div>
+                            <a href="#" class="btn btn-primary">التحق الآن</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-header">
+                        <span class="course-level">متوسط</span>
+                        <h3>اختبار الاختراق الأخلاقي</h3>
+                        <p>تعلم كيفية اكتشاف الثغرات الأمنية وإصلاحها بطريقة أخلاقية</p>
+                    </div>
+                    
+                    <div class="course-features">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> جمع المعلومات والاستطلاع</li>
+                            <li><i class="fas fa-check-circle"></i> تحليل الثغرات الأمنية</li>
+                            <li><i class="fas fa-check-circle"></i> استغلال الثغرات بطريقة أخلاقية</li>
+                            <li><i class="fas fa-check-circle"></i> أدوات اختبار الاختراق</li>
+                            <li><i class="fas fa-check-circle"></i> كتابة تقارير الاختبار</li>
+                        </ul>
+                        
+                        <div class="course-price">
+                            <div class="price">₪199</div>
+                            <a href="#" class="btn btn-primary">التحق الآن</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-header">
+                        <span class="course-level">متقدم</span>
+                        <h3>الدفاع السيبراني المتقدم</h3>
+                        <p>تطوير استراتيجيات متقدمة للدفاع ضد الهجمات الإلكترونية المعقدة</p>
+                    </div>
+                    
+                    <div class="course-features">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> تحليل البرمجيات الضارة</li>
+                            <li><i class="fas fa-check-circle"></i> استجابة للحوادث الأمنية</li>
+                            <li><i class="fas fa-check-circle"></i> أمن الشبكات المتقدم</li>
+                            <li><i class="fas fa-check-circle"></i> أنظمة كشف التسلل</li>
+                            <li><i class="fas fa-check-circle"></i> التحقيق الجنائي الرقمي</li>
+                        </ul>
+                        
+                        <div class="course-price">
+                            <div class="price">₪299</div>
+                            <a href="#" class="btn btn-primary">التحق الآن</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأسئلة -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>أسئلة شائعة</h2>
+                <p>إجابات على الأسئلة الأكثر شيوعاً حول الأكاديمية وبرامجنا التعليمية</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ما هي القرصنة الأخلاقية؟ وكيف تختلف عن القرصنة غير القانونية؟
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>القرصنة الأخلاقية هي اختبار الأنظمة والشبكات لاكتشاف الثغرات الأمنية وإصلاحها، بموافقة مسبقة من المالك وبإطار قانوني. بينما القرصنة غير القانونية تتم بدون إذن وبهدف إلحاق الضرر أو تحقيق مكاسب غير مشروعة.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        هل يحتاج المتعلم إلى خلفية مسبقة في البرمجة؟
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>لا، تبدأ مساراتنا التعليمية من الصفر وتزود المتعلم بجميع الأساسيات اللازمة بما في ذلك أساسيات البرمجة اللازمة لمجال الأمن السيبراني.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ما هي الأدوات والبرامج التي سأتعلمها في هذه الأكاديمية؟
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>ستتعلم مجموعة واسعة من الأدوات مثل Nmap, Wireshark, Metasploit, Burp Suite، بالإضافة إلى أدوات اختبار الاختراق في بيئات معزولة وآمنة، وأدوات التحليل الجنائي الرقمي.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        كيف يمكنني ممارسة هذه المهارات بشكل قانوني وآمن؟
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نوفر بيئات معزولة وآمنة للممارسة العملية، ونرشدك إلى منصات CTF (Capture The Flag) القانونية، ونؤكد دائمًا على أهمية الحصول على إذن كتابي قبل اختبار أي نظام.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        هل الشهادات المقدمة معترف بها في سوق العمل؟
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، الشهادات التي نقدمها معترف بها في سوق العمل وتمكنك من الحصول على فرص عمل في مجال الأمن السيبراني، كما أننا نعدك للحصول على شهادات دولية معتمدة مثل CEH وSecurity+.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- الفوتر -->
-    <footer>
+    <footer id="contact">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>عن سعيد بتاع الغلابه</h3>
-                    <p>متجرنا يقدم أفضل أسعار الموبايلات في مصر مع ضمان الجودة والكفالة. نحن نعمل منذ أكثر من 10 سنوات في سوق الموبايلات.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>أكاديمية البشمهندس يوسف</h3>
+                    <p>منصة تعليمية رائدة في مجال الأمن السيبراني والقرصنة الأخلاقية باللغة العربية.</p>
+                    <div class="social-links">
                         <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
                     </div>
                 </div>
-                <div class="footer-column">
+                
+                <div class="footer-col">
                     <h3>روابط سريعة</h3>
                     <ul>
-                        <li><a href="#">الرئيسية</a></li>
-                        <li><a href="#">الموبايلات</a></li>
-                        <li><a href="#">العروض الخاصة</a></li>
-                        <li><a href="#">الأسئلة الشائعة</a></li>
-                        <li><a href="#">اتصل بنا</a></li>
+                        <li><a href="#home"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                        <li><a href="#features"><i class="fas fa-angle-left"></i> المميزات</a></li>
+                        <li><a href="#courses"><i class="fas fa-angle-left"></i> المسارات</a></li>
+                        <li><a href="#faq"><i class="fas fa-angle-left"></i> الأسئلة</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>وسائل التواصل</h3>
+                
+                <div class="footer-col">
+                    <h3>المسارات</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> 123 شارع الحصوه، منوف</li>
-                        <li><i class="fas fa-phone"></i> 01050079125</li>
-                        <li><i class="fas fa-envelope"></i> info@saeedmobile.com</li>
-                        <li><i class="fas fa-clock"></i> يومياً من 10 صباحاً إلى 10 مساءً</li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> أساسيات الأمن السيبراني</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> اختبار الاختراق الأخلاقي</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> الدفاع السيبراني المتقدم</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> التحقيق الجنائي الرقمي</a></li>
                     </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>النشرة البريدية</h3>
+                    <p>اشترك في نشرتنا البريدية لتصلك آخر المستجدات والدورات الجديدة.</p>
+                    <form>
+                        <input type="email" placeholder="بريدك الإلكتروني" required>
+                        <button type="submit" class="btn btn-primary">اشترك الآن</button>
+                    </form>
                 </div>
             </div>
+            
             <div class="copyright">
-                <p>جميع الحقوق محفوظة &copy; 2025 سعيد بتاع الغلابه</p>
+                <p>© 2023 أكاديمية البشمهندس يوسف. جميع الحقوق محفوظة.</p>
+                <p>هذا الموقع لأغراض تعليمية وأخلاقية فقط.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // كود جافاسكريبت للتفاعلية
-        document.addEventListener('DOMContentLoaded', function() {
-            // تأثير التمرير السلس للروابط
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+        // JavaScript للأسئلة الشائعة
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+                
+                const icon = question.querySelector('i');
+                icon.className = item.classList.contains('active') ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+            });
+        });
+        
+        // تأثير scroll السلس للروابط
+        document.querySelectorAll('nav a, .btn[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                });
-            });
-            
-            // تغيير لون الشريط العلوي عند التمرير
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('header');
-                if (window.scrollY > 50) {
-                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
-                    header.style.background = 'linear-gradient(135deg, #2c3e50, #34495e)';
-                } else {
-                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-                    header.style.background = 'linear-gradient(135deg, #2c3e50, #4a6491)';
                 }
             });
-            
-            // فلترة المنتجات
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    // هنا يمكن إضافة كود الفلترة الفعلي
-                });
+        });
+        
+        // تأثيرات التصفح
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                }
             });
-            
-            // تأثيرات للبطاقات عند التمرير
-            const phoneCards = document.querySelectorAll('.phone-card');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            phoneCards.forEach(card => {
-                card.style.opacity = '0';
-                observer.observe(card);
+        }, observerOptions);
+        
+        document.querySelectorAll('.feature-card, .course-card, .faq-item').forEach(item => {
+            observer.observe(item);
+        });
+        
+        // tabs المسارات
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
             });
         });
     </script>
