@@ -1,886 +1,346 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>روبو الحب - من يوسف إلى روان</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            color: white;
-        }
-        
-        .container {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 20px;
-            box-shadow: 0 0 50px rgba(255, 105, 180, 0.5);
-            width: 95%;
-            max-width: 600px;
-            padding: 25px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 105, 180, 0.3);
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: linear-gradient(45deg, #ff0099, #493240, #ff0099);
-            z-index: -1;
-            filter: blur(20px);
-            opacity: 0.7;
-        }
-        
-        h1 {
-            color: #ff5e94;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px #ff5e94;
-            font-size: 2.5rem;
-        }
-        
-        .robot-container {
-            position: relative;
-            width: 100%;
-            height: 250px;
-            margin: 20px 0;
-            perspective: 1000px;
-        }
-        
-        .robot {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 1s ease;
-        }
-        
-        .head {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            border-radius: 50%;
-            margin: 0 auto;
-            position: relative;
-            box-shadow: 0 0 20px rgba(167, 119, 227, 0.8);
-            animation: floating 3s ease-in-out infinite;
-            overflow: hidden;
-        }
-        
-        .head::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to bottom right, rgba(255,255,255,0.2), rgba(255,255,255,0));
-            transform: rotate(45deg);
-        }
-        
-        .eyes {
-            display: flex;
-            justify-content: space-around;
-            padding-top: 35px;
-            transition: all 0.5s ease;
-        }
-        
-        .eye {
-            width: 25px;
-            height: 25px;
-            background-color: #fff;
-            border-radius: 50%;
-            position: relative;
-            animation: blink 4s infinite;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-        
-        .pupil {
-            width: 12px;
-            height: 12px;
-            background: radial-gradient(circle, #000, #333);
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.3s ease;
-        }
-        
-        .mouth {
-            width: 40px;
-            height: 10px;
-            background: linear-gradient(to right, #ff5e94, #ff2e63);
-            border-radius: 10px;
-            margin: 15px auto 0;
-            transition: all 0.5s ease;
-            box-shadow: 0 0 10px rgba(255, 46, 99, 0.8);
-        }
-        
-        .speaking .mouth {
-            animation: speak 0.5s infinite alternate;
-        }
-        
-        .chat-container {
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            padding: 15px;
-            margin: 20px 0;
-            height: 200px;
-            overflow-y: auto;
-            text-align: right;
-            box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.5);
-            border: 1px solid rgba(255, 105, 180, 0.3);
-        }
-        
-        .message {
-            margin: 10px 0;
-            padding: 10px 15px;
-            border-radius: 15px;
-            max-width: 80%;
-            display: inline-block;
-            animation: fadeIn 0.5s;
-            position: relative;
-        }
-        
-        .bot-message {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
-            text-align: right;
-            margin-left: auto;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .user-message {
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            color: #333;
-            text-align: left;
-            margin-right: auto;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .input-container {
-            display: flex;
-            margin-top: 15px;
-            position: relative;
-        }
-        
-        input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            outline: none;
-            font-size: 16px;
-            color: white;
-            box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.3);
-            border: 1px solid rgba(255, 105, 180, 0.5);
-            transition: all 0.3s ease;
-        }
-        
-        input:focus {
-            box-shadow: inset 0 0 15px rgba(255, 105, 180, 0.5), 0 0 20px rgba(255, 105, 180, 0.5);
-        }
-        
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        button {
-            background: linear-gradient(135deg, #ff5e94, #ff2e63);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            padding: 15px 25px;
-            margin-right: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(255, 46, 99, 0.5);
-        }
-        
-        button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 46, 99, 0.8);
-        }
-        
-        .hearts {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .heart {
-            position: absolute;
-            font-size: 20px;
-            color: #ff5e94;
-            opacity: 0;
-            animation: float 6s linear infinite;
-            text-shadow: 0 0 10px #ff5e94;
-        }
-        
-        .phase-indicator {
-            display: flex;
-            justify-content: center;
-            margin-top: 15px;
-        }
-        
-        .phase {
-            width: 15px;
-            height: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            margin: 0 8px;
-            transition: all 0.5s ease;
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
-        }
-        
-        .phase.active {
-            background: linear-gradient(135deg, #ff5e94, #ff2e63);
-            transform: scale(1.5);
-            box-shadow: 0 0 15px rgba(255, 46, 99, 0.8);
-        }
-        
-        .welcome-text {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: #a777e3;
-            text-shadow: 0 0 5px #a777e3;
-        }
-        
-        .romantic-phase {
-            display: none;
-            animation: fadeIn 1s;
-        }
-        
-        .romantic-phase.active {
-            display: block;
-        }
-        
-        .phase-title {
-            font-size: 1.8rem;
-            color: #ff5e94;
-            margin: 15px 0;
-            text-shadow: 0 0 10px #ff5e94;
-        }
-        
-        .phase-content {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 15px;
-            margin: 15px 0;
-            box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.3);
-            border: 1px solid rgba(255, 105, 180, 0.3);
-        }
-        
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -2;
-        }
-        
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 5s infinite;
-        }
-        
-        .romantic-scene {
-            position: relative;
-            height: 200px;
-            border-radius: 15px;
-            overflow: hidden;
-            margin: 15px 0;
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-        }
-        
-        .scene-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .scene-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 1.5rem;
-            text-align: center;
-            padding: 20px;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-        }
-        
-        @keyframes blink {
-            0%, 40%, 80%, 100% {
-                height: 25px;
-            }
-            20%, 60% {
-                height: 5px;
-            }
-        }
-        
-        @keyframes speak {
-            from {
-                height: 5px;
-            }
-            to {
-                height: 15px;
-            }
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes floating {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-        
-        @keyframes twinkle {
-            0%, 100% {
-                opacity: 0.2;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes moveAround {
-            0% {
-                left: 50%;
-            }
-            25% {
-                left: 30%;
-            }
-            50% {
-                left: 50%;
-            }
-            75% {
-                left: 70%;
-            }
-            100% {
-                left: 50%;
-            }
-        }
-        
-        @keyframes surprise {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-        }
-        
-        .surprise {
-            animation: surprise 0.5s ease-in-out;
-        }
-        
-        .move-around {
-            animation: moveAround 5s ease-in-out infinite;
-        }
-        
-        .looking-around .pupil {
-            animation: lookAround 3s ease-in-out infinite;
-        }
-        
-        @keyframes lookAround {
-            0%, 100% {
-                transform: translate(-50%, -50%);
-            }
-            25% {
-                transform: translate(-70%, -50%);
-            }
-            50% {
-                transform: translate(-50%, -70%);
-            }
-            75% {
-                transform: translate(-30%, -50%);
-            }
-        }
-        
-        .fireworks {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .firework {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0;
-        }
-        
-        @keyframes explode {
-            0% {
-                transform: translate(-50%, -50%) scale(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) scale(1);
-                opacity: 0;
-            }
-        }
-        
-        .hidden {
-            display: none;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>عقد زواج يوسف &amp; روان — لحظة الأبد</title>
+  <style>
+    :root{--press-sec:15}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family: 'Noto Kufi Arabic', 'Cairo', Tahoma, system-ui, -apple-system;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 10% 10%, #fff7f8, #ffdfe6 12%, #ffc1d3 40%, #ff8fb2 100%);color:#421b2a}
+
+    .stage{width:96%;max-width:1100px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));border-radius:22px;padding:28px;box-shadow:0 16px 50px rgba(0,0,0,0.18);text-align:center}
+    h1{margin:0 0 6px;font-size:30px;color:#fff;text-shadow:0 8px 30px rgba(0,0,0,0.18)}
+    p.lead{margin:4px 0 22px;color:rgba(255,255,255,0.95)}
+
+    .fingers{display:flex;gap:30px;justify-content:center;flex-wrap:wrap}
+    .finger-card{width:230px}
+    .finger{width:230px;height:230px;border-radius:50%;background:linear-gradient(180deg,#ffffff,#ffeef6);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 18px 40px rgba(0,0,0,0.18);cursor:pointer;user-select:none}
+    .finger svg{width:120px;height:120px;opacity:0.96;pointer-events:none}
+    .count{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(66,27,42,0.14);padding:6px 12px;border-radius:18px;color:#fff;font-weight:800}
+    .name{margin-top:12px;font-size:20px;color:#fff;font-weight:900;min-height:28px;text-shadow:0 4px 14px rgba(0,0,0,0.22)}
+    .status{margin-top:6px;color:rgba(255,255,255,0.95)}
+
+    .ring{transform:rotate(-90deg)}
+    .finger.pressing{transform:scale(0.985);box-shadow:inset 0 10px 30px rgba(0,0,0,0.08)}
+
+    /* Romance scene */
+    .scene{margin-top:28px;min-height:260px;position:relative;overflow:hidden;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.02));padding:18px}
+
+    .character{position:absolute;bottom:18px;width:220px;height:220px;display:flex;align-items:flex-end;justify-content:center;transition:transform 900ms cubic-bezier(.2,.9,.3,1);opacity:0}
+    .groom{left:-260px}
+    .bride{right:-260px}
+    .character.show{opacity:1}
+
+    /* simple SVG silhouettes centered inside */
+    .avatar{width:140px;height:160px}
+
+    .hands{position:absolute;bottom:56px;left:50%;transform:translateX(50%);opacity:0;transition:opacity 700ms 200ms ease}
+    .hands.show{opacity:1}
+
+    .banner{position:absolute;top:22px;left:50%;transform:translateX(-50%) scale(0.95);background:linear-gradient(90deg,#fff6fb,#ffeef6);padding:12px 22px;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,0.14);display:none}
+    .banner.show{display:flex;align-items:center;gap:12px}
+    .banner strong{color:#b42f58;font-size:20px}
+
+    .controls{margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    button{padding:10px 16px;border-radius:10px;border:none;background:rgba(255,255,255,0.12);color:#fff;font-weight:800;cursor:pointer}
+    .primary{background:linear-gradient(90deg,#ff6b8a,#ff4471);box-shadow:0 8px 30px rgba(255,77,109,0.14)}
+
+    .hearts{position:absolute;left:0;right:0;top:0;pointer-events:none}
+    .heart{position:absolute;font-size:22px;opacity:0;animation:rise 2.6s linear forwards}
+    @keyframes rise{0%{transform:translateY(0) scale(0.6);opacity:1}100%{transform:translateY(-240px) translateX(var(--tx,0)) scale(1);opacity:0}}
+
+    .small{margin-top:10px;color:rgba(255,255,255,0.9)}
+
+    @media(max-width:720px){.finger{width:170px;height:170px}.finger-card{width:170px}.character{width:150px;height:150px}.avatar{width:110px;height:120px}}
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>روبو الحب <i class="fas fa-heart"></i></h1>
-        <div class="welcome-text" id="welcome-text">مرحباً بك في عالم الرومانسية</div>
-        
-        <div class="robot-container">
-            <div class="robot" id="robot">
-                <div class="head">
-                    <div class="eyes">
-                        <div class="eye"><div class="pupil"></div></div>
-                        <div class="eye"><div class="pupil"></div></div>
-                    </div>
-                    <div class="mouth"></div>
-                </div>
-            </div>
+  <main class="stage" role="main" aria-label="بصمات الحب">
+    <h1>💍 بصمات يوسف &amp; روان — لحظة الأبد</h1>
+    <p class="lead">اضغط مطوّلًا على بصمتك لـ <strong>15 ثانية</strong> كاملة بدون رفع — بعد ما تنتها الاتنين، هتشوف مراحل رومانسية كأنها فيلم صغير.</p>
+
+    <section class="fingers" aria-hidden="false">
+      <div class="finger-card">
+        <div class="finger" tabindex="0" role="button" aria-pressed="false" data-person="youssef" aria-label="بصمة يوسف">
+          <!-- fingerprint icon -->
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g fill="none" stroke="#b32f52" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M50 20c0 0-8 0-12 8-5 11-6 22-6 30 0 14 6 28 20 28s20-14 20-28c0-8-1-19-6-30-4-8-12-8-12-8" />
+              <path d="M45 18c0 0-5 0-8 6-4 9-5 18-5 25 0 12 5 24 16 24s16-12 16-24c0-7-1-16-5-25-3-6-8-6-8-6" />
+              <path d="M40 33c0 0-2 2-2 7 0 10 4 18 10 18s10-8 10-18c0-5-2-7-2-7" />
+            </g>
+          </svg>
+
+          <div class="progress-ring" aria-hidden="true" style="position:absolute;inset:8px;pointer-events:none">
+            <svg width="214" height="214" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="44" stroke="rgba(255,255,255,0.16)" stroke-width="6" fill="none"></circle>
+              <circle class="ring" cx="50" cy="50" r="44" stroke="#fff" stroke-width="6" stroke-dasharray="276.46" stroke-dashoffset="276.46" fill="none"></circle>
+            </svg>
+          </div>
+
+          <div class="count">15s</div>
         </div>
-        
-        <div class="phase-indicator">
-            <div class="phase" id="phase1"></div>
-            <div class="phase" id="phase2"></div>
-            <div class="phase" id="phase3"></div>
+        <div class="name" id="name-youssef">—</div>
+        <div class="status" id="status-youssef">يوسف — لم تضغط بعد</div>
+      </div>
+
+      <div class="finger-card">
+        <div class="finger" tabindex="0" role="button" aria-pressed="false" data-person="rawan" aria-label="بصمة روان">
+          <!-- fingerprint icon (different color) -->
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g fill="none" stroke="#8c2c79" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M50 20c0 0-8 0-12 8-5 11-6 22-6 30 0 14 6 28 20 28s20-14 20-28c0-8-1-19-6-30-4-8-12-8-12-8" />
+              <path d="M45 18c0 0-5 0-8 6-4 9-5 18-5 25 0 12 5 24 16 24s16-12 16-24c0-7-1-16-5-25-3-6-8-6-8-6" />
+              <path d="M40 33c0 0-2 2-2 7 0 10 4 18 10 18s10-8 10-18c0-5-2-7-2-7" />
+            </g>
+          </svg>
+          <div class="progress-ring" aria-hidden="true" style="position:absolute;inset:8px;pointer-events:none">
+            <svg width="214" height="214" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="44" stroke="rgba(255,255,255,0.16)" stroke-width="6" fill="none"></circle>
+              <circle class="ring" cx="50" cy="50" r="44" stroke="#fff" stroke-width="6" stroke-dasharray="276.46" stroke-dashoffset="276.46" fill="none"></circle>
+            </svg>
+          </div>
+          <div class="count">15s</div>
         </div>
-        
-        <div id="phase1-content" class="romantic-phase active">
-            <div class="chat-container" id="chat">
-                <!-- الرسائل ستظهر هنا -->
-            </div>
-            
-            <div class="input-container">
-                <input type="text" id="user-input" placeholder="اكتبي رسالتك هنا...">
-                <button id="send-btn"><i class="fas fa-paper-plane"></i> إرسال</button>
-            </div>
-        </div>
-        
-        <div id="phase2-content" class="romantic-phase">
-            <div class="phase-title">المرحلة الثانية: رحلة إلى قلعة الحب</div>
-            <div class="romantic-scene">
-                <div class="scene-overlay">
-                    مرحباً بك في قلعة الحب، حيث تبدأ رحلتنا الرومانسية
-                </div>
-            </div>
-            <div class="phase-content">
-                <p>أهلاً يا روان! لقد وصلنا إلى قلعة الحب الأسطورية</p>
-                <p>هنا حيث تبدأ رحلتنا الرومانسية التي أعدها يوسف خصيصاً لك</p>
-                <p>أخبريني، ما هو أكثر شيء تنتظرينه في هذه الرحلة؟</p>
-            </div>
-            <div class="input-container">
-                <input type="text" id="phase2-input" placeholderما هو أكثر شيء تنتظرينه؟">
-                <button id="phase2-btn"><i class="fas fa-heart"></i> تابعي</button>
-            </div>
-        </div>
-        
-        <div id="phase3-content" class="romantic-phase">
-            <div class="phase-title">المرحلة الثالثة: حديقة المشاعر</div>
-            <div class="romantic-scene">
-                <div class="scene-overlay">
-                    حديقة المشاعر، حيث تزهر أجمَل الأحاسيس
-                </div>
-            </div>
-            <div class="phase-content">
-                <p>تهانينا يا روان! لقد وصلتي إلى حديقة المشاعر</p>
-                <p>هنا حيث تزهر أجمَل الأحاسيس وأعمق المشاعر</p>
-                <p>يوسف يريدك أن تعلمي أنكِ الشخص الأكثر تميزاً في حياته</p>
-                <p>وأن هذه الرحلة ما هي إلا بداية لقصة حب جميلة</p>
-            </div>
-            <button id="restart-btn"><i class="fas fa-redo"></i> بدء رحلة جديدة</button>
-        </div>
-        
-        <div id="final-message" class="hidden">
-            <div class="phase-title">رسالة خاصة من يوسف</div>
-            <div class="phase-content">
-                <p>عزيزتي روان،</p>
-                <p>هذه الرحلة ما هي إلا تعبير عن مشاعري التي لا أستطيع التعبير عنها</p>
-                <p>أتمنى أن تكوني قد استمتعتِ بهذه الرحلة الرومانسية البسيطة</p>
-                <p>وأن تعلمي أنكِ شخص مميز جداً في حياتي</p>
-                <p>مع كل الحب، يوسف</p>
-            </div>
-        </div>
+        <div class="name" id="name-rawan">—</div>
+        <div class="status" id="status-rawan">روان — لم تضغط بعد</div>
+      </div>
+    </section>
+
+    <section class="scene" id="scene">
+      <!-- groom -->
+      <div class="character groom" id="groom">
+        <svg class="avatar" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- head -->
+          <circle cx="60" cy="30" r="18" fill="#fde7e9" stroke="#b33" stroke-width="1" />
+          <!-- suit -->
+          <path d="M35 60 L85 60 L75 140 L45 140 Z" fill="#2e2630" />
+          <!-- tie -->
+          <path d="M59 70 L63 95 L57 95 Z" fill="#b32f52" />
+        </svg>
+      </div>
+
+      <!-- bride -->
+      <div class="character bride" id="bride">
+        <svg class="avatar" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- head -->
+          <circle cx="60" cy="30" r="18" fill="#fff4f6" stroke="#8c2c79" stroke-width="1" />
+          <!-- dress -->
+          <path d="M30 70 C55 110, 65 110, 90 70 L60 140 Z" fill="#fff" stroke="#ffdff0" stroke-width="1" />
+          <!-- veil -->
+          <path d="M42 18 C55 36, 66 36, 78 18" stroke="#fff" stroke-width="6" fill="none" opacity="0.9" />
+        </svg>
+      </div>
+
+      <!-- hands connection -->
+      <div class="hands" id="hands" aria-hidden="true" style="left:50%;transform:translateX(-50%);">
+        <svg width="260" height="120" viewBox="0 0 260 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path id="handpath" d="M10 80 Q130 20 250 80" stroke="#f2c8d5" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.0" />
+        </svg>
+      </div>
+
+      <div class="banner" id="banner" role="status">
+        <div>✨</div>
+        <div><strong id="bannerText">يوسف ❤️ روان — تم الزواج الأبدي</strong></div>
+      </div>
+
+      <div class="hearts" id="hearts"></div>
+
+    </section>
+
+    <div class="controls" id="controls">
+      <button class="primary" id="downloadBtn" style="display:none">حفظ لحظة (تحميل شهادة PNG)</button>
+      <button id="resetBtn" style="display:none">إعادة</button>
     </div>
-    
-    <div class="hearts" id="hearts"></div>
-    <div class="stars" id="stars"></div>
-    <div class="fireworks" id="fireworks"></div>
-    
-    <audio id="background-music" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2021/10/25/audio_172d7dec90.mp3?filename=soft-romantic-background-music-6986.mp3" type="audio/mpeg">
-    </audio>
-    
-    <audio id="sound-effect">
-        <source src="" type="audio/mpeg">
-    </audio>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const chatContainer = document.getElementById('chat');
-            const userInput = document.getElementById('user-input');
-            const sendBtn = document.getElementById('send-btn');
-            const robot = document.getElementById('robot');
-            const mouth = document.querySelector('.mouth');
-            const heartsContainer = document.getElementById('hearts');
-            const starsContainer = document.getElementById('stars');
-            const fireworksContainer = document.getElementById('fireworks');
-            const phases = document.querySelectorAll('.phase');
-            const welcomeText = document.getElementById('welcome-text');
-            const backgroundMusic = document.getElementById('background-music');
-            const soundEffect = document.getElementById('sound-effect');
-            const phase1Content = document.getElementById('phase1-content');
-            const phase2Content = document.getElementById('phase2-content');
-            const phase3Content = document.getElementById('phase3-content');
-            const phase2Input = document.getElementById('phase2-input');
-            const phase2Btn = document.getElementById('phase2-btn');
-            const restartBtn = document.getElementById('restart-btn');
-            const finalMessage = document.getElementById('final-message');
-            const romanticScenes = document.querySelectorAll('.romantic-scene');
-            
-            // تعيين خلفيات للمشاهد الرومانسية
-            romanticScenes[0].style.background = "linear-gradient(to bottom, #0f0c29, #302b63)";
-            romanticScenes[1].style.background = "linear-gradient(to bottom, #ff5e94, #a777e3)";
-            
-            let currentPhase = 1;
-            let conversationStep = 0;
-            let userName = "";
-            
-            // إنشاء النجوم في الخلفية
-            function createStars() {
-                for (let i = 0; i < 100; i++) {
-                    const star = document.createElement('div');
-                    star.classList.add('star');
-                    star.style.width = Math.random() * 3 + 'px';
-                    star.style.height = star.style.width;
-                    star.style.left = Math.random() * 100 + 'vw';
-                    star.style.top = Math.random() * 100 + 'vh';
-                    star.style.animationDelay = Math.random() * 5 + 's';
-                    starsContainer.appendChild(star);
-                }
-            }
-            
-            // رسائل الروبوت لكل مرحلة
-            const messages = {
-                phase1: [
-                    "مرحباً! من هناك؟ هل هناك أحد؟",
-                    "أرى أن هناك شخصاً ما قد دخل! من أنت؟",
-                    "أنتِ إنسانة، أليس كذلك؟ أخبريني ما اسمك!",
-                    "يجب أن تخبريني باسمك الحقيقي، لا تكذبي عليّ! عشان الباشمهندس يوسف ممكن يقفلني في أي لحظة!",
-                    "أوه، روان! يا للروعة! هذا اسم جميل!",
-                    "حسناً يا روان، هل أنت مستعدة لبدء رحلتنا الرومانسية؟"
-                ]
-            };
-            
-            // إنشاء رسالة في الدردشة
-            function addMessage(text, isUser = false) {
-                const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message');
-                messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
-                messageDiv.textContent = text;
-                chatContainer.appendChild(messageDiv);
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-            }
-            
-            // جعل الروبوت يتحدث
-            function robotSpeak(text, callback) {
-                mouth.parentElement.classList.add('speaking');
-                addMessage(text);
-                
-                // محاكاة الصوت باستخدام Web Speech API
-                try {
-                    const speech = new SpeechSynthesisUtterance(text);
-                    speech.lang = 'ar-SA';
-                    speech.rate = 0.9;
-                    speech.pitch = 1.2;
-                    speech.onend = function() {
-                        mouth.parentElement.classList.remove('speaking');
-                        if (callback) callback();
-                    };
-                    window.speechSynthesis.speak(speech);
-                } catch (e) {
-                    // إذا لم يعمل Web Speech API، ننتظر قليلاً ثم ننفذ callback
-                    setTimeout(() => {
-                        mouth.parentElement.classList.remove('speaking');
-                        if (callback) callback();
-                    }, text.length * 100);
-                }
-            }
-            
-            // إنشاء قلوب متحركة
-            function createHearts() {
-                for (let i = 0; i < 15; i++) {
-                    setTimeout(() => {
-                        const heart = document.createElement('div');
-                        heart.classList.add('heart');
-                        heart.innerHTML = '❤️';
-                        heart.style.left = Math.random() * 100 + 'vw';
-                        heart.style.animationDuration = (Math.random() * 4 + 3) + 's';
-                        heartsContainer.appendChild(heart);
-                        
-                        setTimeout(() => {
-                            heart.remove();
-                        }, 6000);
-                    }, i * 400);
-                }
-            }
-            
-            // إنشاء ألعاب نارية
-            function createFireworks() {
-                for (let i = 0; i < 20; i++) {
-                    setTimeout(() => {
-                        const firework = document.createElement('div');
-                        firework.classList.add('firework');
-                        firework.style.left = Math.random() * 100 + 'vw';
-                        firework.style.top = Math.random() * 100 + 'vh';
-                        firework.style.width = Math.random() * 8 + 2 + 'px';
-                        firework.style.height = firework.style.width;
-                        firework.style.background = `radial-gradient(circle, 
-                            ${getRandomColor()}, 
-                            ${getRandomColor()})`;
-                        firework.style.setProperty('--tx', (Math.random() * 100 - 50) + 'px');
-                        firework.style.setProperty('--ty', (Math.random() * 100 - 50) + 'px');
-                        firework.style.animation = `explode ${Math.random() * 1 + 0.5}s ease-out forwards`;
-                        fireworksContainer.appendChild(firework);
-                        
-                        setTimeout(() => {
-                            firework.remove();
-                        }, 2000);
-                    }, i * 300);
-                }
-            }
-            
-            function getRandomColor() {
-                const colors = ['#ff5e94', '#6e8efb', '#a777e3', '#ff2e63', '#00ffff', '#ffff00'];
-                return colors[Math.floor(Math.random() * colors.length)];
-            }
-            
-            // حركة الروبوت المفاجئة
-            function surpriseMovement() {
-                robot.classList.add('surprise');
-                setTimeout(() => {
-                    robot.classList.remove('surprise');
-                }, 500);
-            }
-            
-            // حركة التطلع حوله
-            function lookAround() {
-                document.querySelector('.eyes').classList.add('looking-around');
-                setTimeout(() => {
-                    document.querySelector('.eyes').classList.remove('looking-around');
-                }, 3000);
-            }
-            
-            // حركة التنقل في الشاشة
-            function moveAround() {
-                robot.classList.add('move-around');
-                setTimeout(() => {
-                    robot.classList.remove('move-around');
-                }, 5000);
-            }
-            
-            // تغيير المرحلة
-            function setPhase(phaseNum) {
-                currentPhase = phaseNum;
-                phases.forEach((phase, index) => {
-                    if (index + 1 === phaseNum) {
-                        phase.classList.add('active');
-                    } else {
-                        phase.classList.remove('active');
-                    }
-                });
-                
-                // إخفاء وإظهار محتوى المراحل
-                phase1Content.classList.remove('active');
-                phase2Content.classList.remove('active');
-                phase3Content.classList.remove('active');
-                finalMessage.classList.add('hidden');
-                
-                if (phaseNum === 1) {
-                    phase1Content.classList.add('active');
-                } else if (phaseNum === 2) {
-                    phase2Content.classList.add('active');
-                } else if (phaseNum === 3) {
-                    phase3Content.classList.add('active');
-                    createFireworks();
-                } else if (phaseNum === 4) {
-                    finalMessage.classList.remove('hidden');
-                    createFireworks();
-                }
-                
-                conversationStep = 0;
-            }
-            
-            // معالجة إرسال الرسائل
-            function handleSendMessage() {
-                const message = userInput.value.trim();
-                if (message === '') return;
-                
-                addMessage(message, true);
-                userInput.value = '';
-                
-                // في المرة الأولى نأخذ الاسم
-                if (conversationStep === 0) {
-                    userName = message;
-                    setTimeout(() => {
-                        surpriseMovement();
-                        robotSpeak("أوه! " + userName + "! يا له من اسم جميل!", () => {
-                            conversationStep = 1;
-                            setTimeout(() => {
-                                robotSpeak("هل هذا اسمك الحقيقي؟ يجب أن تكوني صادقة معي! عشان الباشمهندس يوسف ممكن يقفلني في أي لحظة!", () => {
-                                    conversationStep = 2;
-                                });
-                            }, 1000);
-                        });
-                    }, 1000);
-                } 
-                // التأكد من الاسم
-                else if (conversationStep === 2) {
-                    if (message.toLowerCase().includes("نعم") || message.includes("صحيح") || message.includes("ايوه") || message.toLowerCase().includes("yes")) {
-                        setTimeout(() => {
-                            moveAround();
-                            robotSpeak("أحسنت! الصدق هو مفتاح القلب! والآن لنبدأ رحلتنا الرومانسية!", () => {
-                                setPhase(2);
-                                createHearts();
-                            });
-                        }, 1000);
-                    } else {
-                        setTimeout(() => {
-                            robotSpeak("لا تكذبي عليّ! أخبريني اسمك الحقيقي! عشان الباشمهندس يوسف ممكن يقفلني في أي لحظة!", () => {
-                                conversationStep = 0;
-                            });
-                        }, 1000);
-                    }
-                }
-            }
-            
-            // الانتقال إلى المرحلة الثالثة
-            phase2Btn.addEventListener('click', function() {
-                const message = phase2Input.value.trim();
-                if (message === '') return;
-                
-                setPhase(3);
-                createHearts();
-                createFireworks();
-                
-                // بعد فترة، عرض الرسالة النهائية
-                setTimeout(() => {
-                    setPhase(4);
-                }, 10000);
-            });
-            
-            // إعادة البدء
-            restartBtn.addEventListener('click', function() {
-                setPhase(1);
-                conversationStep = 0;
-                userName = "";
-                chatContainer.innerHTML = "";
-                phase2Input.value = "";
-                
-                // إعادة بدء المحادثة
-                setTimeout(() => {
-                    lookAround();
-                    robotSpeak("مرحباً! من هناك؟ هل هناك أحد؟", () => {
-                        conversationStep = 0;
-                    });
-                }, 1000);
-            });
-            
-            // إضافة event listeners
-            sendBtn.addEventListener('click', handleSendMessage);
-            userInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    handleSendMessage();
-                }
-            });
-            
-            // بدء المحادثة عند تحميل الصفحة
-            setTimeout(() => {
-                createStars();
-                lookAround();
-                setTimeout(() => {
-                    moveAround();
-                    robotSpeak("مرحباً! من هناك؟ هل هناك أحد؟", () => {
-                        conversationStep = 0;
-                    });
-                }, 1000);
-                
-                // حاول تشغيل الموسيقى الخلفية
-                try {
-                    backgroundMusic.volume = 0.3;
-                    backgroundMusic.play();
-                } catch (e) {
-                    console.log("تعذر تشغيل الموسيقى الخلفية");
-                }
-            }, 1000);
-        });
-    </script>
+
+    <p class="small">ملاحظة: لما تضغط وتكمل الـ15 ثانية، البصمة بتتسجل محليًا في المتصفح علشان تختار تبعت الملف بنفسك — مفيش حاجة بتتحمّل على الإنترنت.</p>
+  </main>
+
+  <script>
+    (function(){
+      const DURATION = (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--press-sec')) || 15) * 1000;
+      const fingers = document.querySelectorAll('.finger');
+      const state = { youssef:false, rawan:false };
+      const nameEls = { youssef:document.getElementById('name-youssef'), rawan:document.getElementById('name-rawan') };
+      const statusEls = { youssef:document.getElementById('status-youssef'), rawan:document.getElementById('status-rawan') };
+      const ringRadius = 44; const circumference = 2 * Math.PI * ringRadius;
+
+      function setRing(circle,progress){
+        const offset = circumference * (1 - progress);
+        circle.style.strokeDashoffset = offset;
+      }
+
+      function createFloatHeart(x,y,size=22,delay=0){
+        const h = document.createElement('div');
+        h.className='heart'; h.style.left = x + 'px'; h.style.top = y + 'px'; h.style.fontSize = size + 'px'; h.style.setProperty('--tx',(Math.random()*200-100)+'px');
+        h.textContent = '💖';
+        document.getElementById('hearts').appendChild(h);
+        setTimeout(()=> h.remove(), 2600 + delay);
+      }
+
+      function burstHearts(centerX,centerY,count=22){
+        for(let i=0;i<count;i++){
+          setTimeout(()=> createFloatHeart(centerX + (Math.random()*120 - 60), centerY + (Math.random()*40 - 20), 12 + Math.random()*22), i*80);
+        }
+      }
+
+      fingers.forEach(fp=>{
+        const person = fp.dataset.person;
+        const ring = fp.querySelector('.ring');
+        const countdown = fp.querySelector('.count');
+        let start = 0; let raf=0; let pressing=false;
+
+        function update(){
+          const now = performance.now();
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / DURATION, 1);
+          const remaining = Math.ceil((DURATION - elapsed)/1000);
+          countdown.textContent = remaining > 0 ? remaining + 's' : '0s';
+          setRing(ring, progress);
+          if(progress >= 1){
+            cancelAnimationFrame(raf);
+            finish();
+            return;
+          }
+          raf = requestAnimationFrame(update);
+        }
+
+        function finish(){
+          pressing = false;
+          fp.classList.remove('pressing');
+          fp.setAttribute('aria-pressed','true');
+          nameEls[person].textContent = (person === 'youssef' ? 'يوسف' : 'روان');
+          statusEls[person].textContent = (person === 'youssef' ? 'يوسف — تم التوثيق' : 'روان — تم التوثيق');
+          state[person] = true;
+          fp.style.pointerEvents = 'none';
+          countdown.textContent = 'تم';
+          // small heart burst near fingerprint
+          const rect = fp.getBoundingClientRect();
+          burstHearts(rect.left + rect.width/2, rect.top + rect.height/2, 8);
+          if(state.youssef && state.rawan) startRomanceSequence();
+        }
+
+        function canceled(){
+          pressing=false; fp.classList.remove('pressing'); if(raf) cancelAnimationFrame(raf);
+          setRing(ring,0); countdown.textContent = (DURATION/1000) + 's';
+          statusEls[person].textContent = (person === 'youssef' ? 'يوسف — انقطع الضغط، حاول تاني' : 'روان — انقطع الضغط، حاول تاني');
+          fp.animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(0)'}],{duration:420,easing:'ease-out'});
+        }
+
+        function startPress(e){
+          if(fp.style.pointerEvents === 'none') return; if(pressing) return;
+          e.preventDefault(); pressing=true; fp.classList.add('pressing'); start = performance.now(); setRing(ring,0); countdown.textContent = (DURATION/1000)+'s'; raf = requestAnimationFrame(update);
+        }
+        function endPress(e){ if(!pressing) return; const now=performance.now(); const elapsed = now - start; if(elapsed >= DURATION){ /* already finished in update() */ } else { canceled(); } }
+
+        // mouse
+        fp.addEventListener('mousedown', startPress);
+        window.addEventListener('mouseup', endPress);
+        // touch
+        fp.addEventListener('touchstart', startPress, {passive:false});
+        window.addEventListener('touchend', endPress);
+        // keyboard
+        fp.addEventListener('keydown', function(evt){ if(evt.key === ' ' || evt.key === 'Enter'){ if(evt.repeat) return; startPress(evt); }});
+        fp.addEventListener('keyup', function(evt){ if(evt.key === ' ' || evt.key === 'Enter'){ endPress(evt); }});
+      });
+
+      // romance sequence
+      const groomEl = document.getElementById('groom');
+      const brideEl = document.getElementById('bride');
+      const handsEl = document.getElementById('hands');
+      const banner = document.getElementById('banner');
+      const downloadBtn = document.getElementById('downloadBtn');
+      const resetBtn = document.getElementById('resetBtn');
+
+      function startRomanceSequence(){
+        // step 1: characters enter
+        groomEl.style.transform = 'translateX(320px)'; groomEl.classList.add('show');
+        brideEl.style.transform = 'translateX(-320px)'; brideEl.classList.add('show');
+
+        setTimeout(()=>{
+          // step 2: hands appear and connect
+          handsEl.classList.add('show');
+          const path = document.getElementById('handpath');
+          path.style.opacity = '1';
+          path.style.stroke = '#ff9fb3';
+          path.style.transition = 'stroke-dashoffset 900ms ease, opacity 400ms ease';
+          // animate tiny wave by toggling stroke-dasharray
+          path.style.strokeDasharray = '400'; path.style.strokeDashoffset = '400';
+          setTimeout(()=>{ path.style.strokeDashoffset = '0'; },60);
+
+          // create a slow coupling of hands (visual)
+        }, 900);
+
+        setTimeout(()=>{
+          // hearts flutter
+          const rect = document.querySelector('.scene').getBoundingClientRect();
+          burstHearts(rect.width/2 - 80, rect.height/2 + 60, 30);
+        }, 1700);
+
+        setTimeout(()=>{
+          // show banner and controls
+          banner.classList.add('show'); banner.classList.add('appear');
+          downloadBtn.style.display = 'inline-block'; resetBtn.style.display = 'inline-block';
+        }, 2600);
+      }
+
+      // generate a PNG certificate
+      function downloadCertificate(){
+        const canvas = document.createElement('canvas');
+        const w = 1200, h = 700; canvas.width = w; canvas.height = h; const ctx = canvas.getContext('2d');
+        // background gradient
+        const g = ctx.createLinearGradient(0,0,w,h); g.addColorStop(0,'#fff7f8'); g.addColorStop(0.5,'#ffdfe6'); g.addColorStop(1,'#ffb7d0'); ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+        // title
+        ctx.fillStyle = '#5a2230'; ctx.font = 'bold 42px Arial'; ctx.textAlign = 'center'; ctx.fillText('شهادة زواج — يوسف & روان', w/2, 90);
+        // date
+        const date = new Date(); const dateStr = date.toLocaleDateString('ar-EG', {year:'numeric',month:'long',day:'numeric'});
+        ctx.font = '18px Arial'; ctx.fillStyle = '#6b3442'; ctx.fillText('بتاريخ: ' + dateStr, w/2, 130);
+
+        // draw simple groom
+        // groom head
+        ctx.fillStyle = '#fde7e9'; ctx.beginPath(); ctx.arc(w*0.3, 300, 48, 0, Math.PI*2); ctx.fill(); ctx.strokeStyle='#b33'; ctx.lineWidth=2; ctx.stroke();
+        // groom suit
+        ctx.fillStyle = '#2e2630'; ctx.beginPath(); ctx.moveTo(w*0.3-60,380); ctx.lineTo(w*0.3+60,380); ctx.lineTo(w*0.3+30,520); ctx.lineTo(w*0.3-30,520); ctx.closePath(); ctx.fill();
+
+        // bride
+        ctx.fillStyle = '#fff4f6'; ctx.beginPath(); ctx.arc(w*0.7,300,48,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#8c2c79'; ctx.lineWidth=2; ctx.stroke();
+        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.moveTo(w*0.7-60,380); ctx.bezierCurveTo(w*0.7-20,460,w*0.7+20,460,w*0.7+60,380); ctx.lineTo(w*0.7,520); ctx.closePath(); ctx.fill();
+
+        // hands joining (simple)
+        ctx.strokeStyle='#f2b6c4'; ctx.lineWidth=18; ctx.lineCap='round'; ctx.beginPath(); ctx.moveTo(w*0.3+40,370); ctx.quadraticCurveTo(w/2,410,w*0.7-40,370); ctx.stroke();
+
+        // big text
+        ctx.fillStyle = '#b42f58'; ctx.font = 'bold 36px Arial'; ctx.fillText('✨ تم الزواج الأبدي ✨', w/2, 600);
+        ctx.fillStyle = '#3e2028'; ctx.font = '20px Arial'; ctx.fillText('يوسف ❤️ روان', w/2, 640);
+
+        // download
+        const data = canvas.toDataURL('image/png');
+        const a = document.createElement('a'); a.href = data; a.download = 'Shahadat_Zawag_Youssef_Rawan.png'; document.body.appendChild(a); a.click(); a.remove();
+      }
+
+      downloadBtn.addEventListener('click', downloadCertificate);
+
+      // reset
+      function resetAll(){
+        // reset state
+        state.youssef=false; state.rawan=false;
+        Object.keys(nameEls).forEach(k=> nameEls[k].textContent='—');
+        statusEls.youssef.textContent='يوسف — لم تضغط بعد'; statusEls.rawan.textContent='روان — لم تضغط بعد';
+        document.querySelectorAll('.finger').forEach(fp=>{ fp.style.pointerEvents=''; fp.setAttribute('aria-pressed','false'); const r = fp.querySelector('.ring'); r.style.strokeDashoffset = circumference; fp.querySelector('.count').textContent = (DURATION/1000) + 's'; });
+        // hide scene
+        groomEl.classList.remove('show'); brideEl.classList.remove('show'); groomEl.style.transform='translateX(0)'; brideEl.style.transform='translateX(0)'; handsEl.classList.remove('show'); document.getElementById('banner').classList.remove('show'); document.getElementById('hearts').innerHTML='';
+        downloadBtn.style.display='none'; resetBtn.style.display='none';
+      }
+      resetBtn.addEventListener('click', resetAll);
+
+      // init rings
+      document.querySelectorAll('.ring').forEach(r=>{ r.style.strokeDasharray = circumference; r.style.strokeDashoffset = circumference; });
+
+      // helpful: if one pressed already, the other can still press
+
+    })();
+  </script>
 </body>
 </html>
